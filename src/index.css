@@ -1,5 +1,11 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+* {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +16,155 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#sliderContainer {
+  overflow-x: auto;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+#sliderContainer:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* range slider  */
+
+.range-slider {
+  width: auto;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: auto;
+  background: none;
+  outline: none;
+  border-radius: 50px;
+}
+
+/* Target the first input[type="range"]::-webkit-slider-thumb */
+input[type="range"]:first-of-type::-webkit-slider-thumb {
+  background: #3347fa; /* Change background color for the first thumb */
+}
+/* Target the second input[type="range"]::-webkit-slider-thumb */
+input[type="range"]:last-of-type::-webkit-slider-thumb {
+  background: white; /* Change background color for the second thumb */
+  border: 1px solid #6666ff;
+}
+/* General styling for all input[type="range"]::-webkit-slider-thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #2024f1;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  background: #2024f1;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+
+.movie-container {
+
+}
+
+.movie-container select {
+
+
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.movie-container .container {
+
+}
+
+.movie-container .seat {
+	background: url("../public/images/Car\ -\ Free\ security\ icons-1.png") no-repeat;
+	height: 40px;
+	width: 40px;
+	margin: 3px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.movie-container .selected {
+	background: url("../public/images/Car\ -\ Free\ security\ icons-2.png") no-repeat;
+}
+
+.movie-container .occupied {
+	background: url("../public/images/Car\ -\ Free\ security\ icons-3.png") no-repeat;
+}
+.movie-container .seat:nth-of-type(2) {
+}
+
+.movie-container .seat:nth-last-of-type(2) {
+}
+
+.movie-container .seat:not(.occupied):hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.movie-container .showcase .seat:not(.occupied):hover {
+	cursor: default;
+	transform: scale(1);
+}
+
+.movie-container .showcase {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+
+}
+
+.movie-container .showcase li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.movie-container .showcase li small {
+}
+
+.movie-container .row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.movie-container .screen {
+
 }
