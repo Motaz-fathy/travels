@@ -14,10 +14,9 @@ export const BookingChaire = () => {
 
   // Fetch available seats when trip and loading status change
   useEffect(() => {
-    if (!loading && trip) {
-      dispatch(AvilableSeats(trip));
-    }
-  }, [loading, trip, dispatch]);
+    
+    dispatch(AvilableSeats(trip));
+  }, []);
 
   // Function to filter selected seats
   const filterSelectedSeats = useMemo(() => {
@@ -42,6 +41,9 @@ export const BookingChaire = () => {
           seats={seats}
           setSelectedList={setSelectedList}
           selectedList={selectedList}
+          reservationSeats={reservationSeats}
+          filterSelectedSeats={filterSelectedSeats}
+          trip={trip}
         />
       )}
     </div>

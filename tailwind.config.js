@@ -4,7 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        seat: '#CCCCCC', // Define your seat color
+        selected: '#FF0000', // Define your selected seat color
+        occupied: '#000000', // Define your occupied seat color
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),

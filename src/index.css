@@ -96,22 +96,17 @@ input[type="range"]::-moz-focus-outer {
 }
 
 
-.movie-container {
 
-}
-
-.movie-container select {
+ select {
 
 
 	font-size: 14px;
 	border-radius: 5px;
 }
 
-.movie-container .container {
 
-}
 
-.movie-container .seat {
+ .seat {
 	background: url("../public/images/Car\ -\ Free\ security\ icons-1.png") no-repeat;
 	height: 40px;
 	width: 40px;
@@ -120,51 +115,51 @@ input[type="range"]::-moz-focus-outer {
 	border-top-right-radius: 10px;
 }
 
-.movie-container .selected {
+ .selected {
 	background: url("../public/images/Car\ -\ Free\ security\ icons-2.png") no-repeat;
 }
 
-.movie-container .occupied {
+ .occupied {
 	background: url("../public/images/Car\ -\ Free\ security\ icons-3.png") no-repeat;
 }
-.movie-container .seat:nth-of-type(2) {
+ .seat:nth-of-type(2) {
 }
 
-.movie-container .seat:nth-last-of-type(2) {
+ .seat:nth-last-of-type(2) {
 }
 
-.movie-container .seat:not(.occupied):hover {
+ .seat:not(.occupied):hover {
 	cursor: pointer;
 	transform: scale(1.2);
 }
 
-.movie-container .showcase .seat:not(.occupied):hover {
+ .showcase .seat:not(.occupied):hover {
 	cursor: default;
 	transform: scale(1);
 }
 
-.movie-container .showcase {
+ .showcase {
 	display: flex;
 	justify-content: center;
 	list-style-type: none;
 
 }
 
-.movie-container .showcase li {
+ .showcase li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.movie-container .showcase li small {
+ .showcase li small {
 }
 
-.movie-container .row {
+ .row {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.movie-container .screen {
+ .screen {
 
 }

@@ -95,8 +95,8 @@ export const AvilableSeats = (trip) => async dispatch => {
         "Content-Type": "multipart/form-data",
       }
     };
-    const {data} =await  axios.get(`https://app.telefreik.com/api/transports/trips/37426/available-seats?from_city_id=${trip.stations_from[0].city_id}&to_city_id=${trip.stations_to[0].city_id}&from_location_id=${trip.stations_from[0].id}&to_location_id=${trip.stations_to[0].id}&date=${trip.date}`)
-    console.log(data.data)
+    const {data} = await  axios.get(`https://app.telefreik.com/api/transports/trips/${trip.id}/available-seats?from_city_id=${trip.stations_from[0].city_id}&to_city_id=${trip.stations_to[0].city_id}&from_location_id=${trip.stations_from[0].id}&to_location_id=${trip.stations_to[0].id}&date=${trip.date}`)
+    console.log("action available seates " , data )
     dispatch({type : GET_AVIALBLE_SEATS , payload : data.data})
   } catch (error) {
     dispatch({

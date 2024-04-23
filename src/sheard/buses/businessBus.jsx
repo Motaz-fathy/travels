@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const BusinessBus = ({ setSelectedList , selectedList, seats }) => {
+export const BusinessBus = ({ setSelectedList , selectedList, seats , reservationSeats , trip , filterSelectedSeats}) => {
 
   const setContainer = (e) => {
     if (
@@ -62,14 +62,10 @@ export const BusinessBus = ({ setSelectedList , selectedList, seats }) => {
   }, [JSON.stringify(seats)]);
 
   return (
-    <div className="mt-4 " dir="ltr">
-      <h3 className="w-full text-2xl font-semibold">selectSeats</h3>
-      <div className="mt-2 w-full">
-        <div
-          className={`my-5 inline-block w-full transform overflow-hidden rounded-2xl border border-black border-opacity-5 bg-white text-left align-middle text-neutral-900 transition-all dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 sm:my-8`}
-        >
-          <div className="movie-container  px-1 sm:px-0">
-            <ul className="showcase">
+    <div className="w-full px-10 py-4" >
+      <div className="w-full flex justify-between items-center gap-4">
+        <div className="w-1/3  border border-gray-600 bg-gray-100 py-4 max-sm:w-full">
+            <ul className="flex justify-center items-center px-4 py-2 gap-4  rounded-md w-5/6 mx-auto">
               <li>
                 <div className="seat"></div>
                 <small>availableSeat</small>
@@ -84,7 +80,7 @@ export const BusinessBus = ({ setSelectedList , selectedList, seats }) => {
               </li>
             </ul>
 
-            <div className="container" onClick={(e) => setContainer(e)}>
+            <div className="" onClick={(e) => setContainer(e)}>
             <div className="row">
 								<div className="seat" title={"1"} id={"1"}></div>
 								<div className="seat" title={"2"} id={"2"}></div>
@@ -127,7 +123,6 @@ export const BusinessBus = ({ setSelectedList , selectedList, seats }) => {
 								<div className="seat opacity-0"></div>
 								<div className="seat opacity-0"></div>
 								<div className="seat opacity-0"></div>
-								<div className="seat opacity-0"></div>
 							</div>
 							<div className="row">
 								<div className="seat " title={"21"} id={"21"}></div>
@@ -165,9 +160,70 @@ export const BusinessBus = ({ setSelectedList , selectedList, seats }) => {
 								<div className="seat" title={"40"} id={"40"}></div>
 							</div>
             </div>
-          </div>
+
+        </div> 
+        <div
+    className=" w-2/3  border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8">
+
+
+    <div>
+    <div className="w-full flex flex-col  items-start gap-2 text-md ">
+          {filterSelectedSeats.length !== 0 ?  filterSelectedSeats.map((item , index) => {
+            return <div className="w-full flex justify-between items-center gap-2" key={index}>
+               <div className="flex justify-center items-center gap-2">
+               <img src={trip.company_data.avatar} alt={trip.company_data.avatar} className="w-10 h-10 rounded-full"/>
+              <div className="flex flex-col items-start gap-0 ">
+                <span>{trip.company_data.name}</span>
+                <span>{trip.bus.category}</span>
+              </div>
+               </div>
+              <div className="flex flex-col items-start gap-0">
+                <span>seat number :  {item.name}</span>
+                <span>seat type : {item.seat_type_name}</span>
+                
+              </div>
+              <div className="flex justify-center items-center gap-2">
+              <span>{item.price} EL</span>
+
+              <div className="selected seat flex justify-center items-center text-white font-bold text-sm" key={item}>
+              <span className="translate-y-[5px] -translate-x-[2px]">{item.id}</span>
+              </div>
+              </div>
+              
+            </div> 
+
+          }) : <span className="py-2 text-xl"> please select seat </span> } 
+    <span className="py-2 text-xl">total price : {trip.price_start_with * filterSelectedSeats.length}</span>      
+    </div>
+
+    <div className="space-y-4 text-center">
+    <a
+    href="#"
+    className="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
+    >
+    View my cart (2)
+    </a>
+
+    <a
+    href="#"
+    className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+    >
+    Checkout
+    </a>
+
+    <a
+    href="#"
+    className="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
+    >
+    Continue shopping
+    </a>
+    </div>
+    </div>
         </div>
       </div>
+
+
+
     </div>
   );
 
