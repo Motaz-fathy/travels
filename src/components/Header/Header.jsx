@@ -29,7 +29,7 @@ export const Header = () => {
   );
 
   return (
-    <div className="relative top-0 left-0 right-0 w-full min-h-screen bg-slate-400 px-8  max-sm:px-2 overflow-hidden">
+    <div className="relative top-0 left-0 right-0 w-full min-h-screen bg-gray-200 px-8  max-sm:px-2 overflow-hidden ">
       <nav className="w-full h-20  flex justify-between items-center gap-3">
         <div className="w-20 h-20  flex justify-center items-center z-50 cursor-pointer">
           Logo
@@ -43,16 +43,18 @@ export const Header = () => {
           menu
         </div>
         <div
-          className={`absolute top-0 left-0 right-0 w-full min-h-auto py-32 bg-gray-900 flex flex-col   z-20 menu ${open_menu &&
+          className={`absolute top-0 left-0 right-0 w-full py-32 bg-white flex flex-col  overflow-auto z-20 menu ${open_menu &&
             "open" }`}
         >
-          <h1 className="px-8 my-4 text-4xl font-bold text-gray-200 head_trip">popral trips : </h1>  
+          <h1 className="px-8 my-4 text-4xl font-bold text-gray-800 head_trip">popral trips : </h1>  
           <Menu_cards open_menu={open_menu}/>
 
         </div>
       </nav>
 
       <Navigation_search />
+
+      
     </div>
   );
 };

@@ -58,7 +58,7 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
   return (
     <div
       ref={comboBoxRef}
-      className={`relative w-1/4 h-10 outline-none cursor-pointer rounded-md ${converter_trip} max-md:w-1/3 md:w-1/3`}
+      className={`relative w-1/4 h-10 outline-none cursor-pointer rounded-md ${converter_trip} max-md:w-full md:w-1/3 ${isOpen && "max-md:z-50"} `}
     >
       <div
         className="w-full bg-white border border-gray-400 rounded shadow leading-tight cursor-pointer"
@@ -85,7 +85,7 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
         </div>
       </div>
       {isOpen &&
-        <div className="absolute w-full bg-white border border-gray-400 rounded-b shadow mt-1  ">
+        <div className="absolute   w-full bg-white border border-gray-400 rounded-b shadow mt-1  ">
           <input
             type="text"
             className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none"
@@ -93,7 +93,7 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
-          <div className="z-50 overflow-y-scroll h-[200px] w-full ">
+          <div className=" overflow-y-scroll h-[200px] w-full ">
             {filteredOptions.map((option, index) =>
               <div
                 key={index}

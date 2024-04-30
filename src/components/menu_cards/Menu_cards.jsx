@@ -1,6 +1,9 @@
 import gsap from "gsap";
 import React, { useEffect } from "react";
 import Slider from "../../sheard/Slider";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleBusTrip } from "../../redux/actions/bus_travel_actions/bus_travel_actions";
+import { useNavigate } from "react-router-dom";
 
 export const Menu_cards = ({ open_menu }) => {
   useEffect(
@@ -19,113 +22,55 @@ export const Menu_cards = ({ open_menu }) => {
     },
     [open_menu]
   );
+  const {data} = useSelector(state => state.busSearch)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleSingleTrip = async (item) => {
+    await dispatch(SingleBusTrip(item))
+    navigate(`${item.id}`)
+   }
   return (
 
     
           <Slider>
-          {[1, 2, 3, 4, 5 , 6].map(item => {
+          {/* {data.data.map(trip => {
             return (
-              <a
-                href="#"
-                className="menu-card block p-4 max-sm:w-full max-sm:h-auto rounded-lg hover:scale-125 shadow-sm shadow-indigo-100 bg-gray-300"
-              >
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                  className="h-56 w-full rounded-md object-cover"
-                />
-
-                <div className="mt-2">
-                  <dl>
-                    <div>
-                      <dt className="sr-only">Price</dt>
-
-                      <dd className="text-sm text-gray-500">$240,000</dd>
-                    </div>
-
-                    <div>
-                      <dt className="sr-only">Address</dt>
-
-                      <dd className="font-medium">
-                        123 Wallaby Avenue, Park Road
-                      </dd>
-                    </div>
-                  </dl>
-
-                  <div className="mt-6 flex items-center gap-8 text-xs">
-                    <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <svg
-                        className="size-4 text-indigo-700"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-                        />
-                      </svg>
-
-                      <div className="mt-1.5 sm:mt-0">
-                        <p className="text-gray-500">Parking</p>
-
-                        <p className="font-medium">2 spaces</p>
-                      </div>
-                    </div>
-
-                    <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <svg
-                        className="size-4 text-indigo-700"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                        />
-                      </svg>
-
-                      <div className="mt-1.5 sm:mt-0">
-                        <p className="text-gray-500">Bathroom</p>
-
-                        <p className="font-medium">2 rooms</p>
-                      </div>
-                    </div>
-
-                    <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                      <svg
-                        className="size-4 text-indigo-700"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                        />
-                      </svg>
-
-                      <div className="mt-1.5 sm:mt-0">
-                        <p className="text-gray-500">Bedroom</p>
-
-                        <p className="font-medium">4 rooms</p>
-                      </div>
-                    </div>
-                  </div>
+              <div className="bg-white  rounded-lg shadow-lg  backdrop-filter backdrop-blur-lg menu-card  ">
+              <div className="flex flex-col items-center gap-2 w-[350px]  h-auto px-2 py-2">
+                <div className="flex justify-between items-center w-full">
+                  <img src={trip.company_data.avatar} alt={trip.company_data.name} height={40} width={40} />
+                   <span>{trip.time}</span>
                 </div>
-              </a>
+      
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex justify-start items-center gap-2 ">
+                    <div className="border-gray-400 border-l-2 w-2 h-40"></div>
+                    <div className="flex flex-col items-start gap-2 ">
+                    <span>{trip.cities_from[0].name} ({trip.stations_from[0].name}) </span>
+                    <span>{trip.stations_from[0].arrival_at}</span>
+                    <span>{trip.cities_to[0].name} ({trip.stations_to[0].name}) </span>
+                    <span>{trip.stations_to[0].arrival_at}</span>
+                    </div>
+      
+                  </div>
+                  <img src={trip.company_data.bus_image} alt={trip.company_data.name}  width={100} height={50}/>
+                </div>
+                 
+                 <div  className="flex justify-between items-center w-full">
+                  <span className="px-2 py-1 rounded-2xl bg-gray-600 text-white">{trip.bus.category}</span>
+                  <div className="flex justify-center items-center gap-2 ">
+                    <div className="flex flex-col items-end gap-2 ">
+                      <span>{trip.price_start_with} EL</span>
+                      <span className="text-[10px]">price per person </span>
+                    </div>
+                     <button onClick={ () => handleSingleTrip(trip) } className="w-20 h-10 bg-gray-900 text-white rounded-lg  px-2"> select </button>
+                  </div>
+                 </div>
+      
+              </div>
+            </div>
             );
-          })}
+          })} */}
         </Slider>
   
       

@@ -3,20 +3,22 @@ import { Header } from "./components/Header/Header";
 import { Bus_page } from "./screens/Bus_page/Bus_page";
 import { Not_found } from "./screens/Not_found/Not_found";
 import {BookingChaire} from "./screens/Bus_page/bookingChaire"
-
+import { Home } from "./screens/Home";
+import { Login } from "./screens/AuthPages/Login";
+import { Otp } from "./screens/AuthPages/Otp";
 function App() {
   const router = [
     {
       path : "/",
-      element : <Header />
+      element : <Home />
     },
     {
       path : "/about",
-      element : <Header />
+      element : <Home />
     },
     {
       path : "/services",
-      element : <Header />
+      element : <Home />
     }
   ]
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/busTrips" element={<Bus_page /> } >
         </Route>
         <Route path="busTrips/:BusId" element={<BookingChaire />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/otp" element={<Otp />} />
 
         <Route path="*" element={<Not_found /> } ></Route>
       </Routes>

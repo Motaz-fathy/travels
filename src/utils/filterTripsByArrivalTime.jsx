@@ -276,8 +276,8 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
                        id="minDepartureTimeSlider"
                        type="range"
                        min={minDeparture}
-                       max={maxDeparture}
-                       step="3600" // step by one hour (3600 seconds)
+                       max={maxDeparture + "60"}
+                       step="1800" // step by one hour (3600 seconds)
                        value={minDepartureTime}
                        onChange={e =>
                          handleDepartureSliderChange(e, "min", maxDepartureTime)}
@@ -287,7 +287,7 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
                        type="range"
                        min={minDeparture}
                        max={maxDeparture}
-                       step="3600" // step by one hour (3600 seconds)
+                       step="1800" // step by one hour (3600 seconds)
                        value={maxDepartureTime}
                        onChange={e =>
                          handleDepartureSliderChange(e, minDepartureTime, "max")}
@@ -338,8 +338,8 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
                        id="minPriceSlider"
                        type="range"
                        min={minPrice}
-                       max={maxPrice}
-                       step="10" // step by $10
+                       max={maxPrice + 1}
+                       step="1" // step by $10
                        value={minPriceValue}
                        onChange={e =>
                          handlePriceSliderChange(e, "min", maxPriceValue)}
@@ -349,8 +349,8 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
                        id="maxPriceSlider"
                        type="range"
                        min={minPrice}
-                       max={maxPrice}
-                       step="10" // step by $10
+                       max={maxPrice + 1}
+                       step="1" // step by $10
                        value={maxPriceValue}
                        onChange={e =>
                          handlePriceSliderChange(e, minPriceValue, "max")}

@@ -7,23 +7,22 @@ import { Toggle_trip } from "../../../sheard/Toggle_trip";
 export const Bus_search_form = () => {
   const [converter_trip, set_converter_trip] = useState("oneway");
 
-
-
-
-
-
   return (
-    <div className="w-full flex flex-col items-start  ">
+    <div className="w-full flex flex-col items-start   gap-2  max-md:flex-col ">
       {converter_trip === "oneway" &&
         <One_way_form
           set_converter_trip={set_converter_trip}
           converter_trip={converter_trip}
         />}
-      {converter_trip === "twoway" && <Two_way_form
-       set_converter_trip={set_converter_trip}
-       converter_trip={converter_trip}
-      />}
-      <Toggle_trip set_converter_trip={set_converter_trip} converter_trip={converter_trip} />
+      {converter_trip === "twoway" &&
+        <Two_way_form
+          set_converter_trip={set_converter_trip}
+          converter_trip={converter_trip}
+        />}
+      <Toggle_trip
+        set_converter_trip={set_converter_trip}
+        converter_trip={converter_trip}
+      />
     </div>
   );
 };

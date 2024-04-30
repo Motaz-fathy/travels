@@ -27,7 +27,7 @@ const Slider = ({ children }) => {
   return (
     <div
       ref={sliderContainerRef}
-      className=" overflow-x-auto   flex justify-between gap-4 scrollbar-hide px-8"
+      className=" overflow-x-auto   flex justify-between gap-4 scrollbar-hide px-4"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}

@@ -22,8 +22,9 @@ export const Navigate_search_submit = ({
     <button
       onClick={navigation}
       className={`p-2 w-10 h-10 rounded-full bg-gradient-to-tr  cursor-pointer bg-gray-800
-         text-white  flex justify-center items-center `}
+         text-white  flex justify-center items-center max-md:w-full  `}
     >
+      <span className="hidden max-md:flex max-sm:flex mx-3"> Search </span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
