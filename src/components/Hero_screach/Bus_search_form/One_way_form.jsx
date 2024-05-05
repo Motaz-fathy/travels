@@ -10,6 +10,7 @@ export const One_way_form = ({ converter_trip }) => {
   const [onSelect_to, setonSelect_to] = useState(null);
   const [startDate, setStartDate] = useState(null);
 
+
   const options = [
     {
       name: "ahmed"
@@ -37,10 +38,12 @@ export const One_way_form = ({ converter_trip }) => {
     },
     [converter_trip]
   );
-  
+
+
+
   return (
     <div className=" w-full flex flex-col items-start max-md:mt-4 ">
-      <form className=" w-full h-20  flex justify-between items-center gap-2  max-md:flex-col max-md:h-auto" >
+      <form className=" w-full h-20  flex justify-between items-center gap-2  max-md:flex-col max-md:h-auto">
         <Combo_box_from
           options={options}
           setonSelect_from={setonSelect_from}
@@ -53,15 +56,17 @@ export const One_way_form = ({ converter_trip }) => {
           converter_trip={converter_trip}
         />
 
-        <SingleDatePicker setStartDate={setStartDate} startDate={startDate} />
+        <SingleDatePicker
+          setStartDate={setStartDate}
+          startDate={startDate}
+          converter_trip={converter_trip}
+        />
 
         <div className={`${converter_trip} max-md:w-full`}>
           <Navigate_search_submit
             onSelect_from={onSelect_from}
             onSelect_to={onSelect_to}
-            startDate={
-              startDate !== null && startDate
-            }
+            startDate={startDate !== null && startDate}
           />
         </div>
       </form>

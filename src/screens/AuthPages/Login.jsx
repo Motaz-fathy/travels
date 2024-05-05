@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { data  } = useSelector((state) => state.LoginReducer); // get res data after LoginAction dispatched
+  const { data , error } = useSelector((state) => state.LoginReducer); // get res data after LoginAction dispatched
 
   const navigate = useNavigate();
   const [countryCode, setCountryCode] = useState("+20"); // Default country code
@@ -13,8 +13,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-   let res = []
-   res = data 
+
 
 
   const handleSubmit = (e) => {
@@ -26,11 +25,13 @@ export const Login = () => {
 
     // Navigate to /otp if data.need_verification is true
     useEffect(() => {
-       if( res && res.need_verfication === true && res.status === 200 ) {
+       if( data.need_verfication === true && data.status === 200 ) {
         window.localStorage.setItem("phoneNumber" , phoneNumber )
         navigate("/otp")
+       }else if (data.data !== undefined ) {
+           navigate("/")
        }
-    }, [res, navigate]);
+    }, [data, navigate , phoneNumber]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -40,6 +41,7 @@ export const Login = () => {
             Sign in to your account
           </h2>
         </div>
+        {error !== null && <div className=" text-center text-lg font-extrabold text-red-600">{error.credentials}</div>}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="flex">

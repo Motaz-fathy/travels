@@ -14,7 +14,8 @@ import {
   FAIL_SEND_OTP,
   LOAD_RESEND_OTP,
   SUCCESS_RESEND_OTP,
-  FAIL_RESEND_OTP
+  FAIL_RESEND_OTP,
+  LOGOUT
 } from "../../actions/types";
 
 const initialState = {
@@ -31,6 +32,10 @@ export const LoginReducer = (state = initialState, action) => {
         draft.error = null;
         break;
       case SUCCESS_LOGIN:
+      case SUCCESS_VERIFI_OTP:
+      case SUCCESS_VALIDATE_OTP:
+      case SUCCESS_SEND_OTP:
+      case SUCCESS_RESEND_OTP:
         draft.loading = false;
         draft.data = action.payload;
         draft.error = null;
@@ -39,6 +44,11 @@ export const LoginReducer = (state = initialState, action) => {
         draft.loading = false;
         draft.error = action.payload;
         break;
+      case LOGOUT:
+        draft.loading = false;
+        draft.data = [];
+        draft.error = null;
+        break;
       default:
         break;
     }
@@ -46,41 +56,48 @@ export const LoginReducer = (state = initialState, action) => {
 };
 
 const initOtp = {
-    loading: false,
-    data: null,
-    error: null,
-  };
+  loading: false,
+  data: null,
+  error: null
+};
 export const otpReducer = (state = initOtp, action) => {
-    switch (action.type) {
-      case LOAD_VERIFI_OTP:
-      case LOAD_VALIDATE_OTP:
-      case LOAD_SEND_OTP:
-      case LOAD_RESEND_OTP:
-        return {
-          ...state,
-          loading: true,
-          error: null,
-        };
-      case SUCCESS_VERIFI_OTP:
-      case SUCCESS_VALIDATE_OTP:
-      case SUCCESS_SEND_OTP:
-      case SUCCESS_RESEND_OTP:
-        return {
-          ...state,
-          loading: false,
-          data: action.payload,
-          error: null,
-        };
-      case FAIL_VERIFI_OTP:
-      case FAIL_VALIDATE_OTP:
-      case FAIL_SEND_OTP:
-      case FAIL_RESEND_OTP:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {
+    case LOAD_VERIFI_OTP:
+    case LOAD_VALIDATE_OTP:
+    case LOAD_SEND_OTP:
+    case LOAD_RESEND_OTP:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+    case SUCCESS_VERIFI_OTP:
+    case SUCCESS_VALIDATE_OTP:
+    case SUCCESS_SEND_OTP:
+    case SUCCESS_RESEND_OTP:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+        error: null
+      };
+    case FAIL_VERIFI_OTP:
+    case FAIL_VALIDATE_OTP:
+    case FAIL_SEND_OTP:
+    case FAIL_RESEND_OTP:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    case LOGOUT:
+      return {
+        loading: false,
+        data: null,
+        error: null
+      };
+
+    default:
+      return state;
+  }
+};

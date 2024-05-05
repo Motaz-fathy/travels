@@ -54,11 +54,15 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
     setSelectedOption(option.name);
     setonSelect_from(option.id);
     setIsOpen(false);
+   
   };
+
+
   return (
     <div
       ref={comboBoxRef}
-      className={`relative w-1/4 h-10 outline-none cursor-pointer rounded-md ${converter_trip} max-md:w-full md:w-1/3 ${isOpen && "max-md:z-50"} `}
+      className={`relative w-1/4 h-10 outline-none cursor-pointer rounded-md ${converter_trip} max-md:w-full md:w-1/3 ${isOpen &&
+        "max-md:z-50"} `}
     >
       <div
         className="w-full bg-white border border-gray-400 rounded shadow leading-tight cursor-pointer"

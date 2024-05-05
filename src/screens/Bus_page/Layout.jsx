@@ -5,6 +5,9 @@ import { Container } from "./Container";
 import gsap from "gsap";
 import { useSelector } from "react-redux";
 import { FilterTrips } from "../../utils/filterTripsByArrivalTime";
+import {Footer} from '../../components/Footer'
+import { ToastContainer } from "react-toastify";
+
 export const Layout = () => {
   const { data, loading } = useSelector(state => state.busSearch);
   const trips = data.data;
@@ -78,7 +81,9 @@ export const Layout = () => {
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return (
+  <div className="w-full flex flex-col items-center ">
     <div className=" relative w-full  flex justify-between items-start  ">
       {/*  said bar  */}
       <div
@@ -134,8 +139,17 @@ export const Layout = () => {
             tripsPerPage={tripsPerPage}
           />
         </div>
+
         {/* footer  */}
+     
+        
       </div>
+    
     </div>
+    <div className="w-full">
+    <Footer />
+    </div>
+    <ToastContainer />
+  </div>
   );
 };

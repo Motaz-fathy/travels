@@ -1,14 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* font family  */
+@font-face {
+  font-family: 'en'  ;
+  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf') ;
+}
+@font-face {
+  font-family: 'ar' ;
+  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf') ;
+
+}
+
+[dir='rtl'] .font_rtl {
+  font-family: 'ar';
+}
+
+[dir='ltl'] .font_ltl {
+  font-family: 'en';
+}
 
 body,
 * {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'en' , 'ar' ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,6 +34,26 @@ code {
     monospace;
 }
 
+.link-container {
+  position: relative;
+  display: inline-block;
+}
+
+.link-container:hover .line {
+  width: 100%;
+  transform: rotateZ(-10deg); /* Change rotate to rotateZ for rotation around the Z-axis */
+}
+
+.line {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transform: rotateZ(0deg); /* Change rotate to rotateZ for initial rotation around the Z-axis */
+  @apply bg-yellow-400 ; /* Change this to the color you want for the line */
+  transition: width 0.3s ease; /* Adjust transition properties as needed */
+}
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

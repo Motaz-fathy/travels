@@ -38,3 +38,6 @@ export const FAIL_SEND_OTP = "FAIL_SEND_OTP"
 export const LOAD_RESEND_OTP = "LOAD_RESEND_OTP"
 export const SUCCESS_RESEND_OTP = "SUCCESS_RESEND_OTP"
 export const FAIL_RESEND_OTP = "FAIL_RESEND_OTP"
+
+export const LOGOUT = "LOGOUT"
+

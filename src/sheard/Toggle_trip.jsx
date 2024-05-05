@@ -2,7 +2,7 @@ import React from "react";
 
 export const Toggle_trip = ({ set_converter_trip, converter_trip }) => {
   return (
-    <div className="flex justify-start items-center gap-2  ">
+    <div className="flex justify-start items-center gap-2  text-white">
       <div
         className="flex justify-center items-center gap-1 cursor-pointer "
         onClick={() => set_converter_trip("oneway")}

@@ -14,7 +14,8 @@ import {
   FAIL_SEND_OTP,
   LOAD_RESEND_OTP,
   SUCCESS_RESEND_OTP,
-  FAIL_RESEND_OTP
+  FAIL_RESEND_OTP,
+  LOGOUT
 } from "../types";
 export const LoginAction = (phonecode, mobile, password) => async dispatch => {
   try {
@@ -136,3 +137,7 @@ export const resendOTPAction = (mobile, phonecode) => async dispatch => {
     dispatch({ type: FAIL_RESEND_OTP, payload: error.message });
   }
 };
+
+export const logoutAction = () => async dispatch =>  {
+    dispatch({type : LOGOUT , paylod : []})
+}

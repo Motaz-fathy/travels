@@ -2,7 +2,7 @@ import React from "react";
 
 export const Loading = () => {
   return (
-    <div className="w-full absolute top-0 left-0 right-0 min-h-screen bg-gray-200 flex justify-center items-center ">
+    <div className="w-full h-auto bg-gray-200 flex justify-center items-center ">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
         <radialGradient
           id="a12"

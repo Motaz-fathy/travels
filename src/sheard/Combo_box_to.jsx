@@ -48,6 +48,7 @@ export const Combo_box_to = ({ options, setonSelect_to , converter_trip }) => {
     setSelectedOption(option.name);
     setonSelect_to(option.id);
     setIsOpen(false);
+   
   };
 
   return (

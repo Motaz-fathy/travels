@@ -6,6 +6,7 @@ import {BookingChaire} from "./screens/Bus_page/bookingChaire"
 import { Home } from "./screens/Home";
 import { Login } from "./screens/AuthPages/Login";
 import { Otp } from "./screens/AuthPages/Otp";
+import { MainProfile } from "./screens/profile/MainProfile";
 function App() {
   const router = [
     {
@@ -35,10 +36,11 @@ function App() {
         <Route path="busTrips/:BusId" element={<BookingChaire />} />
         <Route path="login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
+        <Route path="/profile" element={<MainProfile />} />
 
         <Route path="*" element={<Not_found /> } ></Route>
       </Routes>
-
+      
     </Router>
    </>
   );
