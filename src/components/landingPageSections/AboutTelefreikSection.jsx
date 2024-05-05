@@ -9,11 +9,12 @@ export const AboutTelefreikSection = () => {
   const HeaderTitel = useRef(null);
 
   useEffect(() => {
-    const para = elementRef.current;
-    const Title = HeaderTitel.current;
-
     // Create a GSAP timeline
-    const timeline = gsap.timeline({ defaults: { duration: 0.5 } });
+
+    const timeline = gsap.timeline({
+      defaults: { duration: 0.5, stagger: 0.2 }
+    });
+
     const timecards = gsap.timeline({
       defaults: {
         duration: 0.5,
@@ -21,35 +22,28 @@ export const AboutTelefreikSection = () => {
       }
     });
 
-    // Create ScrollTriggers for the animations
-    ScrollTrigger.create({
-      animation: timeline,
-      trigger: Title,
-      start: "top 90%", // Starts animation when the Title is 90% in view
-      end: "bottom 10%", // Ends animation when the Title is 10% out of view
-      onEnterBack: () => {
-        timeline
-          .fromTo(Title, { opacity: 0, y: "50px" }, { opacity: 1, y: 0 })
-          .fromTo(
-            para,
-            { opacity: 0, y: "50px" },
-            { opacity: 1, y: 0 },
-            "-=0.3"
-          ); // Delay the second animation by 0.3 seconds
-      },
+ // create for card animation
+ ScrollTrigger.create({
+  animation: timeline,
+  trigger: ".aboutText",
+  start: "top 90%", // Starts animation when the Title is 90% in view
+  end: "bottom 10%", // Ends animation when the Title is 10% out of view
+  onEnterBack: () => {
+    timeline.fromTo(
+      ".aboutText",
+      { opacity: 0, y: "50px" },
+      { opacity: 1, y: 0 }
+    );
+  },
 
-      onEnter: () => {
-        timeline
-          .fromTo(Title, { opacity: 0, y: "50px" }, { opacity: 1, y: 0 })
-          .fromTo(
-            para,
-            { opacity: 0, y: "50px" },
-            { opacity: 1, y: 0 },
-            "-=0.3"
-          ); // Delay the second animation by 0.3 seconds
-      }
-    });
-
+  onEnter: () => {
+    timeline.fromTo(
+      ".aboutText",
+      { opacity: 0, y: "50px" },
+      { opacity: 1, y: 0 }
+    );
+  }
+});
     // create for card animation
     ScrollTrigger.create({
       animation: timecards,
@@ -78,6 +72,8 @@ export const AboutTelefreikSection = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // Clean up ScrollTriggers
     };
   }, []);
+
+  // data icons
 
   const cardData = [
     {
@@ -159,24 +155,19 @@ export const AboutTelefreikSection = () => {
   ];
 
   return (
-    <div className="w-full h-96 max-sm:h-auto bg-gray-800 flex justify-center items-center relative  px-10 ">
+    <div className="w-full h-auto max-sm:h-auto bg-gray-800 flex justify-center items-center relative  px-10 max-md:py-10   ">
       <div className="flex flex-col items-center w-full gap-8">
         <div className="flex flex-col items-start gap-4 w-full ">
-          <div
-            className="text-4xl w-full font-bold text-white mt-10"
-            ref={HeaderTitel}
-          >
+          <div className="text-4xl w-full font-bold text-white mt-10 aboutText">
             What Telefreik brings to the table .
           </div>
-          <div
-            className="text-lg w-2/5 text-gray-300 max-sm:w-5/6 paragraph"
-            ref={elementRef}
-          >
+          <div className="text-lg w-2/5 text-gray-300 max-sm:w-5/6 aboutText">
             Telefreik is a safe, easy and fast application that enables you to
             search and compare prices and different modes in different times,
             classes and classes of trips. It's like searching more than 10
             search engines simultaneously with just a click of a button.
           </div>
+
         </div>
 
         <div className="  flex justify-center items-center  w-5/6 gap-6 max-sm:gap-2 max-sm:grid max-sm:grid-cols-2  translate-y-20 max-sm:translate-y-0">
