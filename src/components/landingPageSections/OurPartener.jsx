@@ -75,6 +75,8 @@ export const OurPartener = () => {
   return (
     <div className=" w-full mx-auto flex flex-col items-center gap-4 mt-24 py-20">
       <span className="text-4xl font-bold text-gray-800 our">Our partner</span>
+      <span className="w-1/3 max-sm:w-2/3 bg-gray-800 h-2 mx-auto -rotate-2 mb-5 rounded-full" />
+
       <span className="text-lg font-bold text-gray-600 px-2 w-4/5 max-md:w-full max-md:px-2 mx-auto text-center our">
         Our partner is an invaluable ally in our mission to provide exceptional
         products and services to our customers. With their expertise,

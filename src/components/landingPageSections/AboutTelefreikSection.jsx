@@ -155,7 +155,7 @@ export const AboutTelefreikSection = () => {
   ];
 
   return (
-    <div className="w-full h-auto max-sm:h-auto bg-gray-800 flex justify-center items-center relative  px-10 max-md:py-10   ">
+    <div className="w-full h-auto max-sm:h-auto  bg-gray-800 flex justify-center items-center relative  px-10 max-md:py-10   ">
       <div className="flex flex-col items-center w-full gap-8">
         <div className="flex flex-col items-start gap-4 w-full ">
           <div className="text-4xl w-full font-bold text-white mt-10 aboutText">
@@ -175,7 +175,7 @@ export const AboutTelefreikSection = () => {
             return (
               <div
                 key={index}
-                className="w-40  h-32 px-2 bg-white flex justify-center items-center  shadow-lg  card rounded-lg text-slate-800"
+                className="w-40 -rotate-3 Clip h-32 px-2 bg-gray-800 flex justify-center items-center  shadow-lg  card rounded-lg text-yellow-300"
               >
                 <div className=" flex flex-col items-center gap-2 text-center rounded-lg">
                   <span>

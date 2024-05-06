@@ -134,13 +134,11 @@ input[type="range"]::-moz-focus-outer {
 
 
  select {
-
-
 	font-size: 14px;
 	border-radius: 5px;
 }
 
-
+/* bus seats  */
 
  .seat {
 	background: url("../public/images/Car\ -\ Free\ security\ icons-1.png") no-repeat;
@@ -196,6 +194,14 @@ input[type="range"]::-moz-focus-outer {
 	justify-content: center;
 }
 
- .screen {
-
+/* ticket in landing page */
+.Clip {
+  clip-path: inset(0 0 2% 0 round 5% 20% 0 10%);
 }
+
+.Clip2 {
+  clip-path: inset(0 0 2% 0 round 5% 20% 0 10%);
+  transform: rotateZ(3deg);
+  @apply bg-gray-100 ;
+}
+

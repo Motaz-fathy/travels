@@ -47,7 +47,7 @@ return () => {
 
   } , [])
   return (
-    <div className="w-full px-8  flex flex-col lg:flex-row justify-between items-center  max-md:px-2 max-md:py mx-auto">
+    <div className="w-full px-8 Clip2 bg-gray-800   flex flex-col lg:flex-row justify-between items-center  max-md:px-2 max-md:py mx-auto">
       <div className="w-full lg:w-1/2 relative flex justify-center items-center lg:items-start  ">
         <img
           src="./images/landing_page/Phone.png"
