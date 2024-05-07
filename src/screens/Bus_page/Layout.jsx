@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { FilterTrips } from "../../utils/filterTripsByArrivalTime";
 import {Footer} from '../../components/Footer'
 import { ToastContainer } from "react-toastify";
+import { BusHeader } from "./BusHeader";
 
 export const Layout = () => {
   const { data, loading } = useSelector(state => state.busSearch);
@@ -84,6 +85,9 @@ export const Layout = () => {
 
   return (
   <div className="w-full flex flex-col items-center ">
+    <BusHeader 
+    trip ={currentTrips[0]}
+    />
     <div className=" relative w-full  flex justify-between items-start  ">
       {/*  said bar  */}
       <div

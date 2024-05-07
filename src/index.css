@@ -3,13 +3,12 @@
 @tailwind utilities;
 /* font family  */
 @font-face {
-  font-family: 'en'  ;
-  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf') ;
+  font-family: 'en';
+  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf');
 }
 @font-face {
-  font-family: 'ar' ;
-  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf') ;
-
+  font-family: 'ar';
+  src: url('./sheard/fonts/Alkatra-VariableFont_wght.ttf');
 }
 
 [dir='rtl'] .font_rtl {
@@ -24,7 +23,7 @@ body,
 * {
   margin: 0;
   padding: 0;
-  font-family: 'en' , 'ar' ;
+  font-family: 'en', 'ar';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,7 +40,9 @@ code {
 
 .link-container:hover .line {
   width: 100%;
-  transform: rotateZ(-10deg); /* Change rotate to rotateZ for rotation around the Z-axis */
+  transform: rotateZ(
+    -10deg
+  ); /* Change rotate to rotateZ for rotation around the Z-axis */
 }
 
 .line {
@@ -50,8 +51,10 @@ code {
   left: 0;
   width: 0;
   height: 2px;
-  transform: rotateZ(0deg); /* Change rotate to rotateZ for initial rotation around the Z-axis */
-  @apply bg-yellow-400 ; /* Change this to the color you want for the line */
+  transform: rotateZ(
+    0deg
+  ); /* Change rotate to rotateZ for initial rotation around the Z-axis */
+  @apply bg-yellow-400; /* Change this to the color you want for the line */
   transition: width 0.3s ease; /* Adjust transition properties as needed */
 }
 .scrollbar-hide::-webkit-scrollbar {
@@ -131,67 +134,67 @@ input[type="range"]::-moz-focus-outer {
   border: 0;
 }
 
-
-
- select {
-	font-size: 14px;
-	border-radius: 5px;
+select {
+  font-size: 14px;
+  border-radius: 5px;
 }
 
 /* bus seats  */
 
- .seat {
-	background: url("../public/images/Car\ -\ Free\ security\ icons-1.png") no-repeat;
-	height: 40px;
-	width: 40px;
-	margin: 3px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+.seat {
+  background: url("../public/images/Car\ -\ Free\ security\ icons-1.png")
+    no-repeat;
+  height: 40px;
+  width: 40px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
- .selected {
-	background: url("../public/images/Car\ -\ Free\ security\ icons-2.png") no-repeat;
+.selected {
+  background: url("../public/images/Car\ -\ Free\ security\ icons-2.png")
+    no-repeat;
 }
 
- .occupied {
-	background: url("../public/images/Car\ -\ Free\ security\ icons-3.png") no-repeat;
+.occupied {
+  background: url("../public/images/Car\ -\ Free\ security\ icons-3.png")
+    no-repeat;
 }
- .seat:nth-of-type(2) {
-}
-
- .seat:nth-last-of-type(2) {
+.seat:nth-of-type(2) {
 }
 
- .seat:not(.occupied):hover {
-	cursor: pointer;
-	transform: scale(1.2);
+.seat:nth-last-of-type(2) {
 }
 
- .showcase .seat:not(.occupied):hover {
-	cursor: default;
-	transform: scale(1);
+.seat:not(.occupied):hover {
+  cursor: pointer;
+  transform: scale(1.2);
 }
 
- .showcase {
-	display: flex;
-	justify-content: center;
-	list-style-type: none;
-
+.showcase .seat:not(.occupied):hover {
+  cursor: default;
+  transform: scale(1);
 }
 
- .showcase li {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.showcase {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
 }
 
- .showcase li small {
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
- .row {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.showcase li small {
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ticket in landing page */
@@ -202,6 +205,46 @@ input[type="range"]::-moz-focus-outer {
 .Clip2 {
   clip-path: inset(0 0 2% 0 round 5% 20% 0 10%);
   transform: rotateZ(3deg);
-  @apply bg-gray-100 ;
+  @apply bg-gray-100;
 }
 
+.Clip3 {
+  clip-path: inset(0 0 20% 0 round 10% 10% 5% 5%);
+  transform: rotateZ(1deg);
+  @apply bg-gray-200;
+  @apply bg-opacity-10;
+  @apply max-md:pb-40;
+}
+
+/* 3d background  */
+
+.background {
+  background: linear-gradient(45deg, #515f85, #ffffff);
+  transform-origin: 0 0; /* Set the transform origin */
+  transform: translateZ(-900px) scale(1); /* Apply the 3D effect */
+}
+
+/* footer icons  */
+
+.icons * {
+  @apply text-gray-100;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.icons *:hover {
+  @apply text-yellow-400;
+}
+
+/* 
+header video container 
+*/
+.video {
+  clip-path: inset(0 0 0 0 round 30% 30% 10% 10%);
+  background-attachment: fixed;
+}
+/* bus header  */
+
+.BusHeader{
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 60% 75%, 50% 100%, 39% 75%, 0% 75%);
+}

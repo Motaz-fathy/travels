@@ -6,6 +6,7 @@ export const Bus_page = () => {
 
   return (
   <div className="bg-gray-200">
+    
     <Layout />
   </div>
   );

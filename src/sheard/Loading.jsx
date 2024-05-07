@@ -3,56 +3,54 @@ import React from "react";
 export const Loading = () => {
   return (
     <div className="w-full h-auto bg-gray-200 flex justify-center items-center ">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-        <radialGradient
-          id="a12"
-          cx=".66"
-          fx=".66"
-          cy=".3125"
-          fy=".3125"
-          gradientTransform="scale(1.5)"
-        >
-          <stop offset="0" stop-color="#3D3C3E" />
-          <stop offset=".3" stop-color="#3D3C3E" stop-opacity=".9" />
-          <stop offset=".6" stop-color="#3D3C3E" stop-opacity=".6" />
-          <stop offset=".8" stop-color="#3D3C3E" stop-opacity=".3" />
-          <stop offset="1" stop-color="#3D3C3E" stop-opacity="0" />
-        </radialGradient>
-        <circle
-          transform-origin="center"
-          fill="none"
-          stroke="url(#a12)"
-          stroke-width="15"
-          stroke-linecap="round"
-          stroke-dasharray="200 1000"
-          stroke-dashoffset="0"
-          cx="100"
-          cy="100"
-          r="70"
-        >
-          <animateTransform
-            type="rotate"
-            attributeName="transform"
-            calcMode="spline"
-            dur="2"
-            values="360;0"
-            keyTimes="0;1"
-            keySplines="0 0 1 1"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle
-          transform-origin="center"
-          fill="none"
-          opacity=".2"
-          stroke="#3D3C3E"
-          stroke-width="15"
-          stroke-linecap="round"
-          cx="100"
-          cy="100"
-          r="70"
-        />
-      </svg>
+       <div className="md:flex md:space-x-4 w-full mx-auto  ">
+        <section className="w-full mx-auto px-4  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 ">
+     
+  
+          {
+            [1,2,3,4,5,6,7,8].map(() => {
+              return (
+                <div className="bg-white bg-opacity-30 rounded-lg shadow-lg p-6 mb-4 backdrop-filter backdrop-blur-lg ">
+                <div className="flex flex-col items-center gap-2 w-full ">
+                  <div className="flex justify-between items-center w-full">
+                    <div className="animate-pulse px-6 py-6 bg-gray-300 "></div>
+                     <span className="animate-pulse px-4 py-1 bg-gray-300 "></span>
+                  </div>
+        
+                  <div className="flex justify-between items-center w-full">
+                    <div className="flex justify-start items-center gap-2 ">
+                      <div className="border-gray-300 border-l-2 w-2 h-40 animate-pulse"></div>
+                      <div className="flex flex-col items-start gap-2 ">
+                      <span className="animate-pulse px-6 py-2 bg-gray-300 "> </span>
+                      <span className="animate-pulse px-6 py-2 bg-gray-300 "></span>
+                      <span className="animate-pulse px-6 py-2 bg-gray-300 "> </span>
+                      <span className="animate-pulse px-6 py-2 bg-gray-300 "></span>
+                      </div>
+        
+                    </div>
+                   <div className="animate-pulse px-6 py-2 bg-gray-300 "></div>
+                  </div>
+                   
+                   <div  className="flex justify-between items-center w-full">
+                    <span className="px-2 py-1 rounded-2xl bg-gray-300 text-white animate-pulse"></span>
+                    <div className="flex justify-center items-center gap-2 ">
+                      <div className="flex flex-col items-end gap-2 ">
+                        <span className="animate-pulse px-6 py-2 bg-gray-300 "></span>
+                        <span className="animate-pulse px-6 py-2 bg-gray-300 "> </span>
+                      </div>
+                       <button className="w-20 h-10 bg-gray-300 text-white rounded-lg  animate-pulse px-2">  </button>
+                    </div>
+                   </div>
+        
+                </div>
+                </div>
+              )
+            })
+          }
+        
+        
+        </section>
+        </div>
     </div>
   );
 };

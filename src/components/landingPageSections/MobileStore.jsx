@@ -47,7 +47,8 @@ return () => {
 
   } , [])
   return (
-    <div className="w-full px-8 Clip2 bg-gray-800   flex flex-col lg:flex-row justify-between items-center  max-md:px-2 max-md:py mx-auto">
+    <div className="w-full px-8 Clip2 bg-gray-800   flex flex-col lg:flex-row justify-between items-center md:py-10 max-md:px-2 max-md:py mx-auto">
+      
       <div className="w-full lg:w-1/2 relative flex justify-center items-center lg:items-start  ">
         <img
           src="./images/landing_page/Phone.png"
@@ -56,7 +57,7 @@ return () => {
         />
       </div>
 
-      <div className="w-full lg:w-1/2 flex flex-col items-start gap-4 mt-10 lg:mt-0 lg:ml-10 max-md:text-center max-md:w-5/6">
+      <div className="w-full lg:w-1/2 flex flex-col items-start gap-4 mt-10 lg:mt-0 lg:ml-10 max-md:text-center max-md:w-5/6 md:text-center md:items-center">
         <span className="text-3xl lg:text-4xl font-bold text-gray-800  max-md:w-full mobStore ">
           The world in your pocket
         </span>
@@ -78,6 +79,7 @@ return () => {
           </button>
         </div>
       </div>
+
     </div>
   );
 };

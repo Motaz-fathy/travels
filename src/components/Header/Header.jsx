@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/actions/user/User";
 import { Title } from "./Title";
 import { ToastContainer } from "react-toastify";
-import { Transition } from "@headlessui/react";
+
 export const Header = () => {
   gsap.registerPlugin(CSSPlugin);
   const [open_menu, set_open_menu] = useState(false);
@@ -38,13 +38,13 @@ export const Header = () => {
   const loginReducer = useSelector(state => state.LoginReducer) || null;
   const datafromLogin = loginReducer.data.data;
   return (
-    <div className="relative inset-0 top-0 left-0 right-0 w-full min-h-screen bg-gray-200 px-8  max-sm:px-2  overflow-x-hidden scrollbar-hide ">
+    <div className="relative inset-0 top-0 left-0 right-0 w-full min-h-screen bg-gray-800 px-8  max-sm:px-2  overflow-x-hidden scrollbar-hide ">
       {/* bg header video  */}
       <video
         autoPlay
         muted
         loop
-        className="absolute top-0 left-0 object-cover w-full h-full z-0 bg-blend-darken "
+        className="absolute top-0 left-0 object-cover w-full h-full z-0 bg-blend-darken video "
         src="./Header.mp4"
         style={{ filter: "brightness(0.5)" }} // Apply overlay filter
         playbackRate={0.5} // Slow down video playback
@@ -179,6 +179,8 @@ export const Header = () => {
       <Title />
       {/*  */}
       <Navigation_search />
+
+
       <ToastContainer />
     </div>
   );
