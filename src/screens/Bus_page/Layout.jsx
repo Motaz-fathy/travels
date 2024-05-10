@@ -34,6 +34,9 @@ export const Layout = () => {
       ...trip.stations_to.map(station => ({ ...trip, stations_to: [station] }))
     ]) || [];
   }
+  // handle flating trips in useEffect hooks 
+
+
 
   const [modifiyTrips, setModifiyTrips] = useState([]);
 

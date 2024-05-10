@@ -35,6 +35,7 @@ export const LoginAction = (phonecode, mobile, password) => async dispatch => {
       config
     );
     if (res.status === 200) {
+      window.localStorage.setItem("UserData" , res.data.data)
       dispatch({ type: SUCCESS_LOGIN, payload: res.data });
     } else {
       dispatch({
@@ -43,7 +44,6 @@ export const LoginAction = (phonecode, mobile, password) => async dispatch => {
       });
     }
   } catch (error) {
-    console.log();
     dispatch({
       type: FALID_LOGIN,
       payload: error.response.data.errors
@@ -89,6 +89,9 @@ export const verifyOTPAction = (
       body,
       config
     );
+    if(res.status === 200){
+    window.localStorage.setItem("UserData" , res.data.data)
+    }
     dispatch({ type: SUCCESS_VERIFI_OTP, payload: res.data });
   } catch (error) {
     dispatch({ type: FAIL_VERIFI_OTP, payload: error.message });

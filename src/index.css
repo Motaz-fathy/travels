@@ -97,19 +97,19 @@ input[type="range"] {
 
 /* Target the first input[type="range"]::-webkit-slider-thumb */
 input[type="range"]:first-of-type::-webkit-slider-thumb {
-  background: #3347fa; /* Change background color for the first thumb */
+  @apply bg-gray-800 
 }
 /* Target the second input[type="range"]::-webkit-slider-thumb */
 input[type="range"]:last-of-type::-webkit-slider-thumb {
   background: white; /* Change background color for the second thumb */
-  border: 1px solid #6666ff;
+  border: 2px  solid #04041a;
 }
 /* General styling for all input[type="range"]::-webkit-slider-thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   border-radius: 50%;
 }
@@ -247,4 +247,9 @@ header video container
 
 .BusHeader{
   clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 60% 75%, 50% 100%, 39% 75%, 0% 75%);
+}
+
+.myElement {
+  clip-path: path("M100,10 L40,180 L190,60 L10,60 L160,180 Z");
+  @apply bg-gray-800 ;
 }

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Slider from "../sheard/Slider";
 // Functional component for filtering trips by arrival, departure time, price, and company
-export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) => {
+export const FilterTrips = ({
+  trips,
+  setModifiyTrips,
+  loading,
+  setSaidCtr
+}) => {
   const calculateMinMaxArrivalTime = () => {
     let min = Infinity;
     let max = -Infinity;
@@ -71,13 +76,41 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
 
   useEffect(
     () => {
+      // Set initial state values for arrival and departure times
+      const {
+        min: initialMinArrival,
+        max: initialMaxArrival
+      } = calculateMinMaxArrivalTime();
+      const {
+        min: initialMinDeparture,
+        max: initialMaxDeparture
+      } = calculateMinMaxDepartureTime();
+
+      setMinArrivalTime(initialMinArrival);
+      setMaxArrivalTime(initialMaxArrival);
+      setMinDepartureTime(initialMinDeparture);
+      setMaxDepartureTime(initialMaxDeparture);
+
+      // Set initial state values for price
+      const {
+        min: initialMinPrice,
+        max: initialMaxPrice
+      } = calculateMinMaxPrice();
+      setMinPriceValue(initialMinPrice);
+      setMaxPriceValue(initialMaxPrice);
+    },
+    [loading]
+  );
+
+  useEffect(
+    () => {
       if (!filteredTrips.length) {
         // Check if filteredTrips is empty to avoid re-rendering
         setFilteredTrips(trips);
         setCompanies(getUniqueCompanies());
       }
     },
-    [trips, filteredTrips ]
+    [trips, filteredTrips]
   ); // Include filteredTrips in dependencies
 
   // Function to handle slider change for arrival time
@@ -156,6 +189,13 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
     }));
   };
 
+  // state to track checked status of each departure stations
+
+
+
+
+
+
   // Function to filter trips by arrival, departure time, price, and company
   const filterTrips = (
     minArrivalTime,
@@ -185,6 +225,8 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
     setFilteredTrips(filtered);
     setModifiyTrips(filtered); // Update modified trips
   };
+
+  
 
   // Function to filter trips by company
   const filterByCompany = () => {
@@ -249,180 +291,308 @@ export const FilterTrips = ({ trips, setModifiyTrips ,   loading , setSaidCtr}) 
     setModifiyTrips(filtered); // Update modified trips
   };
 
+  
   useEffect(filterByCategory, [categoryFilters]);
+
+  // State to track checked status of each departure station
+
+
+  // function to get time by H-M and date by MM/DD
+  const formattedTimeWithDate = timestamp => {
+    const date = new Date(parseInt(timestamp));
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    // Pad single-digit day and month with leading zeros
+    const formattedDay = day < 10 ? `${day}` : day;
+    const formattedMonth = month < 10 ? `${month}` : month;
+
+    // Pad single-digit minutes with a leading zero
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `(${formattedMonth}/${formattedDay}) ${hours}:${formattedMinutes}`;
+  };
+
   return (
-    <div
-          >
+    <div>
       {/* Sidebar content */}
-       {loading ? <div></div> : 
-             <div className=" px-2">
-      
-             {/* Logo */}
-             <div className="text-center mb-6">
-               {/* <img src="/path/to/logo.png" alt="Logo" className="w-8 h-8" /> */}
-               <div className="hidden max-sm:flex" onClick={() => setSaidCtr(true)}>{">"}</div>
-             </div>
-             {/* Buttons */}
-             <div className="w-full m-auto flex flex-col items-start">
-               
-               <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4">
-                 <span className="text-gray-800 "> Bus Time : </span>
+      {loading
+        ? <div />
+        : <div className=" px-2">
+            {/* Logo */}
+            <div className="text-center mb-6">
+              {/* <img src="/path/to/logo.png" alt="Logo" className="w-8 h-8" /> */}
+              <div
+                className="hidden max-sm:flex"
+                onClick={() => setSaidCtr(true)}
+              >
+                {">"}
+              </div>
+            </div>
+            {/* Buttons */}
+            <div className="w-full m-auto flex flex-col items-start">
+              <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4">
+                <span className="text-gray-600 "> bus time filters </span>
                 <div className="flex flex-col items-start gap-2 w-full ">
-                <span>departure time : </span>
-                 <div className="flex justify-center gap-2 items-center w-full">
-                   {new Date(parseInt(minDepartureTime)).getHours()}:00
-                   <div className="flex justify-center bg-gray-200 h-2 rounded-xl w-full">
-                     <input
-                       id="minDepartureTimeSlider"
-                       type="range"
-                       min={minDeparture}
-                       max={maxDeparture + "60"}
-                       step="1800" // step by one hour (3600 seconds)
-                       value={minDepartureTime}
-                       onChange={e =>
-                         handleDepartureSliderChange(e, "min", maxDepartureTime)}
-                     />
-                     <input
-                       id="maxDepartureTimeSlider"
-                       type="range"
-                       min={minDeparture}
-                       max={maxDeparture}
-                       step="1800" // step by one hour (3600 seconds)
-                       value={maxDepartureTime}
-                       onChange={e =>
-                         handleDepartureSliderChange(e, minDepartureTime, "max")}
-                     />
-                   </div>
-                   {new Date(parseInt(maxDepartureTime)).getHours()}:00
-                   <br />
-                 </div>
-                 
-                 <span>arrival time : </span>
-                 <div className="flex flex-col items-start gap-2 w-full ">
-                   <div className="flex justify-center items-center gap-2 w-full ">
-                     {/* <label htmlFor="minArrivalTimeSlider">Minimum Arrival Time: </label> */}
-                     {new Date(parseInt(minArrivalTime)).getHours()}:00
-                     <div className="flex justify-center h-2 rounded-xl bg-gray-200 w-full">
-                       <input
-                         id="minArrivalTimeSlider"
-                         type="range"
-                         min={minArrival}
-                         max={maxArrival}
-                         step="3600" // step by one hour (3600 seconds)
-                         value={minArrivalTime}
-                         onChange={e =>
-                           handleArrivalSliderChange(e, "min", maxArrivalTime)}
-                       />
-                       {/* <label htmlFor="maxArrivalTimeSlider">Maximum Arrival Time: </label> */}
-                       <input
-                         id="maxArrivalTimeSlider"
-                         type="range"
-                         min={minArrival}
-                         max={maxArrival}
-                         step="3600" // step by one hour (3600 seconds)
-                         value={maxArrivalTime}
-                         onChange={e =>
-                           handleArrivalSliderChange(e, minArrivalTime, "max")}
-                       />
-                     </div>
-                     {new Date(parseInt(maxArrivalTime)).getHours()}:00
-                     <br />
-                   </div>
-                 </div>
-     
-                 <span>price : </span>
-                 <div className="flex justify-center items-center w-full">
-                   ${minPriceValue}
-                   <div className=" w-full flex justify-center items-center bg-gray-200 rounded-xl h-2">
-                     <input
-                       id="minPriceSlider"
-                       type="range"
-                       min={minPrice}
-                       max={maxPrice + 1}
-                       step="1" // step by $10
-                       value={minPriceValue}
-                       onChange={e =>
-                         handlePriceSliderChange(e, "min", maxPriceValue)}
-                     />
-     
-                     <input
-                       id="maxPriceSlider"
-                       type="range"
-                       min={minPrice}
-                       max={maxPrice + 1}
-                       step="1" // step by $10
-                       value={maxPriceValue}
-                       onChange={e =>
-                         handlePriceSliderChange(e, minPriceValue, "max")}
-                     />
-                   </div>
-                   ${maxPriceValue}
-                   <br />
-                 </div>
-               </div>
-     
-            
-               </div>
-     
-               <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full">
-                 <span className=""> operator : </span>
-                 {companies.map(company =>
-                   <div
-                     key={company}
-                     className={` h-10 w-full rounded-xl  flex justify-between items-center    px-4
-                     ${!companyFilters[company] ? "bg-gray-100" : "bg-gray-200"}
-                     `}
-                   >
-                     <input
-                       type="checkbox"
-                       id={company}
-                       value={company}
-                       checked={companyFilters[company]}
-                       onChange={() => handleCompanyChange(company)}
-                       className=""
-                     />
-                     <label
-                       htmlFor={company}
-                       className="text-gray-800 cursor-pointer flex items-center justify-center w-full h-full"
-                     >
-                       {company}
-                     </label>
-                   </div>
-                 )}
-     
-               </div>
-     
-               <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
-                 <span>classes :</span>
-                 {Object.keys(categoryFilters).map(category =>
-                   <div
-                     key={category}
-                     className={` h-10  rounded-xl  flex justify-between items-center w-full  px-4
-               ${!categoryFilters[category] ? "bg-gray-100" : "bg-gray-200"}
-               `}
-                   >
-                     <input
-                       type="checkbox"
-                       id={category}
-                       value={category}
-                       checked={categoryFilters[category]}
-                       onChange={() => handleCategoryChange(category)}
-                       className="styled-checkbox"
-                     />
-                     <label
-                       htmlFor={category}
-                       className="text-gray-800 cursor-pointer flex items-center justify-center w-full h-full"
-                     >
-                       {category}
-                     </label>
-                   </div>
-                 )}
-              
-               </div>
-     
-             </div>
-           </div>
-       }
+                  <span>
+                    departure time ({trips[0].cities_from[0].name}){" "}
+                  </span>
+                  <div className="flex flex-col gap-2 items-center w-full">
+                    <div className="flex justify-between items-center w-full">
+                      <span>
+                        {formattedTimeWithDate(minDepartureTime)}
+                      </span>
+
+                      <span>
+                        {formattedTimeWithDate(maxDepartureTime)}
+                      </span>
+                    </div>
+                    <div className="flex justify-center bg-gray-200 h-2 rounded-xl w-full">
+                      <input
+                        id="minDepartureTimeSlider"
+                        type="range"
+                        min={minDeparture}
+                        max={maxDeparture}
+                        step="1800" // step by one hour (3600 seconds)
+                        value={minDepartureTime}
+                        onChange={e =>
+                          handleDepartureSliderChange(
+                            e,
+                            "min",
+                            maxDepartureTime
+                          )}
+                      />
+
+                      <input
+                        id="maxDepartureTimeSlider"
+                        type="range"
+                        min={minDeparture}
+                        max={maxDeparture}
+                        step="1800" // step by one hour (3600 seconds)
+                        value={maxDepartureTime}
+                        onChange={e =>
+                          handleDepartureSliderChange(
+                            e,
+                            minDepartureTime,
+                            "max"
+                          )}
+                      />
+                    </div>
+                    <br />
+                  </div>
+
+                  <span>
+                    arrival time ({trips[0].cities_to[0].name}){" "}
+                  </span>
+                  <div className="flex flex-col items-start gap-2 w-full ">
+                    <div className="flex flex-col  items-center gap-2 w-full ">
+                      <div className="flex justify-between items-center w-full ">
+                        <span>
+                          {formattedTimeWithDate(minArrivalTime)}
+                        </span>
+                        <span>
+                          {formattedTimeWithDate(maxArrivalTime)}
+                        </span>
+                      </div>
+                      <div className="flex justify-center h-2 rounded-xl bg-gray-200 w-full">
+                        <input
+                          id="minArrivalTimeSlider"
+                          type="range"
+                          min={minArrival}
+                          max={maxArrival}
+                          step="3600" // step by one hour (3600 seconds)
+                          value={minArrivalTime}
+                          onChange={e =>
+                            handleArrivalSliderChange(e, "min", maxArrivalTime)}
+                        />
+                        {/* <label htmlFor="maxArrivalTimeSlider">Maximum Arrival Time: </label> */}
+                        <input
+                          id="maxArrivalTimeSlider"
+                          type="range"
+                          min={minArrival}
+                          max={maxArrival}
+                          step="3600" // step by one hour (3600 seconds)
+                          value={maxArrivalTime}
+                          onChange={e =>
+                            handleArrivalSliderChange(e, minArrivalTime, "max")}
+                        />
+                      </div>
+
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 ">
+                <span className="text-gray-600"> bus prices </span>
+                <div className="flex flex-col  items-center w-full">
+                  <div className="w-full flex justify-between items-center">
+                    <span>
+                      {minPriceValue} EL
+                    </span>
+                    <span>
+                      {maxPriceValue} EL
+                    </span>
+                  </div>
+                  <br />
+                  <div className=" w-full flex justify-center items-center bg-gray-200 rounded-xl h-2">
+                    <input
+                      id="minPriceSlider"
+                      type="range"
+                      min={minPrice}
+                      max={maxPrice + 1}
+                      step="1" // step by $10
+                      value={minPriceValue}
+                      onChange={e =>
+                        handlePriceSliderChange(e, "min", maxPriceValue)}
+                    />
+
+                    <input
+                      id="maxPriceSlider"
+                      type="range"
+                      min={minPrice}
+                      max={maxPrice + 1}
+                      step="1" // step by $10
+                      value={maxPriceValue}
+                      onChange={e =>
+                        handlePriceSliderChange(e, minPriceValue, "max")}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full">
+                <span className="text-gray-600"> operator </span>
+                {companies.map(company =>
+                  <div
+                    key={company}
+                    className={`h-10 w-full rounded-xl flex justify-between items-center px-4 ${!companyFilters[
+                      company
+                    ]
+                      ? "bg-gray-100"
+                      : "bg-gray-800"}`}
+                  >
+                    <label
+                      htmlFor={company}
+                      className={`cursor-pointer flex items-center justify-between gap-4 w-full h-full ${!companyFilters[
+                        company
+                      ]
+                        ? "text-gray-800"
+                        : "text-gray-200"}`}
+                    >
+                      <span className="">
+                        {company}
+                      </span>
+
+                      <input
+                        type="checkbox"
+                        id={company}
+                        value={company}
+                        checked={companyFilters[company]}
+                        onChange={() => handleCompanyChange(company)}
+                        style={{
+                          opacity: 0,
+                          position: "absolute",
+                          left: "-9999px"
+                        }}
+                      />
+                      {companyFilters[company]
+                        ? <span className="text-gray-200 ">&#10004;</span>
+                        : <span className="text-gray-800 ">x</span>}
+                    </label>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
+                <span className="text-gray-600">classes </span>
+                {Object.keys(categoryFilters).map(category =>
+                  <div
+                    key={category}
+                    className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!categoryFilters[
+                      category
+                    ]
+                      ? "bg-gray-200"
+                      : "bg-gray-800"}`}
+                  >
+                    <label
+                      htmlFor={category}
+                      className={`cursor-pointer flex items-center justify-between w-full h-full ${!categoryFilters[
+                        category
+                      ]
+                        ? "text-gray-800"
+                        : "text-gray-200"}`}
+                    >
+                      <span className="mr-2">
+                        {category}
+                      </span>
+
+                      <input
+                        type="checkbox"
+                        id={category}
+                        value={category}
+                        checked={categoryFilters[category]}
+                        onChange={() => handleCategoryChange(category)}
+                        style={{
+                          opacity: 0,
+                          position: "absolute",
+                          left: "-9999px"
+                        }}
+                      />
+                      {categoryFilters[category]
+                        ? <span className="text-gray-200">&#10004;</span>
+                        : <span className="text-gray-800">x</span>}
+                    </label>
+                  </div>
+                )}
+              </div>
+
+              {/* <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
+                <span className="text-gray-600">Departure Stations</span>
+                {Object.keys(stationFilters).map(station =>
+                  <div
+                    key={station}
+                    className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!stationFilters[
+                      station
+                    ]
+                      ? "bg-gray-200"
+                      : "bg-gray-800"}`}
+                  >
+                    <label
+                      htmlFor={station}
+                      className={`cursor-pointer flex items-center justify-between w-full h-full ${!stationFilters[
+                        station
+                      ]
+                        ? "text-gray-800"
+                        : "text-gray-200"}`}
+                    >
+                      <span className="mr-2">
+                        {station}
+                      </span>
+                      <input
+                        type="checkbox"
+                        id={station}
+                        value={station}
+                        checked={stationFilters[station]}
+                        onChange={() => handleStationChange(station)}
+                        style={{
+                          opacity: 0,
+                          position: "absolute",
+                          left: "-9999px"
+                        }}
+                      />
+                      {stationFilters[station]
+                        ? <span className="text-gray-200">&#10004;</span>
+                        : <span className="text-gray-800">x</span>}
+                    </label>
+                  </div>
+                )}
+              </div> */}
+            </div>
+          </div>}
     </div>
   );
 };

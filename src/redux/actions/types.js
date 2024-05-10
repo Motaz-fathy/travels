@@ -41,3 +41,15 @@ export const FAIL_RESEND_OTP = "FAIL_RESEND_OTP"
 
 export const LOGOUT = "LOGOUT"
 
+// create ticket form bus trip  types 
+
+export const LOAD_CREATE_TICKET = "LOAD_CREATE_TICKET"
+export const SUCCESS_CREATE_TICKET = "SUCCESS_CREATE_TICKET"
+export const FAIL_CREATE_TICKET = "FAIL_CREATE_TICKET"
+
+
+// profile types 
+
+export const LOAD_PROFILE_TICKET = "LOAD_PROFILE_TICKET"
+export const SUCCESS_PROFILE_TICKET = "SUCCESS_PROFILE_TICKET"
+export const FAIL_PROFILE_TICKET = "FAIL_PROFILE_TICKET"

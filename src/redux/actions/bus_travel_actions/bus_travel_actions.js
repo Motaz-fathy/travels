@@ -11,7 +11,10 @@ import {
   FAILD_SINGLE_TRIP,
   LOAD_AVIALBLE_SEATS ,
   GET_AVIALBLE_SEATS ,
-  FAILD_AVIALBLE_SEATS
+  FAILD_AVIALBLE_SEATS,
+  LOAD_CREATE_TICKET ,
+  SUCCESS_CREATE_TICKET ,
+  FAIL_CREATE_TICKET
 } from "../types";
 
 /**
@@ -90,13 +93,8 @@ export const SingleBusTrip = (trip) => async dispatch => {
 export const AvilableSeats = (trip) => async dispatch => {
   try {
      dispatch({type : LOAD_AVIALBLE_SEATS , payload : []})
-     const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    };
+
     const {data} = await  axios.get(`https://app.telefreik.com/api/transports/trips/${trip.id}/available-seats?from_city_id=${trip.stations_from[0].city_id}&to_city_id=${trip.stations_to[0].city_id}&from_location_id=${trip.stations_from[0].id}&to_location_id=${trip.stations_to[0].id}&date=${trip.date}`)
-    console.log("action available seates " , data )
     dispatch({type : GET_AVIALBLE_SEATS , payload : data.data})
   } catch (error) {
     dispatch({
@@ -106,5 +104,35 @@ export const AvilableSeats = (trip) => async dispatch => {
           ? error.response.data.message
           : error.message
     });
+  }
+}
+
+/**
+* @doc create ticket action 
+// @access private (just user can create ticket ) 
+// Method POST 
+*/
+
+export const CreateTicketAction = (ticketData , token) => async dispatch => {
+  try {
+    dispatch({type : LOAD_CREATE_TICKET , payload : {}})
+    // config header 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`
+      }
+    } 
+     const res = await axios.post("https://app.telefreik.com/api/v2/transports/buses/create-ticket" , ticketData , config )
+     dispatch({type : SUCCESS_CREATE_TICKET , payload : res.data.data})
+
+
+
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      dispatch({ type: FAIL_CREATE_TICKET, payload: error.response.data.message });
+    } else {
+      dispatch({ type: FAIL_CREATE_TICKET, payload: 'An error occurred while creating the ticket.' });
+    }
   }
 }

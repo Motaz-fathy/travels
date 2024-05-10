@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { LoginAction } from "../../redux/actions/user/User";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -115,6 +116,7 @@ export const Login = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

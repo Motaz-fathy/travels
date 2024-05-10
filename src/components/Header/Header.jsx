@@ -84,10 +84,17 @@ export const Header = () => {
                 logout
                 <div className="line active:line" />
               </button>
-            : <Link className="cursor-pointer link-container z-50" to={"/login"}>
+            : <Link
+                className="cursor-pointer link-container z-50"
+                to={"/login"}
+              >
                 login
                 <div className="line " />
               </Link>}
+
+          <Link to={'/profile'} className="w-10 h-10 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center ">
+            {datafromLogin.name[0]}
+          </Link>
 
           <span className={`z-50 cursor-pointer  `} onClick={handle_menu}>
             <button className="text-white focus:outline-none">
@@ -169,17 +176,19 @@ export const Header = () => {
                 logout
                 <div className="line active:line" />
               </button>
-            : <Link className="cursor-pointer link-container z-50" to={"/login"}>
+            : <Link
+                className="cursor-pointer link-container z-50"
+                to={"/login"}
+              >
                 login
                 <div className="line " />
               </Link>}
         </div>
       </nav>
-       {/* animate text component */}
+      {/* animate text component */}
       <Title />
       {/*  */}
       <Navigation_search />
-
 
       <ToastContainer />
     </div>
