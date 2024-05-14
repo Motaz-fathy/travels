@@ -8,6 +8,7 @@ import { FilterTrips } from "../../utils/filterTripsByArrivalTime";
 import {Footer} from '../../components/Footer'
 import { ToastContainer } from "react-toastify";
 import { BusHeader } from "./BusHeader";
+import { Navbar } from "../../components/Navbar/Navbar";
 
 export const Layout = () => {
   const { data, loading } = useSelector(state => state.busSearch);
@@ -87,15 +88,16 @@ export const Layout = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-  <div className="w-full flex flex-col items-center ">
+  <div className="w-full flex flex-col items-center  ">
+    <Navbar />
     <BusHeader 
     trip ={currentTrips[0]}
     />
-    <div className=" relative w-full  flex justify-between items-start  ">
+    <div className="  w-full  flex justify-between items-start max-md:flex-col ">
       {/*  said bar  */}
+
       <div
-        className={`block top-0 left-0 w-1/4   max-sm:w-full  ${saidCtr &&
-          "hidden"}`}
+        className={`w-1/4 max-md:w-full`}
       >
         <FilterTrips
           setModifiyTrips={setModifiyTrips}
@@ -107,9 +109,7 @@ export const Layout = () => {
       </div>
 
       <div
-        className={`relative    flex flex-col items-start gap-2 ${saidCtr
-          ? "w-full"
-          : "w-3/4 max-sm:w-0 "}`}
+        className={`  w-3/4  flex flex-col items-start gap-2 max-md:w-full `}
       >
         {/* navbar */}
         <div className="w-full h-14  flex justify-between items-center px-4">

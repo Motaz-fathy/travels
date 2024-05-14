@@ -10,10 +10,10 @@ export const BusHeader = ({trip}) => {
     } 
   return (
     <div className='w-full h-40 bg-gray-800 BusHeader  flex justify-center items-start py-2 '>
-       <div className='w-full px-4 flex flex-col items-center gap-2 '>
+       <div className='w-full px-8 flex flex-col items-center gap-2 '>
         {/* back button  */}
         <div className=' w-full flex justify-between items-center '>
-            <button className=' bg-gray-600 text-white px-8 py-2 rounded-2xl' onClick={HandleNavigationBack}> Back </button>
+            <button className=' bg-gray-600 text-white w-8 h-8 flex justify-center items-center rounded-full ' onClick={HandleNavigationBack}> {"<"} </button>
         </div>
         {/* info of trips  */}
         <div className='flex justify-center items-center gap-2 text-white'>

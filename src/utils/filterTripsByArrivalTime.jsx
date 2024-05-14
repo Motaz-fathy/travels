@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Slider from "../sheard/Slider";
 // Functional component for filtering trips by arrival, departure time, price, and company
 export const FilterTrips = ({
@@ -191,11 +191,6 @@ export const FilterTrips = ({
 
   // state to track checked status of each departure stations
 
-
-
-
-
-
   // Function to filter trips by arrival, departure time, price, and company
   const filterTrips = (
     minArrivalTime,
@@ -225,8 +220,6 @@ export const FilterTrips = ({
     setFilteredTrips(filtered);
     setModifiyTrips(filtered); // Update modified trips
   };
-
-  
 
   // Function to filter trips by company
   const filterByCompany = () => {
@@ -291,11 +284,9 @@ export const FilterTrips = ({
     setModifiyTrips(filtered); // Update modified trips
   };
 
-  
   useEffect(filterByCategory, [categoryFilters]);
 
   // State to track checked status of each departure station
-
 
   // function to get time by H-M and date by MM/DD
   const formattedTimeWithDate = timestamp => {
@@ -315,24 +306,44 @@ export const FilterTrips = ({
     return `(${formattedMonth}/${formattedDay}) ${hours}:${formattedMinutes}`;
   };
 
+  //  handle menu buttons
+
+  const [openButton, setOpenButton] = useState(null);
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenButton(null); // Close the menu if clicked outside the menu container
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleClick = buttonName => {
+    setOpenButton(openButton === buttonName ? null : buttonName); // Toggle the open state of the clicked button
+  };
+
   return (
-    <div>
-      {/* Sidebar content */}
+    <div className="w-full overflow-hidden">
+      {/* Sidebar content in upper max-md screen */}
+
       {loading
-        ? <div />
-        : <div className=" px-2">
-            {/* Logo */}
-            <div className="text-center mb-6">
-              {/* <img src="/path/to/logo.png" alt="Logo" className="w-8 h-8" /> */}
-              <div
-                className="hidden max-sm:flex"
-                onClick={() => setSaidCtr(true)}
-              >
-                {">"}
-              </div>
-            </div>
-            {/* Buttons */}
+        ? <div className="flex max-md:hidden w-full">
+            <div className="w-full   h-64 bg-white shadow-xl rounded-xl my-3 py-4 animate-pulse">
+             
+          </div>
+          </div>
+        : <div className=" px-2 max-md:hidden flex w-full ">
+           
+          
+           
             <div className="w-full m-auto flex flex-col items-start">
+
               <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4">
                 <span className="text-gray-600 "> bus time filters </span>
                 <div className="flex flex-col items-start gap-2 w-full ">
@@ -427,7 +438,7 @@ export const FilterTrips = ({
               </div>
 
               <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 ">
-                <span className="text-gray-600"> bus prices </span>
+                <span className="text-gray-600"> bus prices filter </span>
                 <div className="flex flex-col  items-center w-full">
                   <div className="w-full flex justify-between items-center">
                     <span>
@@ -465,7 +476,7 @@ export const FilterTrips = ({
               </div>
 
               <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full">
-                <span className="text-gray-600"> operator </span>
+                <span className="text-gray-600"> operator filter </span>
                 {companies.map(company =>
                   <div
                     key={company}
@@ -508,7 +519,7 @@ export const FilterTrips = ({
               </div>
 
               <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
-                <span className="text-gray-600">classes </span>
+                <span className="text-gray-600">classes filter </span>
                 {Object.keys(categoryFilters).map(category =>
                   <div
                     key={category}
@@ -591,6 +602,327 @@ export const FilterTrips = ({
                   </div>
                 )}
               </div> */}
+            </div>
+          </div>}
+
+      {/* Sidebar content in under max-md screen */}
+
+      {loading
+        ? <div className="w-full  justify-between  items-center overflow-hidden gap-4 max-md:flex hidden">
+            <button className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-400 animate-pulse " />
+            <button className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-400 animate-pulse" />
+            <button className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-400 animate-pulse" />
+            <button className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-400 animate-pulse" />
+          </div>
+        : <div className="hidden max-md:flex w-full ">
+            <div className="relative w-full" ref={menuRef}>
+              <Slider>
+                <button
+                  className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-800 text-gray-200"
+                  onClick={() => handleClick("Times")}
+                >
+                  Times
+                </button>
+                <button
+                  className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-800 text-gray-200"
+                  onClick={() => handleClick("Price")}
+                >
+                  Price
+                </button>
+                <button
+                  className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-800 text-gray-200"
+                  onClick={() => handleClick("Operator")}
+                >
+                  Operator
+                </button>
+                <button
+                  className="button-menu w-32 px-8 h-10 my-4 rounded-lg shadow-xl bg-gray-800 text-gray-200"
+                  onClick={() => handleClick("classes")}
+                >
+                  classes
+                </button>
+              </Slider>
+              {openButton &&
+                <div className="menu-container">
+                  <div className="button-div px-4">
+                    {openButton === "Times" &&
+                      <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4">
+                        <div className="flex justify-between items-center w-full">
+                          <span className="text-gray-600 ">
+                            {" "}bus time filters{" "}
+                          </span>
+                          <span
+                            onClick={() => setOpenButton(null)}
+                            className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-400"
+                          >
+                            x
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-start gap-2 w-full ">
+                          <span>
+                            departure time ({trips[0].cities_from[0].name}){" "}
+                          </span>
+                          <div className="flex flex-col gap-2 items-center w-full">
+                            <div className="flex justify-between items-center w-full">
+                              <span>
+                                {formattedTimeWithDate(minDepartureTime)}
+                              </span>
+
+                              <span>
+                                {formattedTimeWithDate(maxDepartureTime)}
+                              </span>
+                            </div>
+                            <div className="flex justify-center bg-gray-200 h-2 rounded-xl w-full">
+                              <input
+                                id="minDepartureTimeSlider"
+                                type="range"
+                                min={minDeparture}
+                                max={maxDeparture}
+                                step="1800" // step by one hour (3600 seconds)
+                                value={minDepartureTime}
+                                onChange={e =>
+                                  handleDepartureSliderChange(
+                                    e,
+                                    "min",
+                                    maxDepartureTime
+                                  )}
+                              />
+
+                              <input
+                                id="maxDepartureTimeSlider"
+                                type="range"
+                                min={minDeparture}
+                                max={maxDeparture}
+                                step="1800" // step by one hour (3600 seconds)
+                                value={maxDepartureTime}
+                                onChange={e =>
+                                  handleDepartureSliderChange(
+                                    e,
+                                    minDepartureTime,
+                                    "max"
+                                  )}
+                              />
+                            </div>
+                            <br />
+                          </div>
+
+                          <span>
+                            arrival time ({trips[0].cities_to[0].name}){" "}
+                          </span>
+                          <div className="flex flex-col items-start gap-2 w-full ">
+                            <div className="flex flex-col  items-center gap-2 w-full ">
+                              <div className="flex justify-between items-center w-full ">
+                                <span>
+                                  {formattedTimeWithDate(minArrivalTime)}
+                                </span>
+                                <span>
+                                  {formattedTimeWithDate(maxArrivalTime)}
+                                </span>
+                              </div>
+                              <div className="flex justify-center h-2 rounded-xl bg-gray-200 w-full">
+                                <input
+                                  id="minArrivalTimeSlider"
+                                  type="range"
+                                  min={minArrival}
+                                  max={maxArrival}
+                                  step="3600" // step by one hour (3600 seconds)
+                                  value={minArrivalTime}
+                                  onChange={e =>
+                                    handleArrivalSliderChange(
+                                      e,
+                                      "min",
+                                      maxArrivalTime
+                                    )}
+                                />
+                                {/* <label htmlFor="maxArrivalTimeSlider">Maximum Arrival Time: </label> */}
+                                <input
+                                  id="maxArrivalTimeSlider"
+                                  type="range"
+                                  min={minArrival}
+                                  max={maxArrival}
+                                  step="3600" // step by one hour (3600 seconds)
+                                  value={maxArrivalTime}
+                                  onChange={e =>
+                                    handleArrivalSliderChange(
+                                      e,
+                                      minArrivalTime,
+                                      "max"
+                                    )}
+                                />
+                              </div>
+
+                              <br />
+                            </div>
+                          </div>
+                        </div>
+                      </div>}
+
+                    {openButton === "Price" &&
+                      <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 ">
+                        <div className="flex justify-between items-center w-full">
+                          <span className="text-gray-600 ">bus prices</span>
+                          <span
+                            onClick={() => setOpenButton(null)}
+                            className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-400"
+                          >
+                            x
+                          </span>
+                        </div>
+                        <div className="flex flex-col  items-center w-full">
+                          <div className="w-full flex justify-between items-center">
+                            <span>
+                              {minPriceValue} EL
+                            </span>
+                            <span>
+                              {maxPriceValue} EL
+                            </span>
+                          </div>
+                          <br />
+                          <div className=" w-full flex justify-center items-center bg-gray-200 rounded-xl h-2">
+                            <input
+                              id="minPriceSlider"
+                              type="range"
+                              min={minPrice}
+                              max={maxPrice + 1}
+                              step="1" // step by $10
+                              value={minPriceValue}
+                              onChange={e =>
+                                handlePriceSliderChange(
+                                  e,
+                                  "min",
+                                  maxPriceValue
+                                )}
+                            />
+
+                            <input
+                              id="maxPriceSlider"
+                              type="range"
+                              min={minPrice}
+                              max={maxPrice + 1}
+                              step="1" // step by $10
+                              value={maxPriceValue}
+                              onChange={e =>
+                                handlePriceSliderChange(
+                                  e,
+                                  minPriceValue,
+                                  "max"
+                                )}
+                            />
+                          </div>
+                        </div>
+                      </div>}
+                    {openButton === "Operator" &&
+                      <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full">
+                        <div className="flex justify-between items-center w-full">
+                          <span className="text-gray-600 ">
+                            {" "}operator filters{" "}
+                          </span>
+                          <span
+                            onClick={() => setOpenButton(null)}
+                            className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-400"
+                          >
+                            x
+                          </span>
+                        </div>
+                        {companies.map(company =>
+                          <div
+                            key={company}
+                            className={`h-10 w-full rounded-xl flex justify-between items-center px-4 ${!companyFilters[
+                              company
+                            ]
+                              ? "bg-gray-100"
+                              : "bg-gray-800"}`}
+                          >
+                            <label
+                              htmlFor={company}
+                              className={`cursor-pointer flex items-center justify-between gap-4 w-full h-full ${!companyFilters[
+                                company
+                              ]
+                                ? "text-gray-800"
+                                : "text-gray-200"}`}
+                            >
+                              <span className="">
+                                {company}
+                              </span>
+
+                              <input
+                                type="checkbox"
+                                id={company}
+                                value={company}
+                                checked={companyFilters[company]}
+                                onChange={() => handleCompanyChange(company)}
+                                style={{
+                                  opacity: 0,
+                                  position: "absolute",
+                                  left: "-9999px"
+                                }}
+                              />
+                              {companyFilters[company]
+                                ? <span className="text-gray-200 ">
+                                    &#10004;
+                                  </span>
+                                : <span className="text-gray-800 ">x</span>}
+                            </label>
+                          </div>
+                        )}
+                      </div>}
+                    {openButton === "classes" &&
+                      <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
+                        <div className="flex justify-between items-center w-full">
+                          <span className="text-gray-600 ">
+                            {" "}classes filters{" "}
+                          </span>
+                          <span
+                            onClick={() => setOpenButton(null)}
+                            className="w-6 h-6 flex justify-center items-center rounded-full bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-400"
+                          >
+                            x
+                          </span>
+                        </div>
+                        {Object.keys(categoryFilters).map(category =>
+                          <div
+                            key={category}
+                            className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!categoryFilters[
+                              category
+                            ]
+                              ? "bg-gray-200"
+                              : "bg-gray-800"}`}
+                          >
+                            <label
+                              htmlFor={category}
+                              className={`cursor-pointer flex items-center justify-between w-full h-full ${!categoryFilters[
+                                category
+                              ]
+                                ? "text-gray-800"
+                                : "text-gray-200"}`}
+                            >
+                              <span className="mr-2">
+                                {category}
+                              </span>
+
+                              <input
+                                type="checkbox"
+                                id={category}
+                                value={category}
+                                checked={categoryFilters[category]}
+                                onChange={() => handleCategoryChange(category)}
+                                style={{
+                                  opacity: 0,
+                                  position: "absolute",
+                                  left: "-9999px"
+                                }}
+                              />
+                              {categoryFilters[category]
+                                ? <span className="text-gray-200">
+                                    &#10004;
+                                  </span>
+                                : <span className="text-gray-800">x</span>}
+                            </label>
+                          </div>
+                        )}
+                      </div>}
+                  </div>
+                </div>}
             </div>
           </div>}
     </div>

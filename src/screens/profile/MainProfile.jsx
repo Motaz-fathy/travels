@@ -8,6 +8,7 @@ import {FlightIcon} from '../../sheard/FlightIcon.jsx'
 import {MariTimeIcon} from '../../sheard/MariTimeIcon.jsx'
 import {CarIcon} from '../../sheard/CarIcon.jsx'
 import Slider from "../../sheard/Slider";
+import {Navbar} from '../../components/Navbar/Navbar.jsx'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 export const MainProfile = () => {
   const [activeTab, setActiveTab] = useState("bus");
@@ -30,7 +31,8 @@ export const MainProfile = () => {
   const { tickets } = useSelector(state => state.TicketReducer);
   return (
     <div className="bg-gray-100 flex flex-col w-full overflow-hidden">
-      <header className="bg-white shadow flex flex-col items-center gap-4 w-full Clip2 pb-10">
+      <Navbar />
+      <header className="bg-white shadow flex flex-col items-center gap-4 w-full  pb-10">
         <div className=" mx-auto flex justify-between items-center h-60 bg-gray-800 w-full ">
           <div className=" w-full  flex justify-center items-center gap-4 ">
             <div className="rounded-full bg-gray-800 h-40 w-40 flex justify-center items-center border-4 border-gray-100  ">

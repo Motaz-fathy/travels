@@ -56,13 +56,15 @@ export const One_way_form = ({ converter_trip }) => {
           converter_trip={converter_trip}
         />
 
-        <SingleDatePicker
+       <div className="z-10 max-md:w-full">
+       <SingleDatePicker
           setStartDate={setStartDate}
           startDate={startDate}
           converter_trip={converter_trip}
         />
+       </div>
 
-        <div className={`${converter_trip} max-md:w-full`}>
+        <div className={`${converter_trip} max-md:w-full z-0`}>
           <Navigate_search_submit
             onSelect_from={onSelect_from}
             onSelect_to={onSelect_to}

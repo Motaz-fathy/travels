@@ -38,7 +38,7 @@ export const Header = () => {
   const loginReducer = useSelector(state => state.LoginReducer) || null;
   const datafromLogin = loginReducer.data.data;
   return (
-    <div className="relative inset-0 top-0 left-0 right-0 w-full min-h-screen bg-gray-800 px-8  max-sm:px-2  overflow-x-hidden scrollbar-hide ">
+    <div className="relative inset-0 top-0 left-0 right-0 w-full min-h-screen bg-gray-800 px-8  max-sm:px-2  bg-cover bg-fixed overflow-scroll  scrollbar-hide ">
       {/* bg header video  */}
       <video
         autoPlay
@@ -65,11 +65,8 @@ export const Header = () => {
             About
             <div className="line " />
           </Link>
-          <Link className="cursor-pointer link-container" to={"/services"}>
-            services
-            <div className="line " />
-          </Link>
-          <Link className="cursor-pointer link-container" to={"/services"}>
+         
+          <Link className="cursor-pointer link-container" to={"/contact"}>
             contact us
             <div className="line " />
           </Link>
@@ -93,7 +90,7 @@ export const Header = () => {
               </Link>}
 
           <Link to={'/profile'} className="w-10 h-10 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center ">
-            {datafromLogin.name[0]}
+            {datafromLogin?.name[0]}
           </Link>
 
           <span className={`z-50 cursor-pointer  `} onClick={handle_menu}>
@@ -160,11 +157,8 @@ export const Header = () => {
             About
             <div className="line " />
           </Link>
-          <Link className="cursor-pointer link-container" to={"/services"}>
-            services
-            <div className="line " />
-          </Link>
-          <Link className="cursor-pointer link-container" to={"/services"}>
+         
+          <Link className="cursor-pointer link-container" to={"/contact"}>
             contact us
             <div className="line " />
           </Link>
@@ -188,7 +182,9 @@ export const Header = () => {
       {/* animate text component */}
       <Title />
       {/*  */}
+      <div className="z-50">
       <Navigation_search />
+      </div>
 
       <ToastContainer />
     </div>

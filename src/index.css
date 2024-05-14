@@ -242,6 +242,7 @@ header video container
 .video {
   clip-path: inset(0 0 0 0 round 30% 30% 10% 10%);
   background-attachment: fixed;
+  height: 100%;
 }
 /* bus header  */
 
@@ -253,3 +254,13 @@ header video container
   clip-path: path("M100,10 L40,180 L190,60 L10,60 L160,180 Z");
   @apply bg-gray-800 ;
 }
+
+/* custom_message of toast  */
+
+.custom_message{
+  background-color: #04041a;
+  color: white; /* Text color */
+}
+
+/* datepicker  */
+

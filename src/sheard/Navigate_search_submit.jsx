@@ -27,17 +27,18 @@ export const Navigate_search_submit = ({
     if (!disable) {
       await nav('busTrips');
       dispatch(search_bus_trip(onSelect_from, onSelect_to, startDate));
-      toast.success("Search success! Please wait...");
+      toast.success("Search success! Please wait..." ,  {
+        className: 'custom_message',
+      });
     } else {
       toast.error("Please fill in all required fields.");
     }
   };
 
   return (
-    <div>
-      <button
+    <button
         onClick={navigation}
-        className={`p-2 w-10 h-10 rounded-full bg-gradient-to-tr  cursor-pointer  ${disable === false ? "bg-gray-800" : "bg-gray-500"}
+        className={`p-2 w-10 h-10 -z-10 rounded-full bg-gradient-to-tr  cursor-pointer  ${disable === false ? "bg-gray-800" : "bg-gray-500"}
          text-white  flex justify-center items-center max-md:w-full  `}
         
       >
@@ -57,7 +58,5 @@ export const Navigate_search_submit = ({
           />
         </svg>
       </button>
-      
-    </div>
   );
 };

@@ -30,7 +30,7 @@ export const Menu_cards = ({ open_menu }) => {
     navigate(`${item.id}`)
    }
   return (
-     <div className="text-white bg-gray-800 w-full ">
+     <div className="text-white bg-gray-200 w-full h-64">
 
      </div>
   );

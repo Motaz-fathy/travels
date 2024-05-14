@@ -65,7 +65,7 @@ export const Footer = () => {
       <div className="container gap-y-10 gap-x-5 sm:grid sm:grid-cols-2 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-4 lg:gap-x-10 ">
         <div className=" col-span-2 grid gap-5 sm:grid-cols-4 md:col-span-4 lg:md:col-span-1 lg:relative lg:flex lg:flex-col">
           <div className=" mx-auto  h-[174px] w-[285px] md:col-span-1 lg:absolute lg:top-[-25px]">
-            <img src={"./images/newLogo.png"} alt="logo footer" />
+            <img src={`${process.env.PUBLIC_URL}/images/newLogo.png`} alt="logo footer" />
           </div>
         </div>
         {widgetMenus.map(renderWidgetMenuItem)}

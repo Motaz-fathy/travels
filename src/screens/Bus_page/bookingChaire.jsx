@@ -13,6 +13,7 @@ import { Footer } from "../../components/Footer";
 import { BusHeader } from "./BusHeader";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Navbar } from "../../components/Navbar/Navbar";
 export const BookingChaire = () => {
   // Redux hooks
   const { trip, loading } = useSelector(state => state.SingleTrip);
@@ -90,15 +91,17 @@ export const BookingChaire = () => {
       }
       
       if(!!reservationTicket){
-        toast.done(" create ticket success ")
+        toast.success(" create ticket success ")
       }
      
   };
 
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full">
+    <div className="flex flex-col items-center gap-0 w-full">
+      <Navbar />
       <BusHeader trip={trip} />
+
       <div className="flex justify-center gap-6 items-start w-full px-8 max-md:flex-col">
         {trip.bus.category === "Business 40" &&
           <BusinessBus
@@ -177,7 +180,9 @@ export const BookingChaire = () => {
             {" "}checkout{" "}
           </button>
         </div>
+
       </div>
+
       <div className="w-full">
         <Footer />
       </div>

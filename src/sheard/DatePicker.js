@@ -25,7 +25,7 @@ export const SingleDatePicker = ({
             }}
             dateFormat="dd-MM-yyyy"
             placeholderText="Select a start date"
-            className="w-full focus:outline-none cursor-pointer text-sm max-md:w-96 "
+            className="w-full focus:outline-none cursor-pointer text-sm max-md:w-[22.5rem] max-sm:w-[19.6rem] "
             minDate={new Date()} // Set minDate to today
             popperPlacement="bottom-start" // Set calendar placement
           />
