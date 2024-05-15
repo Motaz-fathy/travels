@@ -262,5 +262,10 @@ header video container
   color: white; /* Text color */
 }
 
-/* datepicker  */
+/* reservation-ticket   */
 
+.reservation-ticket{
+  clip-path: polygon(50% 0%, 100% 6%, 97% 35%, 100% 70%, 100% 95%, 49% 100%, 0 95%, 0% 70%, 3% 35%, 0 5%);
+  
+  @apply text-gray-200 bg-gray-800
+}

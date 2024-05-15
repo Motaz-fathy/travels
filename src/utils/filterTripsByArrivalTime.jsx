@@ -334,16 +334,11 @@ export const FilterTrips = ({
 
       {loading
         ? <div className="flex max-md:hidden w-full">
-            <div className="w-full   h-64 bg-white shadow-xl rounded-xl my-3 py-4 animate-pulse">
-             
-          </div>
+            <div className="w-full   h-64 bg-white shadow-xl rounded-xl my-3 py-4 animate-pulse" />
           </div>
         : <div className=" px-2 max-md:hidden flex w-full ">
-           
-          
-           
             <div className="w-full m-auto flex flex-col items-start">
-
+              
               <div className="w-full flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4">
                 <span className="text-gray-600 "> bus time filters </span>
                 <div className="flex flex-col items-start gap-2 w-full ">
@@ -561,47 +556,7 @@ export const FilterTrips = ({
                 )}
               </div>
 
-              {/* <div className="flex flex-col items-start gap-3 px-4 bg-white shadow-xl rounded-xl my-3 py-4 w-full ">
-                <span className="text-gray-600">Departure Stations</span>
-                {Object.keys(stationFilters).map(station =>
-                  <div
-                    key={station}
-                    className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!stationFilters[
-                      station
-                    ]
-                      ? "bg-gray-200"
-                      : "bg-gray-800"}`}
-                  >
-                    <label
-                      htmlFor={station}
-                      className={`cursor-pointer flex items-center justify-between w-full h-full ${!stationFilters[
-                        station
-                      ]
-                        ? "text-gray-800"
-                        : "text-gray-200"}`}
-                    >
-                      <span className="mr-2">
-                        {station}
-                      </span>
-                      <input
-                        type="checkbox"
-                        id={station}
-                        value={station}
-                        checked={stationFilters[station]}
-                        onChange={() => handleStationChange(station)}
-                        style={{
-                          opacity: 0,
-                          position: "absolute",
-                          left: "-9999px"
-                        }}
-                      />
-                      {stationFilters[station]
-                        ? <span className="text-gray-200">&#10004;</span>
-                        : <span className="text-gray-800">x</span>}
-                    </label>
-                  </div>
-                )}
-              </div> */}
+              
             </div>
           </div>}
 

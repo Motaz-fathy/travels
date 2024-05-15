@@ -33,7 +33,6 @@ export const Navbar = () => {
   const { data } = useSelector(state => state.otpReducer) || null;
   const loginReducer = useSelector(state => state.LoginReducer) 
   const datafromLogin = loginReducer.data.data === undefined ? null :  loginReducer.data.data 
-  console.log("datafromLogin" , datafromLogin)
   return (
     <div className="w-full bg-gray-800 px-4 overflow-hidden">
       <nav className="w-full h-20  flex justify-between items-center gap-3 text-lg  text-white max-md:hidden">
