@@ -15,7 +15,8 @@ import {
   LOAD_RESEND_OTP,
   SUCCESS_RESEND_OTP,
   FAIL_RESEND_OTP,
-  LOGOUT
+  LOGOUT,
+  SET_TRIP_TYPE
 } from "../types";
 export const LoginAction = (phonecode, mobile, password) => async dispatch => {
   try {
@@ -144,3 +145,8 @@ export const resendOTPAction = (mobile, phonecode) => async dispatch => {
 export const logoutAction = () => async dispatch =>  {
     dispatch({type : LOGOUT , paylod : []})
 }
+
+export const setTripType = (tripType) => ({
+  type: SET_TRIP_TYPE,
+  payload: tripType,
+});

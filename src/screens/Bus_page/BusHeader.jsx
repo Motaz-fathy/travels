@@ -1,13 +1,20 @@
 import React from 'react'
 import { BusIcon } from '../../sheard/BusIcon'
 import { useNavigate } from 'react-router-dom'
+import { prevStep } from '../../redux/actions/Ui/UiActions'
+import { useDispatch } from 'react-redux'
 
 export const BusHeader = ({trip}) => {
     // handle navigate back 
     const navigate = useNavigate()
+
+    const dispatch = useDispatch()
+
     const HandleNavigationBack = () => {
+        dispatch(prevStep()) 
         navigate(-1)
     } 
+    
   return (
     <div className='w-full h-40 bg-gray-800 BusHeader  flex justify-center items-start py-2 '>
        <div className='w-full px-8 flex flex-col items-center gap-2 '>

@@ -10,6 +10,7 @@ import {CarIcon} from '../../sheard/CarIcon.jsx'
 import Slider from "../../sheard/Slider";
 import {Navbar} from '../../components/Navbar/Navbar.jsx'
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { Footer } from "../../components/Footer.jsx";
 export const MainProfile = () => {
   const [activeTab, setActiveTab] = useState("bus");
   const loginReducer = useSelector(state => state.LoginReducer);
@@ -129,6 +130,9 @@ export const MainProfile = () => {
        {activeTab === "bus" && <Tickets tickets={tickets} />}
         {activeTab === "addresses" && <Addresses />}
        </div>
+      </div>
+      <div className="w-full">
+        <Footer />
       </div>
     </div>
   );

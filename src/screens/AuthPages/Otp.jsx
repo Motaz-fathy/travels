@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendOTPAction, verifyOTPAction, validateOTPAction, resendOTPAction } from "../../redux/actions/user/User";
-import { useNavigate } from "react-router-dom";
+import { verifyOTPAction, resendOTPAction } from "../../redux/actions/user/User";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Otp = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { loading, error } = useSelector((state) => state.otpReducer);
-  const {data} = useSelector(state => state.otpReducer)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+
+  const { loading, error, data } = useSelector((state) => state.otpReducer);
   const [otp, setOtp] = useState(["", "", "", ""]); // Array to store OTP digits
   const inputRefs = useRef([]); // Ref to store input field references
 
@@ -26,23 +28,23 @@ export const Otp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Combine the digits to form the OTP
-    const mobile = window.localStorage.getItem("phoneNumber")
+    const mobile = window.localStorage.getItem("phoneNumber");
     const otpValue = otp.join("");
     // Dispatch action to verify OTP
-    dispatch(verifyOTPAction(mobile , "20" , otpValue)); // Assuming verifyOTPAction takes only OTP value
+    dispatch(verifyOTPAction(mobile, "20", otpValue));
   };
 
   const handleResendOTP = () => {
     // Dispatch action to resend OTP
-    const mobile = window.localStorage.getItem("phoneNumber")
-    dispatch(resendOTPAction( mobile , "20"));
+    const mobile = window.localStorage.getItem("phoneNumber");
+    dispatch(resendOTPAction(mobile, "20"));
   };
 
   useEffect(() => {
-    if( data && data.status === 200 && data.data.status === "Active" ) {
-        navigate("/")
+    if (data && data.status === 200 && data.data.status === "Active") {
+      navigate(from); // Navigate to the last attempted URL
     }
-  } , [data , navigate])
+  }, [data, navigate, from]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -77,7 +79,7 @@ export const Otp = () => {
             </button>
           </div>
           {error && <p className="text-red-500 text-center">{error}</p>}
-          {<span className="text-blue-500 cursor-pointer" onClick={handleResendOTP}>Resent OTP</span>}
+          <span className="text-blue-500 cursor-pointer" onClick={handleResendOTP}>Resend OTP</span>
         </form>
       </div>
     </div>

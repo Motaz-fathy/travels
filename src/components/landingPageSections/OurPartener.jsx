@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Slider from "../../sheard/Slider";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PartnerLogos } from "../../sheard/PartenerLogos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,35 +48,13 @@ export const OurPartener = () => {
   } , [])
 
 
-  const logos = [
-    {
-      src: "image 2.png"
-    },
-    {
-      src: "image 3.png"
-    },
-    {
-      src: "image 4.png"
-    },
-    {
-      src: "image 5.png"
-    },
-    {
-      src: "image 6 (1).png"
-    },
-    {
-      src: "image 7.png"
-    },
-    {
-      src: "image 8.png"
-    }
-  ];
+
 
 
   return (
-    <div className=" w-full mx-auto flex flex-col items-center gap-4 mt-24 py-20">
+    <div className=" w-full mx-auto flex flex-col items-center gap-4 mt-24 py-20 ">
       <span className="text-4xl font-bold text-gray-800 our">Our partner</span>
-      <span className="w-1/3 max-sm:w-2/3 bg-gray-800 h-2 mx-auto -rotate-2 mb-5 rounded-full" />
+      <span className="w-1/3 max-sm:w-2/3 bg-gray-800 h-2 mx-auto -rotate-2 mb-5 rounded-full our" />
 
       <span className="text-lg font-bold text-gray-600 px-2 w-4/5 max-md:w-full max-md:px-2 mx-auto text-center our">
         Our partner is an invaluable ally in our mission to provide exceptional
@@ -85,19 +64,7 @@ export const OurPartener = () => {
         innovative solutions that exceed expectations and drive mutual success.
       </span>
       <div className=" w-full  ">
-        <Slider>
-          {logos.map((item, index) => {
-            return (
-              <img
-                src={`./images/ourParent/${item.src}`}
-                alt={item.src}
-                key={index}
-                className="   rounded-lg shadow-lg  backdrop-filter backdrop-blur-lg p-2 w-30 h-30 "
-              />
-               
-            );
-          })}
-        </Slider>
+        <PartnerLogos />
       </div>
     </div>
   );

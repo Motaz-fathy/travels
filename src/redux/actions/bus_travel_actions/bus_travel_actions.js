@@ -14,7 +14,13 @@ import {
   FAILD_AVIALBLE_SEATS,
   LOAD_CREATE_TICKET ,
   SUCCESS_CREATE_TICKET ,
-  FAIL_CREATE_TICKET
+  FAIL_CREATE_TICKET,
+  LOAD_CREATE_RETURN_TICKET ,
+  SUCCESS_CREATE_RETURN_TICKET ,
+  FAIL_CREATE_RETURN_TICKET,
+  LOAD_PAYMENT ,
+  SUCCESS_PAYMENT ,
+  FAIL_PAYMENT
 } from "../types";
 
 /**
@@ -135,4 +141,67 @@ export const CreateTicketAction = (ticketData , token) => async dispatch => {
       dispatch({ type: FAIL_CREATE_TICKET, payload: 'An error occurred while creating the ticket.' });
     }
   }
+}
+
+/**
+* @doc create outbond and return  ticket action 
+// @access private (just user can create ticket ) 
+// Method POST 
+*/
+export const CreateReturnTicketAction = (ticketData , token) => async dispatch => {
+  try {
+    dispatch({type : LOAD_CREATE_RETURN_TICKET , payload : {}})
+    // config header 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`
+      }
+    } 
+     const res = await axios.post("https://app.telefreik.com/api/v2/transports/buses/create-ticket" , ticketData , config )
+     dispatch({type : SUCCESS_CREATE_RETURN_TICKET , payload : res.data.data})
+
+
+
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      dispatch({ type: FAIL_CREATE_TICKET, payload: error.response.data.message });
+    } else {
+      dispatch({ type: FAIL_CREATE_RETURN_TICKET, payload: 'An error occurred while creating the ticket.' });
+    }
+  }
+}
+
+
+// payment action 
+export const paymentAction = (uuid , token ) => async dispatch => {
+  try {
+    dispatch({type : LOAD_PAYMENT , payload : {} })
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`
+      }
+    } 
+    const res = await axios.post(`https://app.telefreik.com/api/v2/transports/orders/${uuid}/pay` , config)
+    if(res.status === 200 ){
+      dispatch({type : SUCCESS_PAYMENT , payload : res.data.data })
+    }
+  } catch (error) {
+    dispatch({type : FAIL_PAYMENT , payload : error.response.data.message })
+  }
+}
+
+// store outbond ticket data before create round trip 
+
+const STORE_FIRST_TICKET = "STORE_FIRST_TICKET"  
+
+export const StoreFirstTicketDataAction = (data) => async dispatch => {
+      dispatch({type : STORE_FIRST_TICKET , payload : data })
+}
+
+// store end date 
+const STORE_END_DATE = "STORE_END_DATE" 
+export const StoreEndDateAction = (endDate) => async dispatch => {
+  dispatch({type : STORE_END_DATE , payload : endDate})
 }

@@ -42,9 +42,13 @@ export const SingleDatePicker = ({
   );
 };
 
-export const RangeDatePicker = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+export const RangeDatePicker = ({
+  startDate ,
+  setStartDate ,
+  endDate , 
+  setEndDate,
+  converter_trip 
+}) => {
 
   const clearDates = () => {
     setStartDate(null);
@@ -52,28 +56,28 @@ export const RangeDatePicker = () => {
   };
 
   return (
-    <div>
-      <div className="relative w-full">
-        <div className="flex justify-between items-center px-2 py-2 bg-white border border-gray-400 rounded shadow leading-tight">
+    <div className={`max-md:w-full `} >
+      <div className="relative w-full max-md:w-full">
+        <div className={`flex items-center  bg-white border max-md:mx-auto border-gray-400 rounded shadow leading-tight ${converter_trip}`}>
           <DatePicker
             selected={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={date => setStartDate(formatDate(date))}
             dateFormat="dd/MM/yyyy"
             placeholderText="Select a start date"
-            className="w-full focus:outline-none cursor-pointer text-sm mr-4"
-            minDate={new Date()} // Set minDate to today
+            className="w-full focus:outline-none cursor-pointer text-sm px-4 py-2 max-md:px-6"
+            minDate={startDate || new  Date()} // Set minDate to today
             popperPlacement="top-start" // Set calendar placement
           />
           <DatePicker
             selected={endDate}
-            onChange={date => setEndDate(date)}
+            onChange={date => setEndDate(formatDate(date))}
             dateFormat="dd/MM/yyyy"
             placeholderText="Select an end date"
-            className="w-full focus:outline-none cursor-pointer text-sm"
-            minDate={startDate || new Date()} // Set minDate to startDate or today
+            className="w-full focus:outline-none cursor-pointer text-sm px-4 py-2 max-md:px-6"
+            minDate={endDate || new Date()} // Set minDate to startDate or today
             popperPlacement="top-start" // Set calendar placement
           />
-          {startDate &&
+          {startDate && endDate && 
             <span
               className="text-red-500 cursor-pointer bg-white"
               onClick={clearDates}

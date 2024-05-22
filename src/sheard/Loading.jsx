@@ -10,7 +10,7 @@ export const Loading = () => {
           {
             [1,2,3,4,5,6,7,8].map(() => {
               return (
-                <div className="bg-white bg-opacity-30 rounded-lg shadow-lg p-6 mb-4 backdrop-filter backdrop-blur-lg ">
+                <div className="bg-white  rounded-lg shadow-lg p-6 mb-4 backdrop-filter backdrop-blur-lg ">
                 <div className="flex flex-col items-center gap-2 w-full ">
                   <div className="flex justify-between items-center w-full">
                     <div className="animate-pulse px-6 py-6 bg-gray-300 "></div>

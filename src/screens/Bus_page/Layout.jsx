@@ -9,9 +9,10 @@ import {Footer} from '../../components/Footer'
 import { ToastContainer } from "react-toastify";
 import { BusHeader } from "./BusHeader";
 import { Navbar } from "../../components/Navbar/Navbar";
+import { Stepper } from "../../sheard/stepper";
 
 export const Layout = () => {
-  const { data, loading } = useSelector(state => state.busSearch);
+  const { data , loading } = useSelector(state => state.busSearch);
   const trips = data.data;
   const error = data.errors;
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ export const Layout = () => {
   let allTrips = []
   if(loading === false ) {
      allTrips = 
-    trips.flatMap(trip => [
+    trips?.flatMap(trip => [
       trip,
       ...trip.stations_from.map(station => ({
         ...trip,
@@ -41,9 +42,7 @@ export const Layout = () => {
 
   const [modifiyTrips, setModifiyTrips] = useState([]);
 
-  const toggleFilter = () => {
-    setIsOpen(!isOpen);
-  };
+
 
   const handleClickOutside = event => {
     if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -113,29 +112,10 @@ export const Layout = () => {
       >
         {/* navbar */}
         <div className="w-full h-14  flex justify-between items-center px-4">
-          <span
-            className="px-2 py-2 cursor-pointer flex justify-center items-center gap-2 rounded-xl text-gray-800 hover:text-gray-600"
-            onClick={handleSaidbar}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
-              />
-            </svg>
-            <span className="">filters</span>
-          </span>
+           <Stepper />
           <span>result : {modifiyTrips.length}</span>
         </div>
-
+        <br />
         {/* trips container  */}
         <div className="w-full   ">
           <Container

@@ -1,38 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { LoginAction } from "../../redux/actions/user/User";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { data , error } = useSelector((state) => state.LoginReducer); // get res data after LoginAction dispatched
+  const { data, error } = useSelector((state) => state.LoginReducer); // get res data after LoginAction dispatched
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+
   const [countryCode, setCountryCode] = useState("+20"); // Default country code
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit is success ")
+    console.log("submit is success ");
     // Validate phone number and password
     dispatch(LoginAction("20", phoneNumber, password));
   };
 
+  useEffect(() => {
     // Navigate to /otp if data.need_verification is true
-    useEffect(() => {
-       if( data.need_verfication === true && data.status === 200 ) {
-        window.localStorage.setItem("phoneNumber" , phoneNumber )
-        navigate("/otp")
-       }else if (data.data !== undefined ) {
-           navigate("/")
-       }
-    }, [data, navigate , phoneNumber]);
+    if (data?.need_verfication === true && data.status === 200) {
+      window.localStorage.setItem("phoneNumber", phoneNumber);
+      navigate("/otp");
+    } else if (data?.data !== undefined) {
+      navigate(from); // Navigate to the last attempted URL
+    }
+  }, [data, navigate, phoneNumber, from]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -42,7 +42,11 @@ export const Login = () => {
             Sign in to your account
           </h2>
         </div>
-        {error !== null && <div className=" text-center text-lg font-extrabold text-red-600">{error.credentials}</div>}
+        {error !== null && (
+          <div className="text-center text-lg font-extrabold text-red-600">
+            {error.credentials}
+          </div>
+        )}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="flex">
@@ -50,7 +54,7 @@ export const Login = () => {
                 <select
                   id="country-code"
                   name="country-code"
-                  className="block appearance-none w-full bg-white   px-4 py-2 pr-8 rounded-none shadow-sm leading-tight focus:outline-none  "
+                  className="block appearance-none w-full bg-white px-4 py-2 pr-8 rounded-none shadow-sm leading-tight focus:outline-none"
                   value={countryCode}
                   onChange={(e) => setCountryCode(e.target.value)}
                 >
@@ -84,7 +88,7 @@ export const Login = () => {
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="1021882535"
               />
             </div>

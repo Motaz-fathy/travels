@@ -15,7 +15,8 @@ import {
   LOAD_RESEND_OTP,
   SUCCESS_RESEND_OTP,
   FAIL_RESEND_OTP,
-  LOGOUT
+  LOGOUT,
+  SET_TRIP_TYPE
 } from "../../actions/types";
 
 const initialState = {
@@ -97,6 +98,23 @@ export const otpReducer = (state = initOtp, action) => {
         error: null
       };
 
+    default:
+      return state;
+  }
+};
+
+export const tripReducer = (
+  state = {
+    tripType: "oneWay" // Default value
+  },
+  action
+) => {
+  switch (action.type) {
+    case SET_TRIP_TYPE:
+      return {
+        ...state,
+        tripType: action.payload
+      };
     default:
       return state;
   }

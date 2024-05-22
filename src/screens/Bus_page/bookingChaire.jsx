@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BusinessBus } from "../../sheard/buses/businessBus";
 import {
   AvilableSeats,
-  CreateTicketAction
+  CreateTicketAction,
+  search_bus_trip
 } from "../../redux/actions/bus_travel_actions/bus_travel_actions";
 import { ClassicBus } from "../../sheard/buses/ClassicBus";
 import { ComfortBus } from "../../sheard/buses/ComfortBus";
@@ -14,12 +15,16 @@ import { BusHeader } from "./BusHeader";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Navbar } from "../../components/Navbar/Navbar";
+import { Stepper } from "../../sheard/stepper";
 export const BookingChaire = () => {
   // Redux hooks
   const { trip, loading } = useSelector(state => state.SingleTrip);
   const { seats } = useSelector(state => state.AvilableSeatsReducer);
+  const {endDate}  = useSelector(state => state.StoreEndDateReduce)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {tripType} = useSelector(state => state.tripReducer)
+  const [typeTripCondition , setTypeTripCondition] = useState(1)
   // Local state for selected seats
   const [selectedList, setSelectedList] = useState({});
 
@@ -27,8 +32,11 @@ export const BookingChaire = () => {
   useEffect(
     () => {
       dispatch(AvilableSeats(trip));
+      if(tripType === "round"){
+           setTypeTripCondition(2)
+      }
     },
-    [dispatch, trip]
+    [dispatch, trip , tripType]
   );
 
   // Function to filter selected seats
@@ -52,9 +60,7 @@ export const BookingChaire = () => {
     [filterSelectedSeats]
   );
 
-  // Logging selected seats for reservation
-  // console.log("reservationSeats", reservationSeats);
-  // console.log(trip)
+
 
   const LoginReducer = useSelector(state => state.LoginReducer);
   const { reservationTicket, error } = useSelector(
@@ -76,7 +82,30 @@ export const BookingChaire = () => {
         "to_location_id": trip.stations_to[0].id,
         "date": trip.date,
         "seats": reservationSeats
+      }
+
     }
+    // not finish 
+    const TwoTicketDate = {
+      "round": 1,
+      "boarding": {
+        "trip_id": trip.id ,
+        "from_city_id": trip.cities_from[0].id,
+        "to_city_id": trip.cities_to[0].id,
+        "from_location_id": trip.stations_from[0].id,
+        "to_location_id": trip.stations_to[0].id,
+        "date": trip.FirstDate,
+        "seats": reservationSeats
+      } ,
+      "return" : {
+        "trip_id": trip.id ,
+        "from_city_id":  trip.cities_to[0].id,
+        "to_city_id": trip.cities_from[0].id,
+        "from_location_id": trip.stations_from[0].id,
+        "to_location_id": trip.stations_to[0].id,
+        "date": endDate,
+        "seats": reservationSeats
+      }
     }
    
      if(token === null){
@@ -96,12 +125,22 @@ export const BookingChaire = () => {
      
   };
 
+  const returnToSearchTrip = async () => {
+    setTypeTripCondition(3)
+    if(reservationSeats.length !== 0){
+      
+      await navigate(-1)
+     
+      dispatch(search_bus_trip( trip.cities_to[0].id , trip.cities_from[0].id ,  endDate))
+    }
+
+  }
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
       <Navbar />
       <BusHeader trip={trip} />
-
+      <Stepper />
       <div className="flex justify-center gap-6 items-start w-full px-8 max-md:flex-col">
         {trip.bus.category === "Business 40" &&
           <BusinessBus
@@ -176,9 +215,24 @@ export const BookingChaire = () => {
           <span className="text-2xl font-bold text-white">
             Total price : {reservationSeats.length * trip.price_start_with} LE
           </span>
+          {typeTripCondition === 1 && 
           <button className="w-2/3 py-2 bg-gray-200  rounded-md hover:bg-white  " onClick={SubmitCreateTicket}>
             {" "}checkout{" "}
-          </button>
+          </button>   
+          }
+
+          { typeTripCondition === 2 && 
+           <button className="w-2/3 py-2 bg-gray-200  rounded-md hover:bg-white  " onClick={returnToSearchTrip}>
+                  {" "}search return ticket {" "}
+           </button>    
+          }
+
+          {typeTripCondition === 3 && 
+           <button className="w-2/3 py-2 bg-gray-200  rounded-md hover:bg-white  " >
+                  {" "}checkout round trip  {" "}
+           </button>  
+          }
+
         </div>
 
       </div>

@@ -14,7 +14,13 @@ import {
   FAILD_AVIALBLE_SEATS,
   LOAD_CREATE_TICKET,
   SUCCESS_CREATE_TICKET,
-  FAIL_CREATE_TICKET
+  FAIL_CREATE_TICKET,
+  LOAD_CREATE_RETURN_TICKET,
+  SUCCESS_CREATE_RETURN_TICKET,
+  FAIL_CREATE_RETURN_TICKET,
+  LOAD_PAYMENT,
+  SUCCESS_PAYMENT,
+  FAIL_PAYMENT
 } from "../../actions/types";
 
 // Initial state
@@ -59,7 +65,7 @@ export const busSearch = (
       case LOAD_SEARCH:
         draft.loading = true;
         draft.error = null;
-        draft.data = [] ;
+        draft.data = [];
         break;
       case GET_SEARCH:
         draft.loading = false;
@@ -172,4 +178,81 @@ export const CreateTicketReducer = (
         break;
     }
   });
+};
+/**
+ * @doc create return ticket reducer 
+ * @access private 
+ */
+export const CreateReturnTicketReducer = (
+  state = {
+    loadingReturn: false,
+    reservationReturnTicket: {},
+    ReturnError: null
+  },
+  action
+) => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case LOAD_CREATE_RETURN_TICKET:
+        draft.loadingReturn = true;
+        draft.ReturnError = null;
+        break;
+      case SUCCESS_CREATE_RETURN_TICKET:
+        draft.loadingReturn = false;
+        draft.reservationReturnTicket = action.payload;
+        draft.ReturnError = null;
+        break;
+      case FAIL_CREATE_RETURN_TICKET:
+        draft.loadingReturn = false;
+        draft.ReturnError = action.payload;
+        break;
+
+      default:
+        break;
+    }
+  });
+};
+
+// payment reducer
+
+export const paymentReducer = (
+  state = {
+    loading: false,
+    paymentData: {},
+    error: null
+  },
+  action
+) => {
+  switch (action.type) {
+    case LOAD_PAYMENT:
+      return { loading: true, error: null };
+    case SUCCESS_PAYMENT:
+      return { ...state, loading: false, paymentData: action.payload };
+    case FAIL_PAYMENT:
+      return { loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// store first ticket data
+const STORE_FIRST_TICKET = "STORE_FIRST_TICKET";
+export const StoreFirstTicketDate = (state = {}, action) => {
+  switch (action.type) {
+    case STORE_FIRST_TICKET:
+      return { ...state, firstTicketData: action.payload };
+    default:
+      return state;
+  }
+};
+
+// store endate reducer
+const STORE_END_DATE = "STORE_END_DATE";
+export const StoreEndDateReduce = (state = { endDate: null }, action) => {
+  switch (action.type) {
+    case STORE_END_DATE:
+      return { ...state, endDate: action.payload };
+    default:
+      return state;
+  }
 };

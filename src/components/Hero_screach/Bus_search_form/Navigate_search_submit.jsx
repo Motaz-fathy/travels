@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { search_bus_trip } from "../redux/actions/bus_travel_actions/bus_travel_actions";
+import { search_bus_trip } from "../../../redux/actions/bus_travel_actions/bus_travel_actions";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +15,7 @@ export const Navigate_search_submit = ({
   const [disable, setDisable] = useState(true);
 
   useEffect(() => {
-    if (onSelect_from === null || onSelect_to === null || !startDate) {
+    if (onSelect_from === null || onSelect_to === null || !startDate ) {
       setDisable(true);
     } else {
       setDisable(false);

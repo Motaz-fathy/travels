@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import React, { useEffect, useState } from "react";
 import { SingleDatePicker } from "../../../sheard/DatePicker";
-import { Navigate_search_submit } from "../../../sheard/Navigate_search_submit";
+import { Navigate_search_submit } from "./Navigate_search_submit";
 import { Combo_box_from } from "../../../sheard/Combo_box_from";
 import { Combo_box_to } from "../../../sheard/Combo_box_to";
 

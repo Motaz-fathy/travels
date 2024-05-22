@@ -13,20 +13,23 @@ export const Container = ({loading , currentTrips  , currentPage , paginate , tr
         ? currentTrips.map((trip, index) =>
         <BusTripCard trip={trip} key={index} />
         )
-        : <div className="px-10">No trips in this time</div>}
+        : <div className="w-full flex flex-col items-center gap-6  text-center ">
+          <span className='text-2xl mx-auto fon-bold text-gray-800 Clip w-full bg-gray-100 py-10'> please press on previous !! </span>
+
+          </div>}
         </section>
         </div>
         </div>
         <div className=" flex justify-center items-center gap-3 ">
         <button
-        className={` w-40 h-10 my-3 rounded-md text-white ${currentPage === 1 ? 'bg-gray-400' : 'bg-gray-800'}`}
+        className={` w-40 h-10 my-3 rounded-md text-white ${currentPage === 1 ? 'bg-gray-400' : 'bg-gray-900 hover:bg-gray-800 transition-all duration-300'}`}
         onClick={() => paginate(currentPage - 1)}
         disabled={currentPage === 1}
         >
         Previous
         </button>
         <button
-        className={` w-40 h-10 my-3 rounded-md text-white ${currentTrips.length < tripsPerPage ? 'bg-gray-400' : 'bg-gray-800'}`}
+        className={` w-40 h-10 my-3 rounded-md text-white ${currentTrips.length < tripsPerPage ? 'bg-gray-400' : 'bg-gray-900 hover:bg-gray-800 transition-all duration-300'}`}
         onClick={() => paginate(currentPage + 1)}
         disabled={currentTrips.length < tripsPerPage}
         >

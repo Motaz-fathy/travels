@@ -333,8 +333,48 @@ export const FilterTrips = ({
       {/* Sidebar content in upper max-md screen */}
 
       {loading
-        ? <div className="flex max-md:hidden w-full">
-            <div className="w-full   h-64 bg-white shadow-xl rounded-xl my-3 py-4 animate-pulse" />
+        ? <div className="flex flex-col  max-md:hidden w-full gap-4">
+            <div className="w-full flex flex-col  h-64 bg-white shadow-xl rounded-xl my-3 py-4 " >
+            <span className="text-gray-600 w-20 h-4 rounded-md animate-pulse ">  </span>
+            <div className="flex flex-col items-start gap-2 w-full ">
+                  <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                  </span>
+                  <div className="flex flex-col gap-2 items-center w-full">
+                    <div className="flex justify-between items-center w-full">
+                      <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                      </span>
+
+                      <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                      </span>
+                    </div>
+                    <div className="flex justify-center bg-gray-200 h-2 rounded-xl w-full animate-pulse">
+                     
+                    </div>
+                    <br />
+                  </div>
+
+                  <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                  </span>
+                  <div className="flex flex-col items-start gap-2 w-full ">
+                    <div className="flex flex-col  items-center gap-2 w-full ">
+                      <div className="flex justify-between items-center w-full ">
+                        <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                          
+                        </span>
+                        <span className="w-20 h-4 rounded-md bg-gray-200 animate-pulse ">
+                         
+                        </span>
+                      </div>
+                      <div className="flex justify-center h-2 rounded-xl bg-gray-200 w-full animate-pulse">
+                     
+                      </div>
+
+                      <br />
+                    </div>
+                  </div>
+                </div>
+            </div>
+
           </div>
         : <div className=" px-2 max-md:hidden flex w-full ">
             <div className="w-full m-auto flex flex-col items-start">
