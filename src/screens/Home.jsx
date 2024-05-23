@@ -1,4 +1,4 @@
-import React, { useRef, useState , useEffect} from "react";
+import React, {  useState , useEffect} from "react";
 import { Header } from "../components/Header/Header";
 import { AboutTelefreikSection } from "../components/landingPageSections/AboutTelefreikSection";
 import { OurPartener } from "../components/landingPageSections/OurPartener";
@@ -23,7 +23,7 @@ export const Home = () => {
       setScrollY(newScrollY);
 
       if (newScrollY >= 300 && newScrollY < 700) {
-        setBgColor('bg-gray-200');
+        setBgColor('bg-gray-800');
       } else if (newScrollY <= 1500 && newScrollY > 700) {
         setBgColor('bg-gray-200');
       } else if (newScrollY > 1500 ) {
@@ -51,6 +51,7 @@ export const Home = () => {
       <MobileStore />
       <YourTrips />
       <Footer />
+      
     </div>
   );
 };

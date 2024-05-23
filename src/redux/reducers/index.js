@@ -7,10 +7,10 @@ import {
   CreateTicketReducer,
   CreateReturnTicketReducer,
   StoreFirstTicketDate,
-  StoreEndDateReduce,
+  StoreSearchDataReduce,
   paymentReducer
 } from "./bus_travel_reducers/bus_travel_reducers";
-import { LoginReducer, otpReducer, tripReducer } from "./User/User";
+import { LoginReducer, otpReducer, tripReducer , RegisterReducer , DeleteAccReducer} from "./User/User";
 import { TicketReducer } from "./profile/profileReducer";
 import { stepReducer, OurPartnerReducer } from "./Ui/UiReducers";
 export const Reducers = combineReducers({
@@ -23,10 +23,12 @@ export const Reducers = combineReducers({
   CreateTicketReducer,
   TicketReducer,
   tripReducer,
-  StoreEndDateReduce,
+  StoreSearchDataReduce,
   stepReducer,
   OurPartnerReducer,
   CreateReturnTicketReducer,
   StoreFirstTicketDate,
-  paymentReducer
+  paymentReducer,
+  RegisterReducer,
+  DeleteAccReducer
 });

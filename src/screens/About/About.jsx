@@ -102,7 +102,7 @@ export const About = () => {
       <Navbar />
 
       {/* parent section of about  */}
-      <div className="w-full max-md:flex-col flex py-10 justify-center items-center gap-6 h-auto bg-gradient-to-r from-gray-900 to-gray-700 bg-cover bg-fixed">
+      <div className="w-full max-md:flex-col  flex py-10 justify-center items-center gap-6 h-auto bg-gradient-to-r from-gray-900 to-gray-700 bg-cover bg-fixed">
         <div className="flex flex-col  items-start w-1/2  max-md:w-5/6">
           <h2 className="text-4xl font-bold text-gray-100 sec1">About Us.</h2>
           <span className="w-1/3 max-sm:w-2/3 bg-yellow-400 h-2 -rotate-2 mb-5 rounded-full sec1" />

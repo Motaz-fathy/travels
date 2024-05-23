@@ -39,7 +39,7 @@ export const Two_way_form = ({ converter_trip }) => {
   );
 
   return (
-    <div className="w-full flex flex-col items-start ">
+    <div className="w-full flex flex-col items-start max-md:mt-4">
       <form className="w-full h-20  flex justify-between items-center gap-2 max-md:flex-col max-md:h-auto ">
         <Combo_box_from
           options={options}

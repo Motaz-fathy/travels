@@ -5,6 +5,8 @@ import { CSSPlugin } from "gsap/CSSPlugin";
 import { Menu_cards } from "../menu_cards/Menu_cards";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/actions/user/User";
+import { FaUser } from 'react-icons/fa';
+
 export const Navbar = () => {
   gsap.registerPlugin(CSSPlugin);
   const [open_menu, set_open_menu] = useState(false);
@@ -75,9 +77,9 @@ export const Navbar = () => {
 
           <Link
             to={"/profile"}
-            className="w-10 h-10 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center "
+            className="w-6 h-6 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center "
           >
-            {datafromLogin !== null && datafromLogin?.name[0]}
+            <FaUser />
           </Link>
 
           <span className={`z-50 cursor-pointer  `} onClick={handle_menu}>

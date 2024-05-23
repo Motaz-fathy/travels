@@ -16,7 +16,13 @@ import {
   SUCCESS_RESEND_OTP,
   FAIL_RESEND_OTP,
   LOGOUT,
-  SET_TRIP_TYPE
+  SET_TRIP_TYPE,
+  LOAD_REGISTER,
+  SUCCESS_REGISTER,
+  FAIL_REGISTER,
+  LOAD_DELETE_ACC,
+  SUCCESS_DELETE_ACC,
+  FAIL_DELETE_ACC
 } from "../../actions/types";
 
 const initialState = {
@@ -24,7 +30,40 @@ const initialState = {
   data: [],
   error: null
 };
-
+// delete acc 
+export const DeleteAccReducer = (state = {
+loadingDelete : false ,
+message : null ,
+errorDelete : null 
+} , action ) => {
+  switch (action.type) {
+    case LOAD_DELETE_ACC:
+       return {loading : true , message : null , error : null }
+    case SUCCESS_DELETE_ACC : 
+       return {loading : false , message : action.payload }
+    case FAIL_DELETE_ACC : 
+       return {loading : false , error : action.payload }   
+  
+    default: return {...state }
+  }
+}
+// register reducer 
+export const RegisterReducer = (state = {
+  loading : false ,
+  data : null ,
+  error : null 
+} , action ) => {
+  switch (action.type) {
+    case LOAD_REGISTER:
+       return {loading : true , data : null , error : null }
+    case SUCCESS_REGISTER : 
+       return {loading : false , data : action.payload }
+    case FAIL_REGISTER : 
+       return {loading : false , error : action.payload }   
+  
+    default: return {...state }
+  }
+}
 export const LoginReducer = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {

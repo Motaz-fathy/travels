@@ -4,8 +4,7 @@ import Slider from "../sheard/Slider";
 export const FilterTrips = ({
   trips,
   setModifiyTrips,
-  loading,
-  setSaidCtr
+  loading
 }) => {
   const calculateMinMaxArrivalTime = () => {
     let min = Infinity;
@@ -327,7 +326,7 @@ export const FilterTrips = ({
   const handleClick = buttonName => {
     setOpenButton(openButton === buttonName ? null : buttonName); // Toggle the open state of the clicked button
   };
-
+  if(!trips) {return null }
   return (
     <div className="w-full overflow-hidden">
       {/* Sidebar content in upper max-md screen */}
@@ -383,7 +382,7 @@ export const FilterTrips = ({
                 <span className="text-gray-600 "> bus time filters </span>
                 <div className="flex flex-col items-start gap-2 w-full ">
                   <span>
-                    departure time ({trips[0].cities_from[0].name}){" "}
+                    departure time ({trips[0]?.cities_from[0]?.name}){" "}
                   </span>
                   <div className="flex flex-col gap-2 items-center w-full">
                     <div className="flex justify-between items-center w-full">
@@ -430,7 +429,7 @@ export const FilterTrips = ({
                   </div>
 
                   <span>
-                    arrival time ({trips[0].cities_to[0].name}){" "}
+                    arrival time ({trips[0]?.cities_to[0]?.name}){" "}
                   </span>
                   <div className="flex flex-col items-start gap-2 w-full ">
                     <div className="flex flex-col  items-center gap-2 w-full ">

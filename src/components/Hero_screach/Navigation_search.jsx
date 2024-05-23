@@ -9,7 +9,7 @@ export const Navigation_search = () => {
   const [lable, set_lable] = useState("bus");
 
   return (
-    <div className="w-2/3 max-sm:w-full   flex flex-col items-center shadow-xl bg-gray-500 bg-opacity-20 py-2 px-2 rounded-xl absolute top-1/2 max-md:top-60 mx-auto left-0 right-0 ">
+    <div className="w-2/3 max-sm:w-full   flex flex-col items-center shadow-xl bg-gray-500 bg-opacity-20 py-2 px-2 rounded-xl absolute top-1/3 max-md:top-30 mx-auto left-0 right-0 ">
       {/* nav search  */}
 
       <ul className="w-full flex justify-between items-center gap-2 max-md-hidden max-sm:hidden ">

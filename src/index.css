@@ -18,7 +18,9 @@
 [dir='ltl'] .font_ltl {
   font-family: 'en';
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body,
 * {
   margin: 0;
@@ -97,12 +99,12 @@ input[type="range"] {
 
 /* Target the first input[type="range"]::-webkit-slider-thumb */
 input[type="range"]:first-of-type::-webkit-slider-thumb {
-  @apply bg-gray-800 
+  @apply bg-gray-800;
 }
 /* Target the second input[type="range"]::-webkit-slider-thumb */
 input[type="range"]:last-of-type::-webkit-slider-thumb {
   background: white; /* Change background color for the second thumb */
-  border: 2px  solid #04041a;
+  border: 2px solid #04041a;
 }
 /* General styling for all input[type="range"]::-webkit-slider-thumb */
 input[type="range"]::-webkit-slider-thumb {
@@ -241,36 +243,58 @@ header video container
 */
 .video {
   clip-path: inset(0 0 0 0 round 30% 30% 10% 10%);
-  background-attachment: fixed;
   height: 100%;
 }
 /* bus header  */
 
-.BusHeader{
-  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 60% 75%, 50% 100%, 39% 75%, 0% 75%);
+.BusHeader {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 75%,
+    60% 75%,
+    50% 100%,
+    39% 75%,
+    0% 75%
+  );
 }
 
 .myElement {
   clip-path: path("M100,10 L40,180 L190,60 L10,60 L160,180 Z");
-  @apply bg-gray-800 ;
+  @apply bg-gray-800;
 }
 
 /* custom_message of toast  */
 
-.custom_message{
+.custom_message {
   background-color: #04041a;
   color: white; /* Text color */
 }
 
 /* reservation-ticket   */
 
-.reservation-ticket{
-  clip-path: polygon(50% 0%, 100% 6%, 97% 35%, 100% 70%, 100% 95%, 49% 100%, 0 95%, 0% 70%, 3% 35%, 0 5%);
-  
-  @apply text-gray-200 bg-gray-800
+.reservation-ticket {
+  clip-path: polygon(
+    50% 0%,
+    100% 6%,
+    97% 35%,
+    100% 70%,
+    100% 95%,
+    49% 100%,
+    0 95%,
+    0% 70%,
+    3% 35%,
+    0 5%
+  );
+
+  @apply text-gray-200 bg-gray-800;
 }
 
 /* arrow */
-.arrow{
+.arrow {
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
 }
+.rece {
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+

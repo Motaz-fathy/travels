@@ -14,9 +14,9 @@ export const BusHeader = ({trip}) => {
         dispatch(prevStep()) 
         navigate(-1)
     } 
-    
+  
   return (
-    <div className='w-full h-40 bg-gray-800 BusHeader  flex justify-center items-start py-2 '>
+    <div className='w-full h-40 bg-gray-800 BusHeader rounded-b-full  flex justify-center items-start py-8 '>
        <div className='w-full px-8 flex flex-col items-center gap-2 '>
         {/* back button  */}
         <div className=' w-full flex justify-between items-center '>
@@ -24,12 +24,12 @@ export const BusHeader = ({trip}) => {
         </div>
         {/* info of trips  */}
         <div className='flex justify-center items-center gap-2 text-white'>
-          <span>{trip?.cities_from[0]?.name}</span>
+          <span>{trip?.cities_from?.map((item) => {return item.name})}</span>
            <span className='bg-white w-20 h-1 rounded-full'></span>
 
             <BusIcon lable={"bus"} />
           <span className='bg-white w-20 h-1 rounded-full'></span>
-          <span>{trip?.cities_to[0]?.name}</span>
+          <span>{trip?.cities_to?.map((item) => { return item.name})}</span>
         </div>
 
         <div className='text-white'> {trip?.date} </div>

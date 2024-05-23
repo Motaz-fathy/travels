@@ -16,7 +16,13 @@ import {
   SUCCESS_RESEND_OTP,
   FAIL_RESEND_OTP,
   LOGOUT,
-  SET_TRIP_TYPE
+  SET_TRIP_TYPE,
+  LOAD_REGISTER,
+  SUCCESS_REGISTER,
+  FAIL_REGISTER,
+  LOAD_DELETE_ACC,
+  SUCCESS_DELETE_ACC,
+  FAIL_DELETE_ACC
 } from "../types";
 export const LoginAction = (phonecode, mobile, password) => async dispatch => {
   try {
@@ -36,7 +42,7 @@ export const LoginAction = (phonecode, mobile, password) => async dispatch => {
       config
     );
     if (res.status === 200) {
-      window.localStorage.setItem("UserData" , res.data.data)
+      window.localStorage.setItem("UserData", res.data.data);
       dispatch({ type: SUCCESS_LOGIN, payload: res.data });
     } else {
       dispatch({
@@ -49,6 +55,53 @@ export const LoginAction = (phonecode, mobile, password) => async dispatch => {
       type: FALID_LOGIN,
       payload: error.response.data.errors
     });
+  }
+};
+
+export const RegisterAction = (email, phoneNumber, name, password, confirmPassword ) => async dispatch => {
+  console.log( {
+    "email": email,
+    "mobile": phoneNumber,
+    "phonecode": "20",
+    "name": name,
+    "firebase_token": `0${phoneNumber}`,
+    "os_system": "android",
+    "os_version": "v1",
+    "password" : password ,
+    "password_confirmation" : confirmPassword 
+  })  
+  try {
+    dispatch({ type: LOAD_REGISTER, payload: {} });
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    };
+    const res = await axios.post(
+      `https://app.telefreik.com/api/v1/mobile/customer/register`,
+      
+      {
+        email: email,
+        mobile: phoneNumber,
+        phonecode: 20,
+        name: name,
+        firebase_token: `0${phoneNumber}`,
+        os_system: "android",
+        os_version: "v1",
+        password : password ,
+        password_confirmation : confirmPassword 
+      },
+      config
+
+    );
+    console.log(res)
+    if(res.status === 200 ) {
+      dispatch({type : SUCCESS_REGISTER , payload : res.data })
+    }
+  } catch (error) {
+    console.log(error)
+
+    dispatch({type : FAIL_REGISTER , payload : error.response.data.message})
   }
 };
 
@@ -68,15 +121,11 @@ export const sendOTPAction = (phoneNumber, phoneCode) => async dispatch => {
     );
     dispatch({ type: SUCCESS_SEND_OTP, payload: res.data });
   } catch (error) {
-    dispatch({ type: FAIL_SEND_OTP, payload: error.message });
+    dispatch({ type: FAIL_SEND_OTP, payload: error.response.data.message });
   }
 };
 
-export const verifyOTPAction = (
-  mobile,
-  phonecode,
-  code
-) => async dispatch => {
+export const verifyOTPAction = (mobile, phonecode, code) => async dispatch => {
   try {
     dispatch({ type: LOAD_VERIFI_OTP, payload: [] });
     const config = {
@@ -90,12 +139,12 @@ export const verifyOTPAction = (
       body,
       config
     );
-    if(res.status === 200){
-    window.localStorage.setItem("UserData" , res.data.data)
+    if (res.status === 200) {
+      window.localStorage.setItem("UserData", res.data.data);
     }
     dispatch({ type: SUCCESS_VERIFI_OTP, payload: res.data });
   } catch (error) {
-    dispatch({ type: FAIL_VERIFI_OTP, payload: error.message });
+    dispatch({ type: FAIL_VERIFI_OTP, payload: error.response.data.message });
   }
 };
 
@@ -142,11 +191,33 @@ export const resendOTPAction = (mobile, phonecode) => async dispatch => {
   }
 };
 
-export const logoutAction = () => async dispatch =>  {
-    dispatch({type : LOGOUT , paylod : []})
+export const logoutAction = () => async dispatch => {
+  dispatch({ type: LOGOUT, paylod: [] });
+};
+
+// delete acc 
+
+export const DeleteAccAction = (token) => async dispatch => {
+ try {
+    dispatch({type : LOAD_DELETE_ACC , payload : null })
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data" ,
+        "Authorization" : `Bearer ${token}`
+      }
+    };
+
+    const res = await axios.delete("https://app.telefreik.com/api/transports/profile" , config )
+    dispatch({type : SUCCESS_DELETE_ACC , payload : res.data })
+    dispatch({ type: LOGOUT, paylod: [] });
+    
+ } catch (error) {
+    dispatch({type : FAIL_DELETE_ACC , payload : error.response.data.message  })
+ }
 }
 
-export const setTripType = (tripType) => ({
+export const setTripType = tripType => ({
   type: SET_TRIP_TYPE,
-  payload: tripType,
+  payload: tripType
 });

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/actions/user/User";
 import { Title } from "./Title";
 import { ToastContainer } from "react-toastify";
-
+import { FaUser } from 'react-icons/fa';
 export const Header = () => {
   gsap.registerPlugin(CSSPlugin);
   const [open_menu, set_open_menu] = useState(false);
@@ -34,11 +34,10 @@ export const Header = () => {
     },
     [open_menu]
   );
-  const { data } = useSelector(state => state.otpReducer) || null;
   const loginReducer = useSelector(state => state.LoginReducer) || null;
   const datafromLogin = loginReducer.data.data;
   return (
-    <div className="relative inset-0 top-0 left-0 right-0 w-full min-h-screen bg-gray-800 px-8  max-sm:px-2  bg-cover bg-fixed overflow-scroll  scrollbar-hide ">
+    <div className="relative inset-0 animateHeader top-0 left-0 right-0 w-full min-h-screen max-md:min-h-[70vh] bg-gray-800 px-8  max-sm:px-2  bg-cover bg-fixed overflow-scroll  scrollbar-hide ">
       {/* bg header video  */}
       <video
         autoPlay
@@ -89,8 +88,8 @@ export const Header = () => {
                 <div className="line " />
               </Link>}
 
-          <Link to={'/profile'} className="w-10 h-10 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center ">
-            {datafromLogin?.name[0]}
+          <Link to={'/profile'} className="w-6 h-6 z-50 rounded-full bg-gray-200 text-gray-800 flex justify-center items-center ">
+          <FaUser />
           </Link>
 
           <span className={`z-50 cursor-pointer  `} onClick={handle_menu}>
@@ -180,7 +179,7 @@ export const Header = () => {
         </div>
       </nav>
       {/* animate text component */}
-      <Title />
+      {/* <Title /> */}
       {/*  */}
       <div className="z-50">
       <Navigation_search />

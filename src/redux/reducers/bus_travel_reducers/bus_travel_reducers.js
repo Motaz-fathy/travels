@@ -247,11 +247,11 @@ export const StoreFirstTicketDate = (state = {}, action) => {
 };
 
 // store endate reducer
-const STORE_END_DATE = "STORE_END_DATE";
-export const StoreEndDateReduce = (state = { endDate: null }, action) => {
+const STORE_SEARCH_DATA = "STORE_SEARCH_DATA" 
+export const StoreSearchDataReduce = (state = { searchData: null  } , action) => {
   switch (action.type) {
-    case STORE_END_DATE:
-      return { ...state, endDate: action.payload };
+    case STORE_SEARCH_DATA:
+      return { ...state, searchData: action.payload };
     default:
       return state;
   }

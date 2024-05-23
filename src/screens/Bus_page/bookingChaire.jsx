@@ -20,11 +20,12 @@ export const BookingChaire = () => {
   // Redux hooks
   const { trip, loading } = useSelector(state => state.SingleTrip);
   const { seats } = useSelector(state => state.AvilableSeatsReducer);
-  const {endDate}  = useSelector(state => state.StoreEndDateReduce)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {tripType} = useSelector(state => state.tripReducer)
   const [typeTripCondition , setTypeTripCondition] = useState(1)
+  const {searchData} = useSelector(state => state.StoreSearchDataReduce)
+
   // Local state for selected seats
   const [selectedList, setSelectedList] = useState({});
 
@@ -76,8 +77,8 @@ export const BookingChaire = () => {
       "round": 1,
       "boarding": {
         "trip_id": trip.id ,
-        "from_city_id": trip.cities_from[0].id,
-        "to_city_id": trip.cities_to[0].id,
+        "from_city_id": searchData.city_from,
+        "to_city_id": searchData.city_to,
         "from_location_id": trip.stations_from[0].id,
         "to_location_id": trip.stations_to[0].id,
         "date": trip.date,
@@ -85,29 +86,7 @@ export const BookingChaire = () => {
       }
 
     }
-    // not finish 
-    const TwoTicketDate = {
-      "round": 1,
-      "boarding": {
-        "trip_id": trip.id ,
-        "from_city_id": trip.cities_from[0].id,
-        "to_city_id": trip.cities_to[0].id,
-        "from_location_id": trip.stations_from[0].id,
-        "to_location_id": trip.stations_to[0].id,
-        "date": trip.FirstDate,
-        "seats": reservationSeats
-      } ,
-      "return" : {
-        "trip_id": trip.id ,
-        "from_city_id":  trip.cities_to[0].id,
-        "to_city_id": trip.cities_from[0].id,
-        "from_location_id": trip.stations_from[0].id,
-        "to_location_id": trip.stations_to[0].id,
-        "date": endDate,
-        "seats": reservationSeats
-      }
-    }
-   
+
      if(token === null){
         navigate("/login")
         toast.dismiss("you can't access before login in please")
@@ -125,16 +104,7 @@ export const BookingChaire = () => {
      
   };
 
-  const returnToSearchTrip = async () => {
-    setTypeTripCondition(3)
-    if(reservationSeats.length !== 0){
-      
-      await navigate(-1)
-     
-      dispatch(search_bus_trip( trip.cities_to[0].id , trip.cities_from[0].id ,  endDate))
-    }
 
-  }
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
@@ -221,17 +191,9 @@ export const BookingChaire = () => {
           </button>   
           }
 
-          { typeTripCondition === 2 && 
-           <button className="w-2/3 py-2 bg-gray-200  rounded-md hover:bg-white  " onClick={returnToSearchTrip}>
-                  {" "}search return ticket {" "}
-           </button>    
-          }
 
-          {typeTripCondition === 3 && 
-           <button className="w-2/3 py-2 bg-gray-200  rounded-md hover:bg-white  " >
-                  {" "}checkout round trip  {" "}
-           </button>  
-          }
+
+
 
         </div>
 

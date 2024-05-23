@@ -9,7 +9,7 @@ export const Container = ({loading , currentTrips  , currentPage , paginate , tr
         <div className="md:flex-col ">
         <div className="md:flex md:space-x-4 w-full mx-auto  ">
         <section className="w-full mx-auto px-4  grid grid-cols-2 sm:grid-cols-1 max-md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
-        {currentTrips.length !== 0
+        {currentTrips.length > 0
         ? currentTrips.map((trip, index) =>
         <BusTripCard trip={trip} key={index} />
         )

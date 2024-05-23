@@ -69,8 +69,8 @@ export const search_bus_trip = (city_from , city_to , date  ) => async dispatch 
             "Content-Type": "multipart/form-data",
           }
         };
-        const {data} = await axios.get(`https://app.telefreik.com/api/v2/transports/buses/search?city_from=${city_from}&city_to=${city_to}&date=${date}` , config)
-        dispatch({type : GET_SEARCH , payload : data})
+        const res = await axios.get(`https://app.telefreik.com/api/v2/transports/buses/search?city_from=${city_from}&city_to=${city_to}&date=${date}` , config)
+        dispatch({type : GET_SEARCH , payload : res.data.data })
     } catch (error) {
         dispatch({
             type: FAILD_SEARCH,
@@ -89,7 +89,6 @@ export const SingleBusTrip = (trip) => async dispatch => {
       dispatch({type : GET_SINGLE_TRIP , payload : trip })
     }else {
       dispatch({type : FAILD_SINGLE_TRIP , payload : {error : "trip not found ! "} })
-
     }
   } catch (error) {
     dispatch({type : FAILD_SINGLE_TRIP , payload : {error : "trip not found ! "} })
@@ -201,7 +200,7 @@ export const StoreFirstTicketDataAction = (data) => async dispatch => {
 }
 
 // store end date 
-const STORE_END_DATE = "STORE_END_DATE" 
-export const StoreEndDateAction = (endDate) => async dispatch => {
-  dispatch({type : STORE_END_DATE , payload : endDate})
+const STORE_SEARCH_DATA = "STORE_SEARCH_DATA" 
+export const StoreSearchDataAction = (searchData) => async dispatch => {
+  dispatch({type : STORE_SEARCH_DATA , payload : searchData})
 }

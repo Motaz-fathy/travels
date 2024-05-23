@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { get_cities_for_bus_search_form } from "../redux/actions/bus_travel_actions/bus_travel_actions";
 import { useDispatch, useSelector } from "react-redux";
+import { IoLocationSharp } from "react-icons/io5";
+
 export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -29,9 +31,12 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
     [comboBoxRef]
   );
 
-  useEffect(() => {
-    dispatch(get_cities_for_bus_search_form());
-  }, []);
+  useEffect(
+    () => {
+      dispatch(get_cities_for_bus_search_form());
+    },
+    [dispatch]
+  );
   let filteredOptions = [];
   data.map(item => {
     if (
@@ -54,9 +59,7 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
     setSelectedOption(option.name);
     setonSelect_from(option.id);
     setIsOpen(false);
-   
   };
-
 
   return (
     <div
@@ -65,12 +68,12 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
         "max-md:z-50"} `}
     >
       <div
-        className="w-full bg-white border border-gray-400 rounded shadow leading-tight cursor-pointer"
+        className="w-full bg-gray-200 border border-gray-400 rounded shadow leading-tight cursor-pointer"
         onClick={handleToggle}
       >
         <div className="flex justify-between items-center px-4 py-2">
-          <div className="text-sm max-md:text-xs max-sm:text-xs">
-            {selectedOption || "Select an option"}
+          <div className="text-sm max-md:text-xs max-sm:text-xs flex justify-center items-center gap-1">
+            <IoLocationSharp /> {selectedOption || "Select a city"}
           </div>
           <div>
             <svg
@@ -89,10 +92,10 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
         </div>
       </div>
       {isOpen &&
-        <div className="absolute   w-full bg-white border border-gray-400 rounded-b shadow mt-1  ">
+        <div className="absolute   w-full bg-gray-200 border border-gray-400 rounded-b shadow mt-1  ">
           <input
             type="text"
-            className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none"
+            className="w-full px-4 py-2 border-b bg-gray-200 border-gray-400 focus:outline-none"
             placeholder="Search..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -101,10 +104,10 @@ export const Combo_box_from = ({ setonSelect_from, converter_trip }) => {
             {filteredOptions.map((option, index) =>
               <div
                 key={index}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100 "
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100 transition-all duration-300 bg-gray-200 flex justify-start items-center gap-2"
                 onClick={() => handleSelectOption(option)}
               >
-                {option.name}
+                <IoLocationSharp /> <span>{option.name}</span>
               </div>
             )}
           </div>

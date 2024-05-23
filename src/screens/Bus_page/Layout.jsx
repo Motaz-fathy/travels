@@ -6,24 +6,18 @@ import gsap from "gsap";
 import { useSelector } from "react-redux";
 import { FilterTrips } from "../../utils/filterTripsByArrivalTime";
 import {Footer} from '../../components/Footer'
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { BusHeader } from "./BusHeader";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { Stepper } from "../../sheard/stepper";
 
 export const Layout = () => {
   const { data , loading } = useSelector(state => state.busSearch);
-  const trips = data.data;
-  const error = data.errors;
+  const trips = data;
   const [isOpen, setIsOpen] = useState(false);
   const filterRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [saidCtr, setSaidCtr] = useState(false);
 
-  const handleSaidbar = () => {
-    setSaidCtr(prev => !prev);
-  };
-  // Flatten trips for easier filtering
   let allTrips = []
   if(loading === false ) {
      allTrips = 
@@ -81,7 +75,6 @@ export const Layout = () => {
   const indexOfLastTrip = currentPage * tripsPerPage;
   const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
   const currentTrips = modifiyTrips.slice(indexOfFirstTrip, indexOfLastTrip);
-  const [showSidebar, setShowSidebar] = useState(true);
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -90,7 +83,7 @@ export const Layout = () => {
   <div className="w-full flex flex-col items-center  ">
     <Navbar />
     <BusHeader 
-    trip ={currentTrips[0]}
+    trip ={currentTrips.length !== 0 && currentTrips[0]}
     />
     <div className="  w-full  flex justify-between items-start max-md:flex-col ">
       {/*  said bar  */}
@@ -98,13 +91,14 @@ export const Layout = () => {
       <div
         className={`w-1/4 max-md:w-full`}
       >
-        <FilterTrips
-          setModifiyTrips={setModifiyTrips}
-          isOpen={isOpen}
-          trips={allTrips}
-          setSaidCtr={setSaidCtr}
-          loading={loading}
-        />
+       {
+        trips.length > 0 &&  <FilterTrips
+        setModifiyTrips={setModifiyTrips}
+        isOpen={isOpen}
+        trips={allTrips}
+        loading={loading}
+      />
+       }
       </div>
 
       <div
