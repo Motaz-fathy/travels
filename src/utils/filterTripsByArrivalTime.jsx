@@ -514,11 +514,11 @@ export const FilterTrips = ({
                 {companies.map(company =>
                   <div
                     key={company}
-                    className={`h-10 w-full rounded-xl flex justify-between items-center px-4 ${!companyFilters[
+                    className={`h-10 w-full rounded-xl shadow-xl flex justify-between items-center px-4 ${!companyFilters[
                       company
                     ]
                       ? "bg-gray-100"
-                      : "bg-gray-800"}`}
+                      : "bg-white"}`}
                   >
                     <label
                       htmlFor={company}
@@ -526,7 +526,7 @@ export const FilterTrips = ({
                         company
                       ]
                         ? "text-gray-800"
-                        : "text-gray-200"}`}
+                        : "text-gray-800"}`}
                     >
                       <span className="">
                         {company}
@@ -545,7 +545,7 @@ export const FilterTrips = ({
                         }}
                       />
                       {companyFilters[company]
-                        ? <span className="text-gray-200 ">&#10004;</span>
+                        ? <span className="text-gray-800 ">&#10004;</span>
                         : <span className="text-gray-800 ">x</span>}
                     </label>
                   </div>
@@ -557,19 +557,19 @@ export const FilterTrips = ({
                 {Object.keys(categoryFilters).map(category =>
                   <div
                     key={category}
-                    className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!categoryFilters[
+                    className={`h-10 rounded-xl flex justify-between shadow-xl items-center w-full px-4 ${!categoryFilters[
                       category
                     ]
-                      ? "bg-gray-200"
-                      : "bg-gray-800"}`}
+                      ? "bg-gray-100"
+                      : "bg-white"}`}
                   >
                     <label
                       htmlFor={category}
-                      className={`cursor-pointer flex items-center justify-between w-full h-full ${!categoryFilters[
+                      className={`cursor-pointer flex  items-center justify-between w-full h-full ${!categoryFilters[
                         category
                       ]
                         ? "text-gray-800"
-                        : "text-gray-200"}`}
+                        : "text-gray-800"}`}
                     >
                       <span className="mr-2">
                         {category}
@@ -588,8 +588,8 @@ export const FilterTrips = ({
                         }}
                       />
                       {categoryFilters[category]
-                        ? <span className="text-gray-200">&#10004;</span>
-                        : <span className="text-gray-800">x</span>}
+                        ? <span className="text-gray-800 ">&#10004;</span>
+                        : <span className="text-gray-800 ">x</span>}
                     </label>
                   </div>
                 )}
@@ -821,11 +821,11 @@ export const FilterTrips = ({
                         {companies.map(company =>
                           <div
                             key={company}
-                            className={`h-10 w-full rounded-xl flex justify-between items-center px-4 ${!companyFilters[
+                            className={`h-10 w-full rounded-xl shadow-xl flex justify-between items-center px-4 ${!companyFilters[
                               company
                             ]
                               ? "bg-gray-100"
-                              : "bg-gray-800"}`}
+                              : "bg-white"}`}
                           >
                             <label
                               htmlFor={company}
@@ -833,7 +833,7 @@ export const FilterTrips = ({
                                 company
                               ]
                                 ? "text-gray-800"
-                                : "text-gray-200"}`}
+                                : "text-gray-800"}`}
                             >
                               <span className="">
                                 {company}
@@ -852,7 +852,7 @@ export const FilterTrips = ({
                                 }}
                               />
                               {companyFilters[company]
-                                ? <span className="text-gray-200 ">
+                                ? <span className="text-gray-800 ">
                                     &#10004;
                                   </span>
                                 : <span className="text-gray-800 ">x</span>}
@@ -876,11 +876,11 @@ export const FilterTrips = ({
                         {Object.keys(categoryFilters).map(category =>
                           <div
                             key={category}
-                            className={`h-10 rounded-xl flex justify-between items-center w-full px-4 ${!categoryFilters[
+                            className={`h-10 rounded-xl shadow-xl flex justify-between items-center w-full px-4 ${!categoryFilters[
                               category
                             ]
-                              ? "bg-gray-200"
-                              : "bg-gray-800"}`}
+                              ? "bg-gray-100"
+                              : "bg-white"}`}
                           >
                             <label
                               htmlFor={category}
@@ -888,7 +888,7 @@ export const FilterTrips = ({
                                 category
                               ]
                                 ? "text-gray-800"
-                                : "text-gray-200"}`}
+                                : "text-gray-800"}`}
                             >
                               <span className="mr-2">
                                 {category}
@@ -907,7 +907,7 @@ export const FilterTrips = ({
                                 }}
                               />
                               {categoryFilters[category]
-                                ? <span className="text-gray-200">
+                                ? <span className="text-gray-800">
                                     &#10004;
                                   </span>
                                 : <span className="text-gray-800">x</span>}
