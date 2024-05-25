@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProfileTicket } from "../../redux/actions/profile/profile_actions";
 import { Tickets } from "./Tickets";
-import { Addresses } from "./Addresses";
+import  {Addresses}  from "./Addresses";
 import { BusIcon } from "../../sheard/BusIcon";
 import { FlightIcon } from "../../sheard/FlightIcon.jsx";
 import { MariTimeIcon } from "../../sheard/MariTimeIcon.jsx";
@@ -160,6 +160,7 @@ export const MainProfile = () => {
       <div className="w-full">
         <Footer />
       </div>
+      <ToastContainer />
     </div>
   );
 };
