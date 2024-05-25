@@ -14,7 +14,7 @@ import { ContactUs } from "./screens/Contact/ContactUs.jsx";
 import { ReservationTicket } from "./screens/Bus_page/ReservationTicket.jsx";
 import { BookingChaireRoundTrip } from "./screens/Bus_page/BookingChaireRoundTrip.jsx";
 import { ProtectedRoute, PublicRoute } from "./utils/PublicProtectRoutes.jsx";
-
+import {CarPage} from './screens/CarPage/CarPage.jsx'
 function App() {
   const { tripType } = useSelector(state => state.tripReducer);
 
@@ -33,6 +33,7 @@ function App() {
       element: ReservationTicket,
       protected: true
     },
+    { path: "/carTrip", element: CarPage, protected: false },
     { path: "/login", element: Login, protected: false },
     { path: "/register", element: Register, protected: false },
     { path: "/otp", element: Otp, protected: false },

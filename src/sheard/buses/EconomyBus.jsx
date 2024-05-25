@@ -154,7 +154,7 @@ export const EconomyBus = ({ setSelectedList , selectedList, seats , reservation
     <div className=" py-2 max-sm:px-2 max-md:px-2">
       <div className="w-full flex justify-between items-center gap-4 max-sm:flex-col max-md:flex-col">
 
-        <div className="   bg-gray-100 py-4 max-sm:w-full max-md:w-full">
+        <div className="    py-4 max-sm:w-full max-md:w-full">
 
           <ul className="flex justify-center items-center px-4 py-2 gap-4  rounded-md w-5/6 mx-auto">
             <li>

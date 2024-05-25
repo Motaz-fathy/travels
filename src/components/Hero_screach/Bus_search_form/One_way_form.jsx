@@ -11,14 +11,7 @@ export const One_way_form = ({ converter_trip }) => {
   const [startDate, setStartDate] = useState(null);
 
 
-  const options = [
-    {
-      name: "ahmed"
-    },
-    {
-      name: "yousif"
-    }
-  ];
+
 
   useEffect(
     () => {
@@ -45,13 +38,11 @@ export const One_way_form = ({ converter_trip }) => {
     <div className=" w-full flex flex-col items-start max-md:mt-4 ">
       <form className=" w-full h-20  flex justify-between items-center gap-2  max-md:flex-col max-md:h-auto">
         <Combo_box_from
-          options={options}
           setonSelect_from={setonSelect_from}
           converter_trip={converter_trip}
         />
 
         <Combo_box_to
-          options={options}
           setonSelect_to={setonSelect_to}
           converter_trip={converter_trip}
         />
@@ -70,6 +61,7 @@ export const One_way_form = ({ converter_trip }) => {
             onSelect_to={onSelect_to}
             startDate={startDate !== null && startDate}
           />
+          
         </div>
       </form>
     </div>

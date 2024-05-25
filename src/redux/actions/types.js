@@ -87,6 +87,17 @@ export const LOAD_UPDATE_ADDRESS = "LOAD_UPDATE_ADDRESS"
 export const SUCCESS_UPDATE_ADDRESS = "SUCCESS_UPDATE_ADDRESS"
 export const FAIL_UPDATE_ADDRESS = "FAIL_UPDATE_ADDRESS"
 
+
+
+
+
+
+// car actions 
+export const LOAD_SEARCH_CAR = "LOAD_SEARCH_CAR"
+export const SUCCESS_SEARCH_CAR = "SUCCESS_SEARCH_CAR"
+export const FAIL_SEARCH_CAR = "FAIL_SEARCH_CAR"
+
+
 // type trip 
 
 export const SET_TRIP_TYPE  = "SET_TRIP_TYPE "

@@ -1,7 +1,7 @@
 import React from "react";
 import { setTripType } from "../redux/actions/user/User";
 import { useDispatch } from "react-redux";
-export const Toggle_trip = ({ set_converter_trip, converter_trip }) => {
+export const ToggleTrip = ({ set_converter_trip, converter_trip }) => {
   const dispatch = useDispatch()
   const handleOneWay = () => {
         dispatch(setTripType("oneWay"))

@@ -61,10 +61,10 @@ export const Footer = () => {
   };
 
   return (
-    <div className="h-fit py-6   text-[#FFFFFF] px-8    bg-gray-800">
+    <div className="h-fit py-6   text-gray-200 px-8    bg-gray-800">
       <div className="container gap-y-10 gap-x-5 sm:grid sm:grid-cols-2 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-4 lg:gap-x-10 ">
-        <div className=" col-span-2 grid gap-5 sm:grid-cols-4 md:col-span-4 lg:md:col-span-1 lg:relative lg:flex lg:flex-col">
-          <div className=" mx-auto  h-[174px] w-[285px] md:col-span-1 lg:absolute lg:top-[-25px]">
+        <div className=" col-span-2 grid gap-5 sm:grid-cols-4 md:col-span-4 lg:md:col-span-1  lg:flex lg:flex-col">
+          <div className=" mx-auto  h-[174px] w-[285px] md:col-span-1  block">
             <img src={`${process.env.PUBLIC_URL}/images/newLogo.png`} alt="logo footer" />
           </div>
         </div>

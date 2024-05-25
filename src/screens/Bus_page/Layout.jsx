@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SaidBar } from "./SaidBar";
 import { BusNavbar } from "./BusNavbar";
 import { Container } from "./Container";
 import gsap from "gsap";

@@ -5,6 +5,8 @@ import { BusIcon } from "../../sheard/BusIcon";
 import { FlightIcon } from "../../sheard/FlightIcon";
 import { MariTimeIcon } from "../../sheard/MariTimeIcon";
 import { CarIcon } from "../../sheard/CarIcon";
+
+import {CarSearchForm} from './CarSearchForm/CarSearchForm'
 export const Navigation_search = () => {
   const [lable, set_lable] = useState("bus");
 
@@ -88,7 +90,7 @@ export const Navigation_search = () => {
       {lable === "bus" && <Bus_search_form />}
       {lable === "flight" && <div>flight form </div>}
       {lable === "maritime" && <div>maritime form </div>}
-      {lable === "car" && <div>car form </div>}
+      {lable === "car" && <CarSearchForm />}
     </div>
   );
 };

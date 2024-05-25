@@ -140,9 +140,9 @@ export const ComfortBus = ({ setSelectedList , selectedList, seats , reservation
         }
       }, [JSON.stringify(seats)]);
   return (
-    <div className="  py-2 max-sm:px-2 max-md:px-2">
+    <div className=" max-md:w-full py-2 ">
       <div className="w-full flex justify-between items-center gap-4 max-sm:flex-col max-md:flex-col">
-        <div className="  bg-gray-100 py-4 max-sm:w-full max-md:w-full">
+        <div className="  rounded-xl px-4 max-md:px-0  bg-gray-100 shadow-xl  py-4 max-sm:w-full max-md:w-full">
           <ul className="flex justify-center items-center px-4 py-2 gap-4  rounded-md w-5/6 mx-auto">
             <li>
               <div className="seat" />
