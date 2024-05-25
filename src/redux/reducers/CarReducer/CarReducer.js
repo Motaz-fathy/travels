@@ -1,3 +1,4 @@
+import produce from "immer";
 import {
   LOAD_SEARCH_CAR,
   SUCCESS_SEARCH_CAR,
@@ -15,16 +16,24 @@ export const SearchCarReducer = (
   },
   action
 ) => {
-  switch (action.type) {
-
-    case LOAD_SEARCH_CAR:
-      return { loadingSearchCar: true, dataSearchCar: [] };
-    case SUCCESS_SEARCH_CAR:
-      return { loadingSearchCar: false, dataSearchCar: action.payload };
-    case FAIL_SEARCH_CAR:
-      return { loadingSearchCar: false, errorSearchCar: action.payload };
-
-    default:
-      return { ...state };
-  }
+  return produce(state, draft => {
+    switch (action.type) {
+      case LOAD_SEARCH_CAR:
+        draft.loadingSearchCar = true;
+        draft.errorSearchCar = null;
+        draft.dataSearchCar = [];
+        break;
+      case SUCCESS_SEARCH_CAR:
+        draft.loadingSearchCar = false;
+        draft.dataSearchCar = action.payload;
+        draft.errorSearchCar = null;
+        break;
+      case FAIL_SEARCH_CAR:
+        draft.loadingSearchCar = false;
+        draft.errorSearchCar = action.payload;
+        break;
+      default:
+        break;
+    }
+  });
 };
