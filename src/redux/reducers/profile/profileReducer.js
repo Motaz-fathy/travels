@@ -79,14 +79,14 @@ export const createAddressReducer = (
 export const getAddressReducer = (
     state = {
       loadingGet: false,
-      addressList: null,
+      addressList: [],
       errorGet: null
     },
     action
   ) => {
     switch (action.type) {
       case LOAD_GET_ADDRESS:
-        return { loadingGet: true, addressList: null };
+        return { loadingGet: true, addressList: [] };
       case SUCCESS_GET_ADDRESS:
         return { loadingGet: false, addressList: action.payload };
       case FAIL_GET_ADDRESS:

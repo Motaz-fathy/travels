@@ -26,7 +26,7 @@ import {
   updateAddressReducer
 } from "./profile/profileReducer";
 import { stepReducer, OurPartnerReducer } from "./Ui/UiReducers";
-import {SearchCarReducer} from './CarReducer/CarReducer'
+import {SearchCarReducer  , singleCarReducer , createTicketCarReducer } from './CarReducer/CarReducer'
 export const Reducers = combineReducers({
   cityReducer,
   busSearch,
@@ -49,5 +49,7 @@ export const Reducers = combineReducers({
   getAddressReducer,
   deleteAddressReducer,
   updateAddressReducer,
-  SearchCarReducer
+  SearchCarReducer,
+  singleCarReducer,
+  createTicketCarReducer
 });

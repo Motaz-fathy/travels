@@ -15,6 +15,10 @@ import { ReservationTicket } from "./screens/Bus_page/ReservationTicket.jsx";
 import { BookingChaireRoundTrip } from "./screens/Bus_page/BookingChaireRoundTrip.jsx";
 import { ProtectedRoute, PublicRoute } from "./utils/PublicProtectRoutes.jsx";
 import {CarPage} from './screens/CarPage/CarPage.jsx'
+import { CheackoutCar } from "./screens/CarPage/CheackoutCar.jsx";
+import { PaymentCar } from "./screens/CarPage/PaymentCar.jsx";
+
+
 function App() {
   const { tripType } = useSelector(state => state.tripReducer);
 
@@ -34,6 +38,8 @@ function App() {
       protected: true
     },
     { path: "/carTrip", element: CarPage, protected: false },
+    { path: "/carTrip/:CarId", element: CheackoutCar, protected: true },
+    { path: "/carTrip/:CarId/payment-ticket", element: PaymentCar, protected: true },
     { path: "/login", element: Login, protected: false },
     { path: "/register", element: Register, protected: false },
     { path: "/otp", element: Otp, protected: false },

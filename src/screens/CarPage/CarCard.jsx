@@ -1,11 +1,19 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-
+import {singleCarAction} from '../../redux/actions/CarActions/CarActions'
 import {CarIcon} from '../../sheard/CarIcon'
+import { useDispatch } from 'react-redux';
+import {toast} from 'react-toastify'
 export const CarCard = ({item}) => {
     const navigate = useNavigate();
-    const handleSingleTrip = async item => {
-        await navigate(`${item.id}`);
+    const dispatch = useDispatch()
+   //  handle single car trip and navigate 
+   const handleSingleTrip = async item => {
+        if(item){
+         await dispatch(singleCarAction(item))
+         navigate(`${item.id}`);
+         toast.success(" trip is ok ")
+        }
      };
 
   return (
@@ -49,6 +57,7 @@ export const CarCard = ({item}) => {
               select
             </button>
          </div>
+         
     </div>
   )
 }

@@ -70,7 +70,7 @@ export const createAddressAction = (addressData , token ) => async dispatch => {
  */
 export const getAddressAction = (token) => async dispatch => {
     try {
-        dispatch({type : LOAD_GET_ADDRESS , payload : null })
+        dispatch({type : LOAD_GET_ADDRESS , payload : [] })
         const config = {
             headers: {
               "Content-Type": "multipart/form-data" ,
@@ -114,7 +114,6 @@ export const deleteAddressAction = (token , id) => async dispatch => {
  * @access private 
  * @method UPDATE 
  */
-
 export const updateAddressAction = (token , id , updateData) => async dispatch => {
     try {
         dispatch({type : LOAD_UPDATE_ADDRESS , payload : null })
