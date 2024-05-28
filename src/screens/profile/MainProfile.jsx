@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetProfileTicket } from "../../redux/actions/profile/profile_actions";
-import { Tickets } from "./Tickets";
-import  {Addresses}  from "./Addresses";
+import {
+  GetProfileTicket,
+  getCarTicketsAction
+} from "../../redux/actions/profile/profile_actions";
+import { BusTickets } from "./BusTickets.jsx";
+import { Addresses } from "./Addresses";
 import { BusIcon } from "../../sheard/BusIcon";
 import { FlightIcon } from "../../sheard/FlightIcon.jsx";
 import { MariTimeIcon } from "../../sheard/MariTimeIcon.jsx";
@@ -12,40 +15,58 @@ import { Navbar } from "../../components/Navbar/Navbar.jsx";
 import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { Footer } from "../../components/Footer.jsx";
 import { MdMail } from "react-icons/md";
-import {DeleteAccAction} from '../../redux/actions/user/User.js'
-import { ToastContainer , toast } from "react-toastify";
-
+import { DeleteAccAction } from "../../redux/actions/user/User.js";
+import { ToastContainer, toast } from "react-toastify";
+import { CarTickets } from "./CarTickets.jsx";
+import { FlightTicket } from "./FlightTicket.jsx";
+import { MariTimeTicket } from "./MariTimeTicket.jsx";
+import { Popover } from "../../sheard/Popover";
+import { UpdateForm } from "./UpdateForm.jsx";
+import { useNavigate } from "react-router-dom";
 export const MainProfile = () => {
   const [activeTab, setActiveTab] = useState("bus");
+  const [openProfileForm, setOpenProfileForm] = useState(false);
   const loginReducer = useSelector(state => state.LoginReducer);
   const data = loginReducer.data.data;
   const dispatch = useDispatch();
-  const navigate = useDispatch()
-  const {message} = useSelector(state => state.DeleteAccReducer) 
+  const navigate = useNavigate();
+  const { message } = useSelector(state => state.DeleteAccReducer);
+  const { tickets, loading } = useSelector(state => state.TicketReducer);
+  const { carTicket, carLoading } = useSelector(
+    state => state.getCarTicketsReducer
+  );
+
   const handleTabChange = tab => {
     setActiveTab(tab);
   };
 
+  const handleUpdateProfileForm = () => {
+    setOpenProfileForm(!openProfileForm);
+  };
   useEffect(
     () => {
       if (activeTab === "bus") {
         dispatch(GetProfileTicket(data.api_token));
+      } else if (activeTab === "car") {
+        dispatch(getCarTicketsAction(data.api_token));
       }
     },
     [activeTab, data, dispatch]
   );
 
-  const { tickets } = useSelector(state => state.TicketReducer);
-
   const handleDeleteAccount = async () => {
-   await dispatch(DeleteAccAction(data.api_token))
-  }
-  useEffect(() => {
-    if(message) {
-      toast.success(message)
-      navigate('/register')
-    }
-  } , [message , navigate , dispatch ])
+    await dispatch(DeleteAccAction(data.api_token));
+  };
+
+  useEffect(
+    () => {
+      if (message) {
+        toast.success(message);
+        navigate("/register");
+      }
+    },
+    [message, navigate, dispatch]
+  );
 
   return (
     <div className="bg-gray-200 flex flex-col w-full overflow-hidden">
@@ -76,13 +97,33 @@ export const MainProfile = () => {
                 {" "}<FaPhone /> {data.phonecode} + {data.mobile}
               </span>
             </div>
-            <button className="w-full h-10 bg-gray-900 hover:bg-gray-800 transition-all duration-300  text-gray-200 rounded-full ">
-              edit profile{" "}
+
+            <button onClick={handleUpdateProfileForm}
+            className="w-full h-10 bg-gray-900 hover:bg-gray-800 transition-all duration-300  text-gray-200 rounded-full ">
+              edit profile
             </button>
+
+            <Popover
+              className="flex flex-col items-start w-full "
+              flag={openProfileForm}
+              onClose={handleUpdateProfileForm}
+            >
+              <UpdateForm />
+            <div className="w-full flex items-start justify-start ">
             <button
-            onClick={handleDeleteAccount} 
-            className="w-full h-10 bg-red-900 hover:bg-red-800 transition-all duration-300  text-gray-200 rounded-full ">
-              delete account {" "}
+                onClick={() => setOpenProfileForm(false)}
+                className="px-4 py-1 rounded-lg bg-gray-800 text-gray-200 "
+              >
+                Close
+              </button>
+            </div>
+            </Popover>
+
+            <button
+              onClick={handleDeleteAccount}
+              className="w-full h-10 bg-red-900 hover:bg-red-800 transition-all duration-300  text-gray-200 rounded-full "
+            >
+              delete account
             </button>
           </div>
           <div />
@@ -152,7 +193,20 @@ export const MainProfile = () => {
 
       <div className="container mx-auto py-8 flex justify-around items-start gap-6 ">
         <div className="flex flex-col w-full items-state ">
-          {activeTab === "bus" && <Tickets tickets={tickets} />}
+          {activeTab === "bus" &&
+            <BusTickets busTicket={tickets} loading={loading} />}
+          {activeTab === "car" &&
+            <CarTickets carTicket={carTicket} carLoading={carLoading} />}
+          {activeTab === "flight" &&
+            <FlightTicket
+              flightTicket={carTicket}
+              flightLoading={carLoading}
+            />}
+          {activeTab === "maritime" &&
+            <MariTimeTicket
+              flightTicket={carTicket}
+              flightLoading={carLoading}
+            />}
           {activeTab === "addresses" && <Addresses />}
         </div>
       </div>

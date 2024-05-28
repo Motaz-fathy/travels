@@ -22,7 +22,10 @@ import {
   FAIL_REGISTER,
   LOAD_DELETE_ACC,
   SUCCESS_DELETE_ACC,
-  FAIL_DELETE_ACC
+  FAIL_DELETE_ACC,
+  LOAD_UPDATE_ACC,
+  SUCCESS_UPDATE_ACC,
+  FAIL_UPDATE_ACC
 } from "../../actions/types";
 
 const initialState = {
@@ -44,7 +47,7 @@ errorDelete : null
     case FAIL_DELETE_ACC : 
        return {loading : false , error : action.payload }   
   
-    default: return {...state }
+    default: return { state }
   }
 }
 // register reducer 
@@ -158,3 +161,16 @@ export const tripReducer = (
       return state;
   }
 };
+
+export const updateProfileReducer = ( state = {
+  loadingUp : false ,
+  messageUp : null ,
+  errorUp : null 
+} , action ) => {
+  switch(action.type){
+    case LOAD_UPDATE_ACC : return {loadingUp : true , messageUp : null }
+    case SUCCESS_UPDATE_ACC : return {loadingUp : false  , messageUp : action.payload }
+    case FAIL_UPDATE_ACC : return {loadingUp : false  , errorUp : action.payload}
+    default :  return {state}
+  }
+}

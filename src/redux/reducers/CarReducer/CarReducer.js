@@ -8,7 +8,10 @@ import {
   FAIL_SINGLE_CAR,
   LOAD_CREATE_TICKET_CAR,
   SUCCESS_CREATE_TICKET_CAR,
-  FAIL_CREATE_TICKET_CAR
+  FAIL_CREATE_TICKET_CAR,
+  LOAD_CAR_TICKET,
+  SUCCESS_CAR_TICKET,
+  FAIL_CAR_TICKET
 } from "../../actions/types";
 
 /**
@@ -88,13 +91,12 @@ export const createTicketCarReducer = (
   },
   action
 ) => {
-
   return produce(state, draft => {
     switch (action.type) {
       case LOAD_CREATE_TICKET_CAR:
         draft.loading = true;
         draft.error = null;
-        draft.CarTicket = [] ;
+        draft.CarTicket = [];
         break;
       case SUCCESS_CREATE_TICKET_CAR:
         draft.loading = false;
@@ -109,6 +111,24 @@ export const createTicketCarReducer = (
         break;
     }
   });
+};
 
- 
+export const getCarTicketsReducer = (
+  state = {
+    carLoading: false,
+    carTicket: [],
+    carError: null
+  },
+  action
+) => {
+  switch (action.type) {
+    case LOAD_CAR_TICKET:
+      return { carLoading: true, carTicket: [] };
+    case SUCCESS_CAR_TICKET:
+      return { carLoading: false, carTicket: action.payload };
+    case FAIL_CAR_TICKET:
+      return { carLoading: false, carError: action.payload };
+    default:
+      return { ...state };
+  }
 };

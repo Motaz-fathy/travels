@@ -22,7 +22,10 @@ import {
   FAIL_REGISTER,
   LOAD_DELETE_ACC,
   SUCCESS_DELETE_ACC,
-  FAIL_DELETE_ACC
+  FAIL_DELETE_ACC,
+  LOAD_UPDATE_ACC,
+  SUCCESS_UPDATE_ACC,
+  FAIL_UPDATE_ACC
 } from "../types";
 export const LoginAction = (phonecode, mobile, password) => async dispatch => {
   try {
@@ -190,13 +193,20 @@ export const resendOTPAction = (mobile, phonecode) => async dispatch => {
     dispatch({ type: FAIL_RESEND_OTP, payload: error.message });
   }
 };
-
+/**
+ * @doc logout 
+ * @access private 
+ * @method just middleware 
+ */
 export const logoutAction = () => async dispatch => {
   dispatch({ type: LOGOUT, paylod: [] });
 };
 
-// delete acc 
-
+/**
+ * @doc delete profile 
+ * @access private 
+ * @method DELETE 
+ */
 export const DeleteAccAction = (token) => async dispatch => {
  try {
     dispatch({type : LOAD_DELETE_ACC , payload : null })
@@ -221,3 +231,28 @@ export const setTripType = tripType => ({
   type: SET_TRIP_TYPE,
   payload: tripType
 });
+
+/**
+ * @doc update profile 
+ * @access private 
+ * @method PUT 
+ */
+export const updateProfileAction = (token ,  formData ) => async dispatch => {
+  try {
+    dispatch({type : LOAD_UPDATE_ACC , payload : null })
+    const config = {
+        headers: {
+          "Content-Type": "application/json" ,
+          "Authorization" : `Bearer ${token}`
+        }
+      } 
+   const res = await axios.post(`https://app.telefreik.com/api/transports/profile` , 
+   formData
+   , config)  
+   if(res.status === 200){
+    await dispatch({type: SUCCESS_UPDATE_ACC , payload : res.data.message })
+   } 
+} catch (error) {
+    dispatch({type : FAIL_UPDATE_ACC , payload : error.response.data.message })
+}
+}

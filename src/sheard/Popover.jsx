@@ -25,7 +25,7 @@ export const Popover = ({ className, flag, children, onClose }) => {
 
   return (
     <div  className={`fixed inset-0  bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center ${className}`}>
-      <div  className="relative bg-gray-200 rounded-xl p-4 shadow-lg w-5/6 h-auto ">
+      <div  className="relative bg-white rounded-xl p-4 shadow-lg w-5/6 h-auto ">
         {children}
       </div>
     </div>

@@ -14,7 +14,10 @@ import {
   FAIL_DELETE_ADDRESS,
   LOAD_UPDATE_ADDRESS,
   SUCCESS_UPDATE_ADDRESS,
-  FAIL_UPDATE_ADDRESS
+  FAIL_UPDATE_ADDRESS,
+  LOAD_CONTACT,
+  SUCCESS_CONTACT,
+  FAIL_CONTACT
 } from "../../actions/types";
 
 /**
@@ -139,3 +142,25 @@ export const updateAddressReducer = (
         return { ...state };
     }
   };
+
+  //   contact reducer 
+
+  export const contactReducer = (
+    state = {
+      contactLoading: false,
+      contactMessage: null,
+      contactError: null
+    },
+    action
+  ) => {
+    switch (action.type) {
+      case LOAD_CONTACT:
+        return { contactLoading: true, contactMessage: null };
+      case SUCCESS_CONTACT:
+        return { contactLoading: false, contactMessage: action.payload };
+      case FAIL_CONTACT:
+        return { contactLoading: false, contactError: action.payload , contactMessage: null };
+      default:
+        return { ...state };
+    }
+  };  

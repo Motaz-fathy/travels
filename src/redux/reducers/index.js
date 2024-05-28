@@ -16,17 +16,23 @@ import {
   tripReducer,
   RegisterReducer,
   DeleteAccReducer,
-  
+  updateProfileReducer
 } from "./User/User";
 import {
   TicketReducer,
   createAddressReducer,
   getAddressReducer,
   deleteAddressReducer,
-  updateAddressReducer
+  updateAddressReducer,
+  contactReducer
 } from "./profile/profileReducer";
 import { stepReducer, OurPartnerReducer } from "./Ui/UiReducers";
-import {SearchCarReducer  , singleCarReducer , createTicketCarReducer } from './CarReducer/CarReducer'
+import {
+  SearchCarReducer,
+  singleCarReducer,
+  createTicketCarReducer,
+  getCarTicketsReducer
+} from "./CarReducer/CarReducer";
 export const Reducers = combineReducers({
   cityReducer,
   busSearch,
@@ -51,5 +57,8 @@ export const Reducers = combineReducers({
   updateAddressReducer,
   SearchCarReducer,
   singleCarReducer,
-  createTicketCarReducer
+  createTicketCarReducer,
+  getCarTicketsReducer,
+  updateProfileReducer,
+  contactReducer
 });

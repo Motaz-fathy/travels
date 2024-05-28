@@ -8,7 +8,8 @@ import {
   FAIL_SINGLE_CAR,
   LOAD_CREATE_TICKET_CAR,
   SUCCESS_CREATE_TICKET_CAR,
-  FAIL_CREATE_TICKET_CAR
+  FAIL_CREATE_TICKET_CAR,
+
 } from "../types";
 
 /**
@@ -79,3 +80,4 @@ export const singleCarAction = (item) => async dispatch => {
     dispatch({type : FAIL_CREATE_TICKET_CAR , payload : error.response.data.message })
   }
  }
+

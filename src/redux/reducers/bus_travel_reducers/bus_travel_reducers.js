@@ -153,7 +153,7 @@ export const AvilableSeatsReducer = (
 export const CreateTicketReducer = (
   state = {
     loading: false,
-    reservationTicket: {},
+    reservationTicket: [],
     error: null
   },
   action
@@ -162,6 +162,7 @@ export const CreateTicketReducer = (
     switch (action.type) {
       case LOAD_CREATE_TICKET:
         draft.loading = true;
+        draft.reservationTicket = [];
         draft.error = null;
         break;
       case SUCCESS_CREATE_TICKET:
@@ -173,11 +174,11 @@ export const CreateTicketReducer = (
         draft.loading = false;
         draft.error = action.payload;
         break;
-
       default:
-        break;
+        return draft;
     }
   });
+  
 };
 /**
  * @doc create return ticket reducer 

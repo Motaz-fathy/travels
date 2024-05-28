@@ -120,7 +120,7 @@ export const AvilableSeats = (trip) => async dispatch => {
 
 export const CreateTicketAction = (ticketData , token) => async dispatch => {
   try {
-    dispatch({type : LOAD_CREATE_TICKET , payload : {}})
+    dispatch({type : LOAD_CREATE_TICKET , payload : []})
     // config header 
     const config = {
       headers: {
@@ -129,16 +129,13 @@ export const CreateTicketAction = (ticketData , token) => async dispatch => {
       }
     } 
      const res = await axios.post("https://app.telefreik.com/api/v2/transports/buses/create-ticket" , ticketData , config )
-     dispatch({type : SUCCESS_CREATE_TICKET , payload : res.data.data})
-
-
+     console.log(res)
+     if(res.status === 200 ){
+      dispatch({type : SUCCESS_CREATE_TICKET , payload : res.data.data})
+     }
 
   } catch (error) {
-    if (error.response && error.response.status === 400) {
-      dispatch({ type: FAIL_CREATE_TICKET, payload: error.response.data.message });
-    } else {
-      dispatch({ type: FAIL_CREATE_TICKET, payload: 'An error occurred while creating the ticket.' });
-    }
+    dispatch({ type: FAIL_CREATE_TICKET, payload: error.response.data.message });
   }
 }
 

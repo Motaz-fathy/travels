@@ -1,11 +1,14 @@
 import React from "react";
 import { BusIcon } from "../../sheard/BusIcon";
 import Slider from "../../sheard/Slider";
-export const Tickets = ({ tickets }) => {
+import { FaSpinner } from 'react-icons/fa';
+
+export const BusTickets = ({ busTicket  , loading}) => {
+  if (loading) return  <div className="text-4xl w-full flex items-center justify-center py-20"><FaSpinner /></div>
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">
-        {tickets.length} tickets{" "}
+        {busTicket.length} bus ticket{" "}
       </h1>
       <div className="w-4/5 max-md:w-full flex justify-start items-center">
         <div className="flex justify-start items-center gap-4 max-md:hidden">
@@ -40,9 +43,9 @@ export const Tickets = ({ tickets }) => {
         </div>
       </div>
       <br />
-      {tickets.length > 0
+      {busTicket.length > 0
         ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {tickets.map((item, index) => {
+            {busTicket.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -84,7 +87,7 @@ export const Tickets = ({ tickets }) => {
               );
             })}
           </div>
-        : <div>no ticket here !_!</div>}
+        : <div> sorry you not reservation ticket  </div>}
     </div>
   );
 };

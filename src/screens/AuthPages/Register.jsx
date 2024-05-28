@@ -47,6 +47,7 @@ export const Register = () => {
 
 
   };
+  
   useEffect(() => {
     if (data) {
       toast.success(data.message);
