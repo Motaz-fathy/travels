@@ -9,8 +9,38 @@ import {
   LOAD_CREATE_TICKET_CAR,
   SUCCESS_CREATE_TICKET_CAR,
   FAIL_CREATE_TICKET_CAR,
-
+  LOAD_CAR_LOCATION ,
+  GET_CAR_LOCATION,
+  FAILD_CAR_LOCATION
 } from "../types";
+
+
+export const getLocationCar = () => async dispatch => {
+  try {
+    dispatch({ type: LOAD_CAR_LOCATION });
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    };
+
+    const res = await axios.get(
+        'https://app.telefreik.com/api/transports/locations/private',
+      config
+    );
+    if(res.status === 200 ) {
+      dispatch({
+        type: GET_CAR_LOCATION , payload : res.data.data
+      });
+    }
+
+  } catch (error) {
+    dispatch({
+      type: FAILD_CAR_LOCATION,
+      payload: error.response.data.message 
+     });
+  }
+};
 
 /**
  * @doc search car trip 

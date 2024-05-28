@@ -38,7 +38,11 @@ export const NavigationSearchRound = ({
     e.preventDefault();
     if(onSelect_from === onSelect_to){
       toast.warning("sorry you search between same city .");
-    }else {
+    }
+     else if(startDate >= endDate) {
+      toast.warning("sorry , your start date large than or equal end date  .");
+     }
+    else {
       if (!disable) {
         if(startDate <= endDate){
           await dispatch(search_bus_trip(onSelect_from, onSelect_to, startDate));

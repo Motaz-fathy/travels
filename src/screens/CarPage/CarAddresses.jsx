@@ -3,14 +3,14 @@ import { getAddressAction } from "../../redux/actions/profile/profile_actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Popover } from "../../sheard/Popover";
 import MapAndAutoComplete from "../../sheard/MapAndAutoComplete";
-import { PickDate } from "./componentCar/PickDate";
+import { PickDate, RangePickTime } from "./componentCar/PickDate";
 import { RiCalendar2Fill } from "react-icons/ri";
 import { FiClock } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { ComboAddress } from "./componentCar/ComboAddress";
 import { convertTime } from "../../utils/ConvertTime";
 import { toast } from "react-toastify";
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { createTicketCarAction } from "../../redux/actions/CarActions/CarActions";
@@ -21,18 +21,22 @@ export const CarAddresses = ({ trip }) => {
   const { CarTicket, loading, error } = useSelector(
     state => state.createTicketCarReducer
   );
+  const { searchData } = useSelector(state => state.StoreSearchDataReduce);
+  const { tripType } = useSelector(state => state.tripReducer);
 
   //   select api_token to use in get address
   const { addressList } = useSelector(state => state.getAddressReducer);
   const loginReducer = useSelector(state => state.LoginReducer);
   let token = loginReducer.data.data.api_token || null;
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //   hook to get addresses
   const [selectedAddressFrom, setSelectedAddressFrom] = useState(null);
   const [selectedAddressTo, setSelectedAddressTo] = useState(null);
   //   hook to get time
   const [selectedTime, setSelectedTime] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
   //   hook to open and hide map
   const [openMap, setOpenMap] = useState(false);
   const [openMapTo, setOpenMapTo] = useState(false);
@@ -85,34 +89,95 @@ export const CarAddresses = ({ trip }) => {
         return;
       } else {
         toast.success(" ticket create successfully ");
-        navigate('payment-ticket')
+        navigate("payment-ticket");
       }
     }
   };
+
+  // handle roundWay
+
+  const handleCheckoutRoundWay = async () => {
+    if (selectedAddressFrom === null) {
+      toast.error("sorry from address not selected  ");
+      return;
+    } else if (selectedAddressTo === null) {
+      toast.error("sorry to address not selected ");
+      return;
+    } else if (selectedAddressFrom.id === selectedAddressTo.id) {
+      toast.error("sorry this same addresses ");
+      return;
+    } else if (startTime === null) {
+      toast.error("sorry select start time  ");
+      return;
+    } else if (endTime === null) {
+      toast.error("sorry select end time  ");
+      return;
+    } else {
+      const ticketData = {
+        round: 2,
+        boarding: {
+          date: `${trip.date} ${convertTime(startTime)}`,
+          from_address_id: selectedAddressFrom.id,
+          to_address_id: selectedAddressTo.id
+        },
+        return: {
+          date: `${searchData.endDate} ${convertTime(endTime)}`,
+          from_address_id: selectedAddressTo.id,
+          to_address_id: selectedAddressFrom.id
+        }
+      };
+      await dispatch(createTicketCarAction(ticketData, trip.id, token));
+      if (error) {
+        toast.error(error);
+        return;
+      } else {
+        toast.success(" ticket create successfully ");
+        navigate("payment-ticket");
+      }
+    }
+  };
+
   return (
     <div className=" w-full  flex  flex-col items-center gap-6 p-4 ">
       <span className="w-full text-start ">Pick Up Information</span>
       <div className="w-full flex justify-between items-center max-md:flex-col max-md:gap-4 ">
         <div className="w-1/3 max-md:w-full flex flex-col items-start gap-1 ">
           <span className="text-sm text-gray-600 ">Confirm Pickup Date</span>
-          <div className="flex w-2/3 max-md:w-3/5 justify-start items-center gap-2 bg-white shadow-xl rounded-lg  px-4 border-[1px] border-gray-300 h-10">
+          <div className="flex w-2/3 max-md:w-3/5 justify-start items-center gap-2 bg-gray-200 shadow-xl rounded-lg  px-4 border-[1px] border-gray-300 h-10">
             <RiCalendar2Fill />
             <span>
-              {trip.date}
+              {trip.date} - {tripType === "round" && searchData.endDate}
             </span>
           </div>
         </div>
 
-        <div className="w-1/3 max-md:w-full flex flex-col items-start gap-1 ">
-          <span className="text-sm text-gray-600 ">Confirm Pickup Time </span>
-          <div className="flex w-2/3 max-md:w-3/5 justify-start items-center gap-2 bg-white shadow-xl rounded-lg  px-4 border-[1px] border-gray-300">
-            <FiClock />
-            <PickDate
-              selectedTime={selectedTime}
-              handleTimeChange={handleTimeChange}
-            />
-          </div>
-        </div>
+        {tripType === "round"
+          ? <div className="w-1/3 max-md:w-full flex flex-col items-start gap-1 ">
+              <span className="text-sm text-gray-600 ">
+                Confirm Pickup Time{" "}
+              </span>
+              <div className="flex w-2/3 max-md:w-3/5 justify-start items-center gap-2 bg-white shadow-xl rounded-lg  px-4 border-[1px] border-gray-300">
+                <FiClock />
+                <RangePickTime
+                  startTime={startTime}
+                  endTime={endTime}
+                  handleStartTimeChange={date => setStartTime(date)}
+                  handleEndTimeChange={date => setEndTime(date)}
+                />
+              </div>
+            </div>
+          : <div className="w-1/3 max-md:w-full flex flex-col items-start gap-1 ">
+              <span className="text-sm text-gray-600 ">
+                Confirm Pickup Time{" "}
+              </span>
+              <div className="flex w-2/3 max-md:w-3/5 justify-start items-center gap-2 bg-white shadow-xl rounded-lg  px-4 border-[1px] border-gray-300">
+                <FiClock />
+                <PickDate
+                  selectedTime={selectedTime}
+                  handleTimeChange={handleTimeChange}
+                />
+              </div>
+            </div>}
       </div>
 
       <div className="w-full flex-col flex items-start gap-2 ">
@@ -187,12 +252,19 @@ export const CarAddresses = ({ trip }) => {
         </Popover>
       </div>
       <div className="w-full flex justify-end items-center ">
-        <button
-          onClick={handleCheckoutOneWay}
-          className="w-1/5 max-md:w-full  px-4 py-2 bg-gray-900 rounded-xl text-gray-200 hover:bg-gray-800 transition-all duration-300 flex justify-center items-center gap-2 "
-        >
-          <span>checkout</span> {loading && <FaSpinner />}
-        </button>
+        {tripType === "round"
+          ? <button
+              onClick={handleCheckoutRoundWay}
+              className="w-1/5 max-md:w-full  px-4 py-2 bg-gray-900 rounded-xl text-gray-200 hover:bg-gray-800 transition-all duration-300 flex justify-center items-center gap-2 "
+            >
+              <span>checkout</span> {loading && <FaSpinner />}
+            </button>
+          : <button
+              onClick={handleCheckoutOneWay}
+              className="w-1/5 max-md:w-full  px-4 py-2 bg-gray-900 rounded-xl text-gray-200 hover:bg-gray-800 transition-all duration-300 flex justify-center items-center gap-2 "
+            >
+              <span>checkout</span> {loading && <FaSpinner />}
+            </button>}
       </div>
     </div>
   );

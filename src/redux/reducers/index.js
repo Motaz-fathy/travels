@@ -31,7 +31,8 @@ import {
   SearchCarReducer,
   singleCarReducer,
   createTicketCarReducer,
-  getCarTicketsReducer
+  getCarTicketsReducer,
+  carLocationReducer
 } from "./CarReducer/CarReducer";
 export const Reducers = combineReducers({
   cityReducer,
@@ -60,5 +61,6 @@ export const Reducers = combineReducers({
   createTicketCarReducer,
   getCarTicketsReducer,
   updateProfileReducer,
-  contactReducer
+  contactReducer,
+  carLocationReducer
 });
