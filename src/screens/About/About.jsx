@@ -118,8 +118,8 @@ export const About = () => {
           </span>
         </div>
         <img
-          src="./images/newlogo.png"
-          alt="./images/newlogo.png"
+          src={`${process.env.PUBLIC_URL}/images/newlogo.png`}
+          alt={`${process.env.PUBLIC_URL}/images/newlogo.png`}
           className="sec1"
         />
       </div>
