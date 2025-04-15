@@ -34,8 +34,8 @@ export const Header = () => {
     },
     [open_menu]
   );
-  const loginReducer = useSelector(state => state.LoginReducer) || null;
-  const datafromLogin = loginReducer.data.data;
+  const {data} = useSelector(state => state.LoginReducer) || null;
+ 
   return (
     <div className="relative inset-0 animateHeader top-0 left-0 right-0 w-full min-h-screen max-md:min-h-[70vh] bg-gray-800 px-8  max-sm:px-2  bg-cover bg-fixed overflow-scroll  scrollbar-hide ">
       {/* bg header video  */}
@@ -72,7 +72,7 @@ export const Header = () => {
         </div>
 
         <div className="flex justify-center items-center gap-4 ">
-          {datafromLogin !== undefined
+          {!data 
             ? <button
                 className="cursor-pointer link-container z-50"
                 onClick={handleLogout}
@@ -161,7 +161,7 @@ export const Header = () => {
             contact us
             <div className="line " />
           </Link>
-          {datafromLogin !== undefined
+          {!data
             ? <button
                 className="cursor-pointer link-container z-50"
                 onClick={handleLogout}
