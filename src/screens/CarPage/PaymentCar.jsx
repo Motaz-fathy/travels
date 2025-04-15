@@ -15,6 +15,7 @@ export const PaymentCar = () => {
   );
 
   const RenderOneWay = item => {
+    if(!item) return <div className="w-full min-h-screen flex justify-center items-center "><span>sorry , you not reservation car ticket now .</span></div>
     return (
       <div className=" w-full flex flex-col items-center gap-6 ">
         {loading ? <FaSpinner /> :  

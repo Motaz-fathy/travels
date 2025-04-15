@@ -3,65 +3,65 @@ import { getLocationCar } from "../../../../redux/actions/CarActions/CarActions"
 import { useDispatch, useSelector } from "react-redux";
 import { IoLocationSharp } from "react-icons/io5";
 
-export const ComboBoxFrom = ({ setonSelectFrom }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const comboBoxRef = useRef(null);
-  const { data } = useSelector(state => state.carLocationReducer);
-  const { tripType } = useSelector(state => state.tripReducer);
-  const dispatch = useDispatch();
-  // Close the ComboBox when clicking outside of it
-  useEffect(
-    () => {
-      const handleClickOutside = event => {
-        if (
-          comboBoxRef.current &&
-          !comboBoxRef.current.contains(event.target)
-        ) {
-          setIsOpen(false);
-        }
-      };
+export const ComboBoxTo = ({ setonSelectTo }) => {
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    },
-    [comboBoxRef]
-  );
-
-  useEffect(
-    () => {
-      dispatch(getLocationCar());
-    },
-    [dispatch]
-  );
-  let filteredOptions = [];
-  data.map(item => {
-    if (
-      item.name
-        .toString()
-        .trim()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
-    ) {
-      filteredOptions.push(item);
-    }
-    return 0;
-  });
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelectOption = option => {
-    setSelectedOption(option.name);
-    setonSelectFrom(option.id);
-    setIsOpen(false);
-  };
-
-  return (
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const comboBoxRef = useRef(null);
+    const { data } = useSelector(state => state.carLocationReducer);
+    const { tripType } = useSelector(state => state.tripReducer);
+    const dispatch = useDispatch();
+    // Close the ComboBox when clicking outside of it
+    useEffect(
+      () => {
+        const handleClickOutside = event => {
+          if (
+            comboBoxRef.current &&
+            !comboBoxRef.current.contains(event.target)
+          ) {
+            setIsOpen(false);
+          }
+        };
+  
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      },
+      [comboBoxRef]
+    );
+  
+    useEffect(
+      () => {
+        dispatch(getLocationCar());
+      },
+      [dispatch]
+    );
+    let filteredOptions = [];
+    data.map(item => {
+      if (
+        item.name
+          .toString()
+          .trim()
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      ) {
+        filteredOptions.push(item);
+      }
+      return 0;
+    });
+  
+    const handleToggle = () => {
+      setIsOpen(!isOpen);
+    };
+  
+    const handleSelectOption = option => {
+      setSelectedOption(option.name);
+      setonSelectTo(option.id);
+      setIsOpen(false);
+    };  
+   return (
     <div
       ref={comboBoxRef}
       className={`relative w-1/4 h-10 outline-none cursor-pointer rounded-md ${tripType} max-md:w-full md:w-1/3 ${isOpen &&
@@ -114,4 +114,4 @@ export const ComboBoxFrom = ({ setonSelectFrom }) => {
         </div>}
     </div>
   );
-};
+}

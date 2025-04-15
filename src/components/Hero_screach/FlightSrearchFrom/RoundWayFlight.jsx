@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useSelector } from "react-redux";
-import { ComboBoxFrom } from "./ComponentCar/ComboBoxFrom";
-import { ComboBoxTo } from "./ComponentCar/ComboBoxTo";
+import { ComboBoxFrom } from "./ComponentFlight/ComboBoxFrom";
+import { ComboBoxTo } from "./ComponentFlight/ComboBoxTo";
 import { RangeDatePicker } from "../../../sheard/DatePicker";
-import { NavigateSearchRoundWay } from "./ComponentCar/NavigateSearchRoundWay";
-export const RoundWayCar = () => {
+import { NavigateSearchRoundWay } from "./ComponentFlight/NavigateSearchRoundWay";
+export const RoundWayFlight = () => {
   const { tripType } = useSelector(state => state.tripReducer);
 
   const [onSelectFrom, setonSelectFrom] = useState(null);

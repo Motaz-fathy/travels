@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { get_cities_for_bus_search_form } from "../../../../redux/actions/bus_travel_actions/bus_travel_actions";
+import { getLocationCar } from "../../../../redux/actions/CarActions/CarActions";
 import { useDispatch, useSelector } from "react-redux";
 import { IoLocationSharp } from "react-icons/io5";
 
@@ -8,7 +8,7 @@ export const ComboBoxTo = ({ setonSelectTo }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const comboBoxRef = useRef(null);
-  const { data } = useSelector(state => state.cityReducer);
+  const { data } = useSelector(state => state.carLocationReducer);
   const { tripType } = useSelector(state => state.tripReducer);
   const dispatch = useDispatch();
   // Close the ComboBox when clicking outside of it
@@ -33,7 +33,7 @@ export const ComboBoxTo = ({ setonSelectTo }) => {
 
   useEffect(
     () => {
-      dispatch(get_cities_for_bus_search_form());
+      dispatch(getLocationCar());
     },
     [dispatch]
   );

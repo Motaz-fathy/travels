@@ -11,8 +11,37 @@ import {
   FAIL_CREATE_TICKET_CAR,
   LOAD_CAR_TICKET,
   SUCCESS_CAR_TICKET,
-  FAIL_CAR_TICKET
+  FAIL_CAR_TICKET,
+  LOAD_CAR_LOCATION ,
+  GET_CAR_LOCATION,
+  FAILD_CAR_LOCATION
 } from "../../actions/types";
+
+export const carLocationReducer = (state =  {
+  loading: false,
+  data: [],
+  error: null
+}, action) => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case LOAD_CAR_LOCATION:
+        draft.loading = true;
+        draft.error = null;
+        break;
+      case GET_CAR_LOCATION:
+        draft.loading = false;
+        draft.data = action.payload;
+        draft.error = null;
+        break;
+      case FAILD_CAR_LOCATION:
+        draft.loading = false;
+        draft.error = action.payload;
+        break;
+      default:
+        break;
+    }
+  });
+};
 
 /**
  * @doc search car reducer 

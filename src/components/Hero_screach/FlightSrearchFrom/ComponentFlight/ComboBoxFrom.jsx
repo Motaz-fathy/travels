@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { getLocationCar } from "../../../../redux/actions/CarActions/CarActions";
 import { useDispatch, useSelector } from "react-redux";
 import { IoLocationSharp } from "react-icons/io5";
-
 export const ComboBoxFrom = ({ setonSelectFrom }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -60,7 +59,7 @@ export const ComboBoxFrom = ({ setonSelectFrom }) => {
     setonSelectFrom(option.id);
     setIsOpen(false);
   };
-
+  
   return (
     <div
       ref={comboBoxRef}
